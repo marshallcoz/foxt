@@ -108,11 +108,12 @@
         [layoutManager addTemporaryAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor blackColor], NSBackgroundColorAttributeName, nil] forCharacterRange:lineCharRange];
         //[layoutManager addTemporaryAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor grayColor], NSBackgroundColorAttributeName, nil] forCharacterRange:wordCharRange];
         //[layoutManager addTemporaryAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor magentaColor], NSBackgroundColorAttributeName, nil] forCharacterRange:NSMakeRange(charIndex, 1)];
-        
+
         if (wordCharRange.length > 0) {
             NSString* palabra = [[NSString alloc] initWithString:[[self string] substringWithRange:wordCharRange]];
             if (![palabra isEqualToString:oldPalabra]) {
                 oldPalabra = palabra;
+                [tf removeFromSuperview];
                 if ([palabra rangeOfString:@" "].length == 0 &&
                     [palabra rangeOfString:@"\n"].length == 0 ) {
                     if (![palabra hasPrefix:@"1"] && 
@@ -147,12 +148,14 @@
                                             len,@"len",
                                             nil];
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"printVar" object:nil userInfo:oo];
-                        [tf removeFromSuperview];
+                        
                     }
                 }
             }
         }
     }
+    } else {
+        [tf removeFromSuperview];
     }
 }
 
