@@ -464,7 +464,7 @@ static NSString* outPut = @".programOutput.txt";
     NSArray *PRarr = [[NSArray alloc] init];
     while (element = [enumerator nextObject] ) {
         NSString *tt = [[NSString alloc] initWithString:(NSString*)element] ;
-        NSLog(@"%@",tt);
+        //NSLog(@"%@",tt);
         nota *n = [[nota alloc] init] ;
         if ([tt hasPrefix:@"#INI_FOR:\n"]) {
             tt = [tt substringFromIndex:10];
@@ -1874,7 +1874,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
         
     } 
-    else if ([ToggleBreakpoints state] == 1) {
+    else if ([ToggleBreakpoints state] == 1) 
+    {
         NSLog(@"Pre Debug, compiler script: \n%@",lineaPreCompilador);
         
         //limpiamos archivos de in y out del programa
@@ -2045,6 +2046,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             
         }
         
+        // mostrar las variables
+        if ([todos_los_breakpoints count] > 0) {
+            [VarsPanel orderFront:self];
+        }
+        
     } else {
         [terminal hideTerm:[self windowForSheet]];
     }
@@ -2152,7 +2158,13 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         NSColor* color = [NSColor whiteColor];
         NSString * db = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         db = [db stringByReplacingOccurrencesOfString:@"(gdb)" withString:@""];
-        //NSLog(@"data:\n%@",db);
+        NSLog(@"data:\n%@",db);
+        // una variable por línea
+        db = [db stringByReplacingOccurrencesOfString:@"{\n" withString:@"{"];
+        db = [db stringByReplacingOccurrencesOfString:@"\n}" withString:@"}"];
+        db = [db stringByReplacingOccurrencesOfString:@", \n" withString:@", "];
+        NSLog(@"data again:\n%@",db);
+        
         NSArray * db_arr = [db componentsSeparatedByString:@"\n"]; //por renglones
         int i;
         NSArray * aux_arr = [NSArray alloc];
@@ -2249,10 +2261,10 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                         
                         
                         VarModel* vm = [[VarModel alloc]init];
-                        [vm setVarName:[aux_arr objectAtIndex:0]];
+                        [vm setVarName:[aux_arr objectAtIndex:0]];                        
                         NSString* db_arr_i_st = [[NSString alloc] initWithString:(NSString*)[db_arr objectAtIndex:i]];
                         db_arr_i_st =  [db_arr_i_st substringFromIndex:NSMaxRange([db_arr_i_st rangeOfString:@"="])];
-                        //NSLog(@"variable %@  =  %@",[aux_arr objectAtIndex:0],db_arr_i_st);
+                        NSLog(@"variable %@  =  %@",[aux_arr objectAtIndex:0],db_arr_i_st);
                         [vm setVarValue:db_arr_i_st];
                         [thisVarArray addObject:vm];
                     }
@@ -2309,7 +2321,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"mostrarValor" object:nil userInfo:dada];
                 }
             }
-        } 
+        }  
         
     } else {
         // We're finished here

@@ -139,6 +139,7 @@
                         ![palabra hasPrefix:@"]"] && 
                         ![palabra hasPrefix:@"("] && 
                         ![palabra hasPrefix:@")"]) {
+                        palabra = [palabra lowercaseString];
                         //   NSLog(@"palabra: %@",palabra);
                         NSNumber *loc = [[NSNumber alloc] initWithUnsignedLong:wordCharRange.location];
                         NSNumber *len = [[NSNumber alloc] initWithUnsignedLong:wordCharRange.length];
