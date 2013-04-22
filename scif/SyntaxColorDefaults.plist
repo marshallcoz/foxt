@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SyntaxColoring:Color:Comments</key>
+	<array>
+		<real>0.0470588</real>
+		<real>0.7647058799999999</real>
+		<real>0.2745098039</real>
+	</array>
+	<key>SyntaxColoring:Color:Comments2</key>
+	<array>
+		<real>0.0470588</real>
+		<real>0.7647058799999999</real>
+		<real>0.2745098039</real>
+	</array>
+	<key>SyntaxColoring:Color:Identifiers</key>
+	<array>
+		<integer>0</integer>
+		<integer>0</integer>
+		<integer>1</integer>
+	</array>
+	<key>SyntaxColoring:Color:Identifiers2</key>
+	<array>
+		<real>0</real>
+		<real>0.25098</real>
+		<real>0.501961</real>
+	</array>
+	<key>SyntaxColoring:Color:Preprocessor</key>
+	<array>
+		<integer>0</integer>
+		<real>0.4</real>
+		<integer>0</integer>
+	</array>
+	<key>SyntaxColoring:Color:Strings</key>
+	<array>
+		<real>0.4000000059604645</real>
+		<real>0.4000000059604645</real>
+		<real>0.4000000059604645</real>
+	</array>
+	<key>SyntaxColoring:Color:Tags</key>
+	<array>
+		<integer>0</integer>
+		<integer>0</integer>
+		<real>0.6</real>
+	</array>
+	<key>SyntaxColoring:Color:UserIdentifiers</key>
+	<array>
+		<real>0</real>
+		<real>0.25098</real>
+		<real>0.501961</real>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Compilador - 1</key>
+	<string>/usr/bin/g95</string>
+	<key>Compilador - 2</key>
+	<string>/usr/bin/gfortran</string>
+	<key>Compilador - 3</key>
+	<string>/usr/bin/g95</string>
+	<key>Compilador - 4</key>
+	<string>/usr/bin/g95</string>
+	<key>Compilador - 5</key>
+	<string>/usr/bin/g95</string>
+	<key>Compilador - 6</key>
+	<string>/usr/bin/g95</string>
+	<key>PreDepurador - 1</key>
+	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<key>PreDepurador - 2</key>
+	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<key>PreDepurador - 3</key>
+	<string>/usr/bin/g95 -g1 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<key>PreDepurador - 4</key>
+	<string>/usr/bin/g95 -g1 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<key>PreDepurador - 5</key>
+	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<key>PreDepurador - 6</key>
+	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<key>Depurador - 1</key>
+	<string>/usr/bin/gdb</string>
+	<key>Depurador - 2</key>
+	<string>/usr/bin/gdb</string>
+	<key>Depurador - 3</key>
+	<string>/usr/bin/gdb</string>
+	<key>Depurador - 4</key>
+	<string>/usr/bin/gdb</string>
+	<key>Depurador - 5</key>
+	<string>/usr/bin/gdb</string>
+	<key>Depurador - 6</key>
+	<string>/usr/bin/gdb</string>
+	<key>rutaBase</key>
+	<string>/.scifex/RunPrefs.plist</string>
+	<key>set</key>
+	<string>1</string>
+	<key>Argumentos - 1</key>
+	<string>-g3 %F -o %A</string>
+	<key>Argumentos - 2</key>
+	<string>-g3 %F -o %A</string>
+	<key>Argumentos - 3</key>
+	<string>-g3 %F -o %A</string>
+	<key>Argumentos - 4</key>
+	<string>-g3 %F -o %A</string>
+	<key>Argumentos - 5</key>
+	<string>-g3 %F -o %A</string>
+	<key>Argumentos - 6</key>
+	<string>-g3 %F -o %A</string>
+	<key>RunArgs - 1</key>
+	<string></string>
+	<key>RunArgs - 2</key>
+	<string></string>
+	<key>RunArgs - 3</key>
+	<string></string>
+	<key>RunArgs - 4</key>
+	<string></string>
+	<key>RunArgs - 5</key>
+	<string></string>
+	<key>RunArgs - 6</key>
+	<string></string>
+	<key>extension - 1</key>
+	<string>.for</string>
+	<key>extension - 2</key>
+	<string>.f90</string>
+	<key>extension - 3</key>
+	<string>.for</string>
+	<key>extension - 4</key>
+	<string>.f90</string>
+	<key>extension - 5</key>
+	<string>.for</string>
+	<key>extension - 6</key>
+	<string>.f95</string>
+</dict>
+</plist>
