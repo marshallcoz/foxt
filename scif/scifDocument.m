@@ -2156,7 +2156,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         NSArray * db_arr = [db componentsSeparatedByString:@"\n"]; //por renglones
         int i;
         NSArray * aux_arr = [NSArray alloc];
-        for (i=0; i<[db_arr count]; i++) {
+        for (i=0; i<[db_arr count]; i++) 
+        {
             color = [NSColor whiteColor];
             aux_arr = [(NSString*)[db_arr objectAtIndex:i] componentsSeparatedByString:@" "];
             if ([aux_arr count]) {
@@ -2289,7 +2290,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
         if ([thisVarArray count]>1) {
             self.VarsArray = [[NSMutableArray alloc] initWithArray:thisVarArray];
-        } else if([thisVarArray count] == 1){
+        }  else if([thisVarArray count] == 1) {
             // una línea. una variable 
             if ([palabra length]>0) {
                 NSString *varVal = [[NSString alloc] initWithString:[[thisVarArray objectAtIndex:0] varValue]];
@@ -2308,11 +2309,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"mostrarValor" object:nil userInfo:dada];
                 }
             }
-        }
-        
-        //refrescarsela a la salida del programa que no se actualiza porque es una tarea asíncrona que bloquea la UI
-        //[[programOUTtxt textStorage] setAttributedString:[[programOUTtxt textStorage] attributedSubstringFromRange:NSMakeRange(0, [[programOUTtxt textStorage] length])]];
-        
+        } 
         
     } else {
         // We're finished here
@@ -2491,10 +2488,18 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                         palabraRange = NSMakeRange(
                                                    [(NSNumber*)[[notification userInfo] objectForKey:@"loc"] unsignedLongValue], 
                                                    [(NSNumber*)[[notification userInfo] objectForKey:@"len"] unsignedLongValue]);
-                        //NSLog(@"palabra: %@",palabra);
+                        
+                        NSLog(@"palabra: %@",palabra);
                         // ahora checamos si dicha palabra arroja algún resultado en el gdb
+                        
                         NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
                         [stdinHandle writeData:new_input];
+//                        
+//                        
+//                        //ahora tomamos esa palabra de la lista de variables,
+//                        if ([self.VarsArray count] > 0) {
+//                         
+//                        }
                     }
                 }
             }
