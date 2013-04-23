@@ -34,10 +34,10 @@
     
     NSString * varVal = (NSString*)[[noti userInfo] objectForKey:@"varVal"];
     unsigned long loc = [(NSNumber*)[[noti userInfo] objectForKey:@"loc"] unsignedLongValue];
-    unsigned long len = [(NSNumber*)[[noti userInfo] objectForKey:@"len"] unsignedLongValue];
-    NSRange  wordRange = NSMakeRange(loc, len+2);
+    //unsigned long len = [(NSNumber*)[[noti userInfo] objectForKey:@"len"] unsignedLongValue];
+    NSRange  wordRange = NSMakeRange(loc, 2+varVal.length);
     
-    NSLog(@"%@",varVal);
+    NSLog(@"varVal:\n%@",varVal);
     
     [tf removeFromSuperview];
     NSRect rect = [self overlayRectForRange:wordRange];
@@ -45,9 +45,12 @@
     [tf setBordered:NO];
     [tf setFrame:rect];
     //tf = [[NSTextField alloc] initWithFrame:rect];
+    [tf setEditable:NO];
+    [tf setBezelStyle:NSTextFieldRoundedBezel];
+    [tf setBezeled:YES];
     
     [tf setTextColor:[NSColor blackColor]];
-    [tf setBackgroundColor:[NSColor colorWithCalibratedRed:155 green:234 blue:208 alpha:0.7]];
+    [tf setBackgroundColor:[NSColor colorWithCalibratedRed:155 green:234 blue:208 alpha:0.75]];
     
     [tf setStringValue:varVal];
     [self addSubview:tf];
@@ -59,8 +62,8 @@
     NSPoint containerOrigin = [self textContainerOrigin];
     neededRect.origin.x += containerOrigin.x;
     neededRect.origin.y += containerOrigin.y; 
-    neededRect.size.height = 16;
-    neededRect.size.width = 200;
+    //neededRect.size.height = 16;
+    neededRect.size.width = 600;
     
     return neededRect;
 }

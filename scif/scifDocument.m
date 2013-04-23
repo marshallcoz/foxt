@@ -257,10 +257,10 @@ static NSString* outPut = @".programOutput.txt";
                                                  name: NSTextStorageDidProcessEditingNotification
                                                object: [txtx textStorage]];
 	
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fdf:) 
-     name:NSTextViewDidChangeSelectionNotification
-     object:txtx];
-     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fdf:) 
+                                                 name:NSTextViewDidChangeSelectionNotification
+                                               object:txtx];
+    
 	// Put selection at top like Project Builder has it, so user sees it:
 	[txtx setSelectedRange: NSMakeRange(0,0)];
     
@@ -515,17 +515,17 @@ static NSString* outPut = @".programOutput.txt";
         }
         if ([tt hasPrefix:@"#printables,"]) {
             tt = [tt substringFromIndex:12];
-            NSLog(@"%@",tt);
+            //NSLog(@"%@",tt);
             PRarr = [tt componentsSeparatedByString:@","]; //sólo esperamos un bloque de breakpoints
         } else if ([tt hasPrefix:@"BPs,"]) {
             tt = [tt substringFromIndex:4];
-            NSLog(@"%@",tt);
+            //NSLog(@"%@",tt);
             NSArray *BParr = [[NSArray alloc] init];
             BParr = [tt componentsSeparatedByString:@","]; //sólo esperamos un bloque de breakpoints
             [self setBPs:BParr];
         } else if ([tt hasPrefix:@"#presets"]) {
             tt = [tt substringFromIndex:8];
-            NSLog(@"to load preset: %@",tt);
+            //NSLog(@"to load preset: %@",tt);
             my_presets = [tt intValue];
             [self grabar:[NSString stringWithFormat:@"%i",my_presets] to:@"set"];
         } else {
@@ -621,17 +621,17 @@ static NSString* outPut = @".programOutput.txt";
 -(void)scrolled:(NSNotification*)notification{
     //NSLog(@"Scrolled:\n%@",[notification description]);
     if([[ARRAYcontroller selectedObjects] count] > 0) {
-    nota* n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
-    if ([n Mi_modo_actual] == 0) {        
-        NSNumber *n_indice_inicial = [[NSNumber alloc] initWithUnsignedLong:[n indice_inicial]];
-        
-        NSDictionary *Nota_marcadores = [n Nota_linesToMarkers];
-        
-        NSDictionary* dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                             n_indice_inicial,@"indice_inicial_en_seccion",
-                             Nota_marcadores,@"Diccionario_de_marcadores",nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ActualizarNumLineaMarcadores" object:nil userInfo:dic];
-    }  
+        nota* n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+        if ([n Mi_modo_actual] == 0) {        
+            NSNumber *n_indice_inicial = [[NSNumber alloc] initWithUnsignedLong:[n indice_inicial]];
+            
+            NSDictionary *Nota_marcadores = [n Nota_linesToMarkers];
+            
+            NSDictionary* dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 n_indice_inicial,@"indice_inicial_en_seccion",
+                                 Nota_marcadores,@"Diccionario_de_marcadores",nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ActualizarNumLineaMarcadores" object:nil userInfo:dic];
+        }  
     }
 }
 
@@ -653,7 +653,7 @@ static NSString* outPut = @".programOutput.txt";
             
             long indice_actual = [[ARRAYcontroller arrangedObjects] indexOfObject:n];
             modo_seleccionado = [(nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:indice_actual] Mi_modo_actual];
-            NSLog(@"Modo: %d",modo_seleccionado);
+            //NSLog(@"Modo: %d",modo_seleccionado);
             //NSLog(@"Selected objects: %@", [[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] txt] string]);
             
             long i;
@@ -763,10 +763,10 @@ static NSString* outPut = @".programOutput.txt";
                 [L_vertical setHidden:YES];
                 [L_vertical_final setHidden:YES];
                 [self turnOnWrapping];
-               
+                
                 [txtx setContinuousSpellCheckingEnabled:TRUE];
                 
-//                n.update_me=NO;
+                //                n.update_me=NO;
             }
             NSRange ra = n.lastvisibleRange;
             if (ra.length > 0) {
@@ -789,7 +789,7 @@ static NSString* outPut = @".programOutput.txt";
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"updateNota_marker" object:nil userInfo:dic];
     
     NSDictionary * dic = [[NSDictionary alloc] initWithDictionary: (NSDictionary*)[[notification userInfo]objectForKey:@"marcadores"]];
-    NSLog(@"%@",dic);
+    //NSLog(@"%@",dic);
     
     [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setNota_linesToMarkers:dic];
     
@@ -863,23 +863,23 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
     }
     
- //NSLog(@"%@",[noti description]);
-// NSDictionary* dic = [[NSDictionary alloc] initWithDictionary:(NSDictionary*)[noti userInfo]];
- //NSLog(@"%@",[dic description]);
- 
- //NSLog(@"%@",[[dic objectForKey:@"NSOldSelectedCharacterRange"] description]);
- 
-// NSUInteger lastloc = [[dic objectForKey:@"NSOldSelectedCharacterRange"] rangeValue].location;
- //NSLog(@"last loc: %lu",lastloc);
- 
- //NSLog(@"%@", [[dic objectForKey:@"NSOldSelectedCharacterRange"] rangeValue].location);
- //nota*n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
-//     if (n.update_me) {
-//         n.lastvisibleRange = lastloc;
-//         //NSLog(@"at loc: %lu ",n.lastvisibleRange);
-//     }
- }
- 
+    //NSLog(@"%@",[noti description]);
+    // NSDictionary* dic = [[NSDictionary alloc] initWithDictionary:(NSDictionary*)[noti userInfo]];
+    //NSLog(@"%@",[dic description]);
+    
+    //NSLog(@"%@",[[dic objectForKey:@"NSOldSelectedCharacterRange"] description]);
+    
+    // NSUInteger lastloc = [[dic objectForKey:@"NSOldSelectedCharacterRange"] rangeValue].location;
+    //NSLog(@"last loc: %lu",lastloc);
+    
+    //NSLog(@"%@", [[dic objectForKey:@"NSOldSelectedCharacterRange"] rangeValue].location);
+    //nota*n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+    //     if (n.update_me) {
+    //         n.lastvisibleRange = lastloc;
+    //         //NSLog(@"at loc: %lu ",n.lastvisibleRange);
+    //     }
+}
+
 
 #pragma mark -
 #pragma mark search
@@ -958,10 +958,10 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         int i;
         NSString *string = [textView string];
         
-        NSLog(@"searching: %@\n",string);
+        //NSLog(@"searching: %@\n",string);
         bool estuvo = NO;
         for (i=0; i< [recentSearches count]; i++) {
-            NSLog(@"comparing contra: %@",[recentSearches objectAtIndex:i]);
+            //NSLog(@"comparing contra: %@",[recentSearches objectAtIndex:i]);
             if ([string isEqualToString:[recentSearches objectAtIndex:i]]) {
                 estuvo = YES;
                 break;
@@ -969,7 +969,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
         if (estuvo == NO && ![string isEqualToString:@""]) {
             [recentSearches addObject:[textView string]];
-            NSLog(@"added %@ to recentSearches\n",string);
+            //NSLog(@"added %@ to recentSearches\n",string);
         }
         
         //resaltar en el texto los resultados, si los hay.
@@ -977,7 +977,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         NSString *texto = [[NSString alloc] init];
         texto = [[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] txt] string];
         
-        NSLog(@"buscando %@ dentro de : \n%@\n",string,texto);
+        //NSLog(@"buscando %@ dentro de : \n%@\n",string,texto);
         
         int k;
         NSRange res;
@@ -990,7 +990,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 NSValue *v = [NSValue valueWithRange:res];
                 
                 [coincidencias addObject:v];
-                NSLog(@"Encontrado en: %lu \n",res.location);
+                //NSLog(@"Encontrado en: %lu \n",res.location);
                 k = (int)res.location;
             } else {
                 break;
@@ -1068,7 +1068,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 }
 
 -(bool) guardarTexto:(NSString*)t en:(NSString*)ruta{
-    NSLog(@"\n\n\t\tEscribiendo archivo en:\n\t\t%@",ruta);
+    //NSLog(@"\n\n\t\tEscribiendo archivo en:\n\t\t%@",ruta);
     //NSLog(@"\n\t\tWe will save this:\n\n%@",t);    
     
     FILE* f_log = fopen([ruta cStringUsingEncoding:NSUTF8StringEncoding],"w");
@@ -1076,7 +1076,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     fflush(f_log);
     fclose(f_log);
     
-    NSLog(@"\n\t\ttermiando escribir.\n");
+    //NSLog(@"\n\t\ttermiando escribir.\n");
     return TRUE;
 }
 
@@ -1092,13 +1092,13 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         
         nombreArchivo = [[[url_file_name absoluteString] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""] stringByReplacingOccurrencesOfString:@".scif" withString:@""];
         directorioBase = [[[url_file_name URLByDeletingLastPathComponent] absoluteString] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
-        NSLog(@"\n\nNom arch: %@\nDir base: %@",nombreArchivo,directorioBase);
+        //NSLog(@"\n\nNom arch: %@\nDir base: %@",nombreArchivo,directorioBase);
         
     } else {
         return false;
     }
     
-    NSLog(@"guardado");
+    //NSLog(@"guardado");
     //nombres
     nombreArchivoTeX = nombreArchivo;
     if (![nombreArchivo hasSuffix:@".tex"]) {
@@ -1148,7 +1148,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         NSLog(@"No hay cosas");
         return nil;
     } else {
-        NSLog(@"Son %lu",[ARR count]);
+        //NSLog(@"Son %lu",[ARR count]);
     }
     int i;
     int j = 0; //contador para fortran code
@@ -1166,7 +1166,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         NSAttributedString *txt = [(nota*)[ARR objectAtIndex:i] txt];
         NSData *txt_data = [[txt string] dataUsingEncoding:NSMacOSRomanStringEncoding allowLossyConversion:YES];
         NSString *txt_str = [[NSString alloc] initWithData:txt_data encoding:NSMacOSRomanStringEncoding];
-        NSLog(@"%@",txt_str);
+        //NSLog(@"%@",txt_str);
         if (txt_str != Nil) 
         {
             // si es fortran juntar y compilar:
@@ -1219,7 +1219,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         NSLog(@"Ningun bloque fue código fortran");
         //return nil;
     } else {
-        NSLog(@"%d fueron bloques de fortran",(int)j);
+        //NSLog(@"%d fueron bloques de fortran",(int)j);
     }
     
     NSDictionary *OUT = [[NSDictionary alloc] initWithObjectsAndKeys:textoFortran,@"t_fort",textoLatex,@"t_late",textoTodo,@"t_todo", nil];
@@ -1267,7 +1267,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     if ([n Mi_modo_actual] == 0) {
         NSRange rangoParaCompletar = [txtx rangeForUserCompletion];
         NSUInteger punto = rangoParaCompletar.location + rangoParaCompletar.length;
-        NSLog(@"spliting from %lu",punto);
+        //NSLog(@"spliting from %lu",punto);
         
         //es un fotran que podemos dividir
         NSString * A_string = [[[n txt] string] substringToIndex:punto];
@@ -1275,7 +1275,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         
         [n setTxt:[[NSAttributedString alloc] initWithString:A_string]];
         {
-            NSLog(@"inserting fortran");
+            //NSLog(@"inserting fortran");
             n_new1.txt = [[NSAttributedString alloc] initWithString:B_string];
             n_new1.Typefort = false;
             n_new1.TypeTEX = true;
@@ -1308,7 +1308,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     //n.indice_inicial++;
                 }
                 
-                NSLog(@"El indice inicial de este segmento es = %lu", n_new1.indice_inicial);
+                //NSLog(@"El indice inicial de este segmento es = %lu", n_new1.indice_inicial);
             }
         }
         
@@ -1327,7 +1327,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     if ([n Mi_modo_actual] == 1) {
         NSRange rangoParaCompletar = [txtx rangeForUserCompletion];
         NSUInteger punto = rangoParaCompletar.location + rangoParaCompletar.length;
-        NSLog(@"spliting from %lu",punto);
+       // NSLog(@"spliting from %lu",punto);
         
         //es un fotran que podemos dividir
         NSString * A_string = [[[n txt] string] substringToIndex:punto];
@@ -1335,7 +1335,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         
         [n setTxt:[[NSAttributedString alloc] initWithString:A_string]];
         {
-            NSLog(@"inserting latex");
+            //NSLog(@"inserting latex");
             n_new1.txt = [[NSAttributedString alloc] initWithString:B_string];
             n_new1.Typefort = true;
             n_new1.TypeTEX = false;
@@ -1383,7 +1383,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSUInteger ind_n_actual = [ARRAYcontroller selectionIndex];
     switch ([SectionMode selectedSegment]) {
         case 0:
-            NSLog(@"inserting fortran");
+            //NSLog(@"inserting fortran");
             n.txt = [[NSAttributedString alloc] initWithString:@"C Fortran code...\n      "];
             n.Typefort = false;
             n.TypeTEX = true;
@@ -1415,14 +1415,14 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 } else {
                     //n.indice_inicial++;
                 }
-                NSLog(@"El indice inicial de este segmento es = %lu", n.indice_inicial);
+               // NSLog(@"El indice inicial de este segmento es = %lu", n.indice_inicial);
             }
             //n.indice_inicial = 0;
             [ARRAYcontroller insertObject:n atArrangedObjectIndex:ind_n_actual+1];
             [TheSplitView adjustSubviews];
             break;
         case 1:
-            NSLog(@"inserting latex");
+           // NSLog(@"inserting latex");
             n.txt = [[NSAttributedString alloc] initWithString:@"\\begin{equation}\ne^x = 1 + x + \\frac{x^2}{2} + \\frac{x^3}{6} + \\cdots = \\sum_{n\\geq 0} \\frac{x^n}{n!} \n\\end{equation}"];
             n.Typefort = true;
             n.TypeTEX = false;
@@ -1434,18 +1434,18 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             break;
         case 2:
             if (m.Mi_modo_actual == 0) {
-                NSLog(@"inserting split fortran");
+               // NSLog(@"inserting split fortran");
                 [self splitThisFortranBlock:nil];
             }
             
             if (m.Mi_modo_actual == 1) {
-                NSLog(@"inserting split latex");
+               // NSLog(@"inserting split latex");
                 [self splitThisLatexBlock:nil];
             }
             
             break;
         case 3:
-            NSLog(@"inserting invisible");
+            //NSLog(@"inserting invisible");
             n.txt = [[NSAttributedString alloc] initWithString:@"Invisible comments only on sciFeX\n"];
             n.Typefort = true;
             n.TypeTEX = true;
@@ -1548,7 +1548,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 - (IBAction)NotaOpcionesSectionClick:(id)sender {
     if ([[ARRAYcontroller selectedObjects] count]>0) {
         nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
-        NSLog(@"%lu",[n indice_inicial]);
+       // NSLog(@"%lu",[n indice_inicial]);
         if ([n indice_inicial] == (unsigned long)99999 ) {
             return;
         }
@@ -1563,7 +1563,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     int j = 0;
                     int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
                     unsigned long suma_lineas = 0;
-                    NSLog(@"index del elemento seleccionado = %i", K);
+                  //  NSLog(@"index del elemento seleccionado = %i", K);
                     if ([(nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:K-1] Mi_modo_actual] == 0) {
                         //se está brincando un fortran, le contamos las  lineas entonces.
                         for (j = 0; j < [[ARRAYcontroller arrangedObjects] indexOfObject:n] - 1; j++) {
@@ -1588,7 +1588,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                             
                         }
                     }
-                    NSLog(@"nuevo indice inicial es = %lu", n.indice_inicial);
+                  //  NSLog(@"nuevo indice inicial es = %lu", n.indice_inicial);
                     
                     [ARRAYcontroller removeObject:n];
                     [ARRAYcontroller insertObject:n atArrangedObjectIndex:ind_anterior];
@@ -1614,7 +1614,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     int j = 0;
                     int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
                     unsigned long suma_lineas = 0;
-                    NSLog(@"index del elemento seleccionado = %i", K);
+                  //  NSLog(@"index del elemento seleccionado = %i", K);
                     if ([(nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:ind_siguiente] Mi_modo_actual] == 0) {
                         //se está brincando un fortran, contamos las  lineas de los que están antes del actual y del de adelante.
                         for (j=0; j < (int)ind_siguiente - 2 ; j++) {
@@ -1645,7 +1645,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                         suma_lineas = suma_lineas + numberOfLines;
                         n.indice_inicial = suma_lineas;
                     }
-                    NSLog(@"nuevo indice inicial es = %lu", n.indice_inicial);
+                  //  NSLog(@"nuevo indice inicial es = %lu", n.indice_inicial);
                     
                     [ARRAYcontroller removeObject:n];
                     [ARRAYcontroller insertObject:n atArrangedObjectIndex:ind_siguiente];
@@ -1664,11 +1664,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     if ([[ARRAYcontroller selectedObjects] count]>0) {
         nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
         if ([OpcionesNotaImprimir state] == 0 ) {
-            NSLog(@"Mejor si imprimir el objeto: %@",n.title);
+          //  NSLog(@"Mejor si imprimir el objeto: %@",n.title);
             [n setPrintable:YES];
         } else {
             // no imprimir
-            NSLog(@"No imprimir el objeto: %@",n.title);
+          //  NSLog(@"No imprimir el objeto: %@",n.title);
             [n setPrintable:NO];
         }
     }
@@ -1733,7 +1733,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     
     
     
-    NSLog(@"terminal.txt = \n%@",terminal.txt); 
+   // NSLog(@"terminal.txt = \n%@",terminal.txt); 
     //revisamos si hubo errores
     NSRange v = {0, 0};
     v = [terminal.txt rangeOfString:@"Error"];
@@ -1781,7 +1781,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 }
 
 - (IBAction)Run_button_click:(id)sender {
-    NSLog(@"Run button click");
+   // NSLog(@"Run button click");
     [self performSelectorOnMainThread:@selector(clean_and_close) withObject:nil waitUntilDone:YES];
     //    [self clean_and_close];
     
@@ -1890,33 +1890,13 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             [[NSFileManager defaultManager] createFileAtPath:[NSString stringWithFormat:@"%@/%@",directorioBase,inPut] contents:nil attributes:nil];
             [[NSFileManager defaultManager] createFileAtPath:[NSString stringWithFormat:@"%@/%@",directorioBase,outPut] contents:nil attributes:nil];
         }
-        //inscribirnos a las notificaciones para cuando cambian los archivos de entrada y salida del depurador.
-        /*{
-            observadorINPUT = [[UKKQueue alloc] init];
-            [observadorINPUT setAlwaysNotify:NO];
-            [observadorINPUT addPathToQueue:[NSString stringWithFormat:@"%@/%@",directorioBase,inPut] notifyingAbout:UKKQueueNotifyAboutWrite];
-            NSNotificationCenter *notCenter;
-            notCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
-            // Assume -observerMethod:(id)aNotification exists
-            [notCenter addObserver:self selector:@selector(InputObserverMethod:) name:nil object:nil]; 
-        }
-          {
-          observadorOUTPUT = [[UKKQueue alloc] init];
-          [observadorOUTPUT setAlwaysNotify:NO];
-          [observadorOUTPUT addPathToQueue:[NSString stringWithFormat:@"%@/%@",directorioBase,outPut] notifyingAbout:UKKQueueNotifyAboutWrite];
-          NSNotificationCenter *notCenter;
-          notCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
-          // Assume -observerMethod:(id)aNotification exists
-          [notCenter addObserver:self selector:@selector(OutputObserverMethod:) name:nil object:nil]; 
-          }*/
+        
         //ON entonces depurar
         NSLog(@"debugging compiled program");
         
         terminal.txt = [terminal.txt stringByAppendingString:@"debugging compiled program\n"];
-        //[terminal hideTerm:[self windowForSheet]];
         
         [gdbSplitView setPosition:300 ofDividerAtIndex:0];
-        //[gdbSplitView adjustSubviews];
         
         // juntar los breakpoints en un mutablearray
         NSMutableArray *todos_los_breakpoints = [[NSMutableArray alloc] init];
@@ -1935,7 +1915,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
         
         //Tareas pre depurador
-        //NSString*PreDepurador = [[NSString alloc] initWithString:[info objectForKey:@"PreDepurador"]];
         NSArray*arr_PreDepurador = [[NSArray alloc] init];
         arr_PreDepurador = [lineaPreCompilador componentsSeparatedByString:@"%return"];
         int h;
@@ -2003,51 +1982,29 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         data = [[NSString stringWithFormat:@"file %@ \n",compiledProgram_name] dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:data];
         
-        //data = [[NSString stringWithFormat:@"tty %@\n",thisTTY] dataUsingEncoding:NSUTF8StringEncoding];
-        //[stdinHandle writeData:data];
-        
-        //terminal.txt = [terminal.txt stringByAppendingString:[NSString stringWithFormat:@"setting program tty: %i\nsetting breakpoints\n",thisTTY]];
-        
         //ahora agregamos los breakpoints
         for (i=0; i < [todos_los_breakpoints count]; i++) {
             data = [[NSString stringWithFormat:@"break %i\n",[(NSNumber*)[todos_los_breakpoints objectAtIndex:i] intValue]] dataUsingEncoding:NSUTF8StringEncoding];
             [stdinHandle writeData:data];
         }
-        //[execTask resume];
-        
-        //NSAttributedString * t = [[[NSAttributedString alloc] initWithString:@"launched...\n" attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.5],[NSColor whiteColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] autorelease];
-        //[[programOUTtxt textStorage] appendAttributedString:t];
-        //[[programOUTtxt textStorage] setAttributedString:t];
-        //[programOUTtxt scrollToEndOfDocument:nil];
-        
-        
-        //        data = [[NSString stringWithFormat:@"run \n"] dataUsingEncoding:NSUTF8StringEncoding];
+
         data = [[NSString stringWithFormat:@"run < %@ > %@ \n",inPut,outPut] dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:data];
         
         [terminal hideTerm:[self windowForSheet]];
         
-        /*
-         NSString *ruta = [NSString stringWithFormat:@"%@/log.txt",directorioBase];
-         FILE* f_log = fopen([ruta cStringUsingEncoding:NSUTF8StringEncoding],"w");
-         fclose(f_log);
-         
-         data = [[NSString stringWithFormat:@"tty %@\nrun \n",ruta] dataUsingEncoding:NSUTF8StringEncoding];
-         [stdinHandle writeData:data];
-         */
-        
-        //enviarmos mensajes sobre las variables
-        {
-            NSNumber *ok = [[NSNumber alloc] initWithInt:0];
-            NSDictionary* dadada = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                    ok,@"enviar",
-                                    nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"definirEnviarMensajes" object:nil userInfo:dadada];
-            
-        }
-        
         // mostrar las variables
         if ([todos_los_breakpoints count] > 0) {
+            //enviarmos mensajes sobre las variables
+            {
+                NSNumber *ok = [[NSNumber alloc] initWithInt:0];
+                NSDictionary* dadada = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                        ok,@"enviar",
+                                        nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"definirEnviarMensajes" object:nil userInfo:dadada];
+                
+            }
+            
             [VarsPanel orderFront:self];
         }
         
@@ -2067,88 +2024,14 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         [as executeAndReturnError:nil];
     }
 }
-/*
--(void)InputObserverMethod:(id)Notification{
-    //la notificación contiene el nombre del archivo en un diccionario. no es relevante.
-    //para evitar repeticiones, leemos el archivo y en seguida lo dejamos en blanco
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",directorioBase,inPut]]) 
-    {    
-        NSString *s = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",directorioBase,inPut] encoding:NSUTF8StringEncoding error:nil];
-        if (![s isEqualToString:@""]) {
-            NSLog(@"El archivo INPUT cambió a \n%@\n",s);
-            //usamos lo que leimos
-            NSColor* color = [NSColor yellowColor];
-            NSAttributedString * t = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",s] attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
-            [[programOUTtxt textStorage] appendAttributedString:t];
-            [programOUTtxt scrollToEndOfDocument:nil];
-            [programOUTtxt setNeedsDisplay:YES];
-            //limpiamos el archivo
-            FILE* f_log = fopen([[NSString stringWithFormat:@"%@/%@",directorioBase,inPut] cStringUsingEncoding:NSUTF8StringEncoding],"w");
-            fprintf(f_log, "");
-            fclose(f_log); 
-        } else {
-            NSLog(@"empty input file");
-            
-        }
-    }
-}
-
- -(void)printback:(NSString*)s withColor:(NSColor*)color{
- NSAttributedString * t = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",s] attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]];
- [[programOUTtxt textStorage] appendAttributedString:t];
- [programOUTtxt scrollToEndOfDocument:nil];
- [programOUTtxt setNeedsDisplay:YES];
- }
- 
- -(void)OutputObserverMethod:(id)Notification{
- //la notificación contiene el nombre del archivo en un diccionario. no es relevante.
- //para evitar repeticiones, leemos el archivo y en seguida lo dejamos en blanco
- if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",directorioBase,outPut]]) 
- {    
- NSString *s = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",directorioBase,outPut] encoding:NSUTF8StringEncoding error:nil];
- if (![s isEqualToString:@""]) {
- //NSLog(@"El archivo OUTPUT cambió a \n%@\n",s);
- //usamos lo que leimos
- NSColor* color = [NSColor whiteColor];
- [self printback:s withColor:color];
- 
- //NSAttributedString * t = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",s] attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
- //[[programOUTtxt textStorage] appendAttributedString:t];
- //[programOUTtxt scrollToEndOfDocument:nil];
- //[programOUTtxt setNeedsDisplay:YES];
- 
- 
- //limpiamos el archivo
- //FILE* f_log = fopen([[NSString stringWithFormat:@"%@/%@",directorioBase,outPut] cStringUsingEncoding:NSUTF8StringEncoding],"w");
- //fprintf(f_log, "");
- //fclose(f_log); 
- } else {
- NSLog(@"empty output file");
- 
- }
- }
- 
- //    NSLog(@"exec: %i",[execTask isRunning]);
- //    NSLog(@"gdb: %i",[gdbtask isRunning]);
- //    if (![execTask isRunning]) {
- //        NSLog(@"stopping");
- //        [self Stop_button_click:nil];
- //    }
- }
- 
- -(void)bakc_getData:(NSData*)data{
- NSLog(@"good!");
- 
- }*/
 
 //apple documentation:
 // This method is called asynchronously when data is available from the task's file handle.
 // We just pass the data along to the controller as an NSString.
 -(void)getData:(NSNotification*)notification{
+    //NSLog(@"get data:\n%@",[notification description]);
     //[terminal_out setEditable:NO];
     NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
-    
-    //[self performSelectorInBackground:@selector(bakc_getData:) withObject:data];
     
     // If the length of the data is zero, then the task is basically over - there is nothing
     // more to get from the handle so we may as well shut down.
@@ -2206,9 +2089,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                             }
                             
                             color = [NSColor greenColor];
-                            NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
+                                       
+                 NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
                             [stdinHandle writeData:new_input];
-                            
                             //actualizamos el programOUTtxt desde [NSString stringWithFormat:@"%@/%@",directorioBase,outPut]
                             NSError *ReadErr = nil;
                             NSString *readText = [[NSString alloc] initWithContentsOfFile:[[NSString alloc] initWithFormat:@"%@/%@",directorioBase,outPut] encoding:NSUTF8StringEncoding error:&ReadErr];
@@ -2251,6 +2134,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                             [dbgTextOut scrollToEndOfDocument:nil];
                         }
                         //[txtx setSelectedRange:NSMakeRange(0, 0)];
+                        [[notification object] readInBackgroundAndNotify];
                         return;
                     }
                     
@@ -2258,8 +2142,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 } else if ([aux_arr count] >= 2) {
                     if ([[aux_arr objectAtIndex:1] isEqualToString:@"="]) {
                         // entonces tenemos variables de un 'print' o un 'info locals'
-                        
-                        
                         VarModel* vm = [[VarModel alloc]init];
                         [vm setVarName:[aux_arr objectAtIndex:0]];                        
                         NSString* db_arr_i_st = [[NSString alloc] initWithString:(NSString*)[db_arr objectAtIndex:i]];
@@ -2269,6 +2151,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                         [thisVarArray addObject:vm];
                     }
                     
+                    // el número de línea después de un breakpoint
                     if ([(NSString*)[aux_arr objectAtIndex:0] rangeOfString:@"\t"].location != NSNotFound ) {
                         NSString *num_lin_str = [(NSString*)[aux_arr objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                         int num_lin_break = [num_lin_str intValue];
@@ -2300,57 +2183,21 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 }
             }
         }
-        if ([thisVarArray count]>1) {
+        if ([thisVarArray count]>=1) {
             self.VarsArray = [[NSMutableArray alloc] initWithArray:thisVarArray];
-        }  else if([thisVarArray count] == 1) {
-            // una línea. una variable 
-            if ([palabra length]>0) {
-                NSString *varVal = [[NSString alloc] initWithString:[[thisVarArray objectAtIndex:0] varValue]];
-                if (![varVal hasPrefix:@" {"]) {
-                    //   NSLog(@"%@",palabra);
-                    varVal = [@" " stringByAppendingFormat:@"%@: %@",palabra,varVal];
-                    //[self showOff:varVal here:palabraRange];
-                    
-                    NSNumber* loc = [[NSNumber alloc] initWithUnsignedLong:palabraRange.location];
-                    NSNumber* len = [[NSNumber alloc] initWithUnsignedLong:palabraRange.length];
-                    NSDictionary* dada = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                            varVal,@"varVal",
-                                            loc,@"loc",
-                                            len,@"len",
-                                            nil];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"mostrarValor" object:nil userInfo:dada];
-                }
-            }
-        }  
+        } 
         
     } else {
         // We're finished here
         //[self clean_and_close];
         [self Stop_button_click:nil];
+        [[notification object] readInBackgroundAndNotify];
         return;
     }
     
     // we need to schedule the file handle go read more data in the background again.
     [[notification object] readInBackgroundAndNotify];
 }
-/*
- -(void)getDataFromExec:(NSNotification*)notification{
- [terminal_out setEditable:NO];
- NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
- // If the length of the data is zero, then the task is basically over - there is nothing
- // more to get from the handle so we may as well shut down.
- if ([data length])
- {
- NSColor* color = [NSColor whiteColor];
- NSString * db = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
- 
- NSAttributedString * t = [[[NSAttributedString alloc] initWithString:db attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.5],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] autorelease];
- [[programOUTtxt textStorage] appendAttributedString:t];
- [programOUTtxt scrollToEndOfDocument:nil];
- }
- [[notification object] readInBackgroundAndNotify]; 
- }
- */
 
 
 - (IBAction)terminal_enter:(id)sender {
@@ -2379,13 +2226,19 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             [programINPUTtxt setStringValue:@""];
         }
     }
-    
-    
-    
 }
 
 -(void)clean_and_close{
     if ([gdbtask isRunning]) {
+        {
+            NSNumber *ok = [[NSNumber alloc] initWithInt:1];
+            NSDictionary* dadada = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                    ok,@"enviar",
+                                    nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"definirEnviarMensajes" object:nil userInfo:dadada];
+            
+        }
+        
         NSData *data = [[[NSString alloc] initWithString:@"kill\n"] dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:data];
         data = [[[NSString alloc] initWithString:@"quit\n"] dataUsingEncoding:NSUTF8StringEncoding];
@@ -2401,7 +2254,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     // It is important to clean up after ourselves so that we don't leave potentially deallocated
     // objects as observers in the notification center; this can lead to crashes.
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object: [[gdbtask standardOutput] fileHandleForReading]];
-    //[[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[[execTask standardOutput] fileHandleForReading]];
     
     //dejar de obscultar los archivos de la terminal
     //[observadorINPUT removePathFromQueue:[NSString stringWithFormat:@"%@/%@",directorioBase,inPut]];
@@ -2425,22 +2277,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 
 - (IBAction)Stop_button_click:(id)sender {
     
-    {
-        NSNumber *ok = [[NSNumber alloc] initWithInt:1];
-        NSDictionary* dadada = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                ok,@"enviar",
-                                nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"definirEnviarMensajes" object:nil userInfo:dadada];
-        
-    }
     
     [VarsPanel orderOut:self];
     [self clean_and_close];
     
     [terminal hideTerm:[self windowForSheet]];
-    //CGSize gs = gdbSplitView.frame.size;
-    //[gdbSplitView setPosition:gs.width-10 ofDividerAtIndex:0];
-    //[gdbSplitView adjustSubviews];
     
     //las animaciones se ven bonitas.
     NSView *upS = [[gdbSplitView subviews]objectAtIndex:0];
@@ -2475,7 +2316,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 -(IBAction)clearSlate:(id)sender{
     // clear working directory of any output
     if (nombreOUTput != nil) {  
-        NSLog(@"cleaning ");
+       // NSLog(@"cleaning ");
         NSString *s = [NSString stringWithFormat:
                        @"tell application \"Terminal\" to do script \"cd / \n cd %@ \n rm *.o *.out \"",directorioBase];
         NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
@@ -2502,16 +2343,34 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                                                    [(NSNumber*)[[notification userInfo] objectForKey:@"len"] unsignedLongValue]);
                         
                         NSLog(@"palabra: %@",palabra);
-                        // ahora checamos si dicha palabra arroja algún resultado en el gdb
                         
-                        NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
-                        [stdinHandle writeData:new_input];
-//                        
-//                        
-//                        //ahora tomamos esa palabra de la lista de variables,
-//                        if ([self.VarsArray count] > 0) {
-//                         
-//                        }
+// ahora checamos si dicha palabra arroja algún resultado en el gdb
+// NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
+// [stdinHandle writeData:new_input];
+                                              
+                        //ahora tomamos esa palabra de la lista de variables,
+                        if ([self.VarsArray count] > 0) {
+                            int i;
+                            VarModel* vm = [[VarModel alloc]init];
+                            for (i=0; i<[self.VarsArray count]; i++) {
+                                vm = (VarModel*)[self.VarsArray objectAtIndex:i];
+                                if ([palabra isEqualToString:[vm varName]]) {
+                                    //bingo
+                                    NSString* varVal = [[NSString alloc] initWithString:[vm varValue]];
+                                    varVal = [@" " stringByAppendingFormat:@"%@: %@",palabra,varVal];
+                                    //[self showOff:varVal here:palabraRange];
+                                    
+                                    NSNumber* loc = [[NSNumber alloc] initWithUnsignedLong:palabraRange.location];
+                                    NSNumber* len = [[NSNumber alloc] initWithUnsignedLong:palabraRange.length];
+                                    NSDictionary* dada = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                                          varVal,@"varVal",
+                                                          loc,@"loc",
+                                                          len,@"len",
+                                                          nil];
+                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"mostrarValor" object:nil userInfo:dada];
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2629,44 +2488,44 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             editado = numberOfLines;
         }
     } while (letra < stringLength);
-//    {
-        nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
-//        int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
-//        hoja_anterior = K;
-        [n setLastvisibleRange:[self getViewableRange:txtx]];
-//    }
+    //    {
+    nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+    //        int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
+    //        hoja_anterior = K;
+    [n setLastvisibleRange:[self getViewableRange:txtx]];
+    //    }
     if([[ARRAYcontroller selectedObjects] count] > 0) {
-//    {
-//        nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
-//        [n setLastvisibleRange:[self getViewableRange:txtx]];
-//    }
-    
-    //NSLog(@"\nEsteTextoSeleccionado:\n%@",[[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] txt] string]);
-    //decidir si el numero de lineas en el documento ha cambiado en un bloque de fortran
-    if ([(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] Mi_modo_actual] == 0) {
+        //    {
+        //        nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+        //        [n setLastvisibleRange:[self getViewableRange:txtx]];
+        //    }
         
-        
-        //NSLog(@"This works");
-        // pedir se actualice el numero de lineas.
-        if ([num_de_lineas longValue] != numberOfLines) {
-            //NSNumber *n_indice_inicial = [[NSNumber alloc] initWithUnsignedLong:[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] indice_inicial]];
-            NSNumber *n_indice_inicial = [[NSNumber alloc] initWithUnsignedLong:[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] indice_inicial]];
+        //NSLog(@"\nEsteTextoSeleccionado:\n%@",[[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] txt] string]);
+        //decidir si el numero de lineas en el documento ha cambiado en un bloque de fortran
+        if ([(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] Mi_modo_actual] == 0) {
             
-            NSDictionary *Nota_marcadores = [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] Nota_linesToMarkers];
             
-            NSDictionary* dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 n_indice_inicial,@"indice_inicial_en_seccion",
-                                 Nota_marcadores,@"Diccionario_de_marcadores",
-                                 nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ActualizarNumLineaMarcadores" object:nil userInfo:dic];
-            
-            num_de_lineas = [NSNumber numberWithLong:numberOfLines];
-            [num_de_lineas retain];
-            [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setNoDeLineas_reciente:[[NSNumber alloc] initWithUnsignedLong:numberOfLines]];
-//            [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setUpdate_me:YES];
-            //n.NoDeLineas_reciente = [[NSNumber alloc] initWithUnsignedLong:numberOfLines];
+            //NSLog(@"This works");
+            // pedir se actualice el numero de lineas.
+            if ([num_de_lineas longValue] != numberOfLines) {
+                //NSNumber *n_indice_inicial = [[NSNumber alloc] initWithUnsignedLong:[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] indice_inicial]];
+                NSNumber *n_indice_inicial = [[NSNumber alloc] initWithUnsignedLong:[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] indice_inicial]];
+                
+                NSDictionary *Nota_marcadores = [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] Nota_linesToMarkers];
+                
+                NSDictionary* dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     n_indice_inicial,@"indice_inicial_en_seccion",
+                                     Nota_marcadores,@"Diccionario_de_marcadores",
+                                     nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ActualizarNumLineaMarcadores" object:nil userInfo:dic];
+                
+                num_de_lineas = [NSNumber numberWithLong:numberOfLines];
+                [num_de_lineas retain];
+                [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setNoDeLineas_reciente:[[NSNumber alloc] initWithUnsignedLong:numberOfLines]];
+                //            [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setUpdate_me:YES];
+                //n.NoDeLineas_reciente = [[NSNumber alloc] initWithUnsignedLong:numberOfLines];
+            }
         }
-    }
     }
     [NSGraphicsContext restoreGraphicsState];
 }
