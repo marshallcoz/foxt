@@ -57,6 +57,8 @@
     IBOutlet NSTextField    *programINPUTtxt;
     IBOutlet NSPanel        *VarsPanel;
     NSMutableArray          *VarsArray;
+    IBOutlet NSTextView     *VarsDumptxt;
+    
     
     IBOutlet NSBox          *L_vertical;
     IBOutlet NSBox          *L_vertical_final;
@@ -77,6 +79,7 @@
     NoodleLineNumberView    *LineNumberVW;
     NSNumber                *num_de_lineas;
     int                     hoja_anterior;
+    NSButton                *NotaiDisclosureButReminder;
     
     //sintaxis de código
     IBOutlet UKTextDocGoToBox*		gotoPanel;				// Controller for our "go to line" panel.
@@ -92,6 +95,7 @@
 @property (assign) IBOutlet NSCollectionView *tablaOutline;
 @property (assign) IBOutlet NSButton *ToggleBreakpoints;
 @property (assign) IBOutlet NSSegmentedCell *SectionMode;
+@property (assign) IBOutlet NSSegmentedControl *RunStopPrint;
 @property (assign) IBOutlet NSSegmentedControl *Debug_panel;
 @property (assign) IBOutlet NSSegmentedControl *Debug_actions;
 @property (assign) IBOutlet NSSegmentedControl *OpcionesNota;
@@ -105,6 +109,11 @@
 @property (assign) IBOutlet NSSplitView *TheSplitView;
 @property (assign) IBOutlet NSSplitView *gdbSplitView;
 @property (copy) NSMutableArray *VarsArray;
+@property (assign) IBOutlet NSButton *NotaiDisclosureBut;
+@property (assign) IBOutlet NSDrawer *View2Drawer;
+@property (assign) IBOutlet NSTextView *NotaiDisclosureTxt;
+@property (assign) IBOutlet NSButton *NotaiDisclosureTitleBut;
+
 
 //variables globales
 @property (assign) NSString *nombreArchivo;
@@ -119,6 +128,7 @@
 @property (assign) NSRange  palabraRange;
 
 //acciones del view
+- (IBAction)RunStopPrint_click:(id)sender;
 - (IBAction)Run_button_click:(id)sender;
 - (IBAction)Run_last_click:(id)sender;
 - (IBAction)Stop_button_click:(id)sender;
@@ -128,6 +138,7 @@
 - (IBAction)click_debug_actions:(id)sender;
 - (IBAction)click_Debug_panels:(id)sender;
 - (IBAction)NotaOpcionesSectionClick:(id)sender;
+- (IBAction)NotaiDisclosureClick:(id)sender;
 - (IBAction)click_printable:(id)sender;
 //-(void) showOff:(NSString*)tt here:(NSRange)ran;
 //- (NSRect)overlayRectForRange:(NSRange)aRange;
@@ -147,6 +158,9 @@
 -(void)clean_and_close;
 
 // objetos para manejar la sintaxis
+
+-(void) processEditing: (NSNotification*)notification;
+
 +(void) asegurarQuePfrefsYaIniciaron;
 
 +(void) makeSurePrefsAreInited;		// No need to call this.

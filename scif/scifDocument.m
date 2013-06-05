@@ -37,6 +37,7 @@ static NSString* outPut = @".programOutput.txt";
 @synthesize TheSplitView;
 @synthesize gdbSplitView;
 @synthesize SectionMode;
+@synthesize RunStopPrint;
 @synthesize Debug_panel;
 @synthesize Debug_actions;
 @synthesize togglecomment;
@@ -54,6 +55,10 @@ static NSString* outPut = @".programOutput.txt";
 @synthesize nombreOUTput;
 @synthesize ToggleBreakpoints;
 @synthesize VarsArray;
+@synthesize NotaiDisclosureBut;
+@synthesize View2Drawer;
+@synthesize NotaiDisclosureTxt;
+@synthesize NotaiDisclosureTitleBut;
 @synthesize AWAKE;
 @synthesize BPs;
 @synthesize palabra;
@@ -256,7 +261,12 @@ static NSString* outPut = @".programOutput.txt";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEditing:)
                                                  name: NSTextStorageDidProcessEditingNotification
                                                object: [txtx textStorage]];
-	
+	// un método para que cuando escribes en la ventana anexa, se acutaliza el array:
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldUpdateArrayController:) 
+                                                 name:NSTextStorageDidProcessEditingNotification 
+                                               object:[NotaiDisclosureTxt textStorage]];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fdf:) 
                                                  name:NSTextViewDidChangeSelectionNotification
                                                object:txtx];
@@ -636,6 +646,7 @@ static NSString* outPut = @".programOutput.txt";
 }
 
 #pragma mark -
+// Se selecciona una nota
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if([keyPath isEqualTo:@"selectionIndexes"])
@@ -1260,6 +1271,22 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 #pragma mark -
 #pragma mark ToolBAR
 
+- (IBAction)RunStopPrint_click:(id)sender {
+    switch ([RunStopPrint selectedSegment]) {
+        case 0:
+            [self Run_button_click:nil];
+            break;
+        case 1:
+            [self Stop_button_click:nil];
+            break;
+        case 2:
+            [self make_pdf:nil];
+            break;
+        default:
+            break;
+    }
+}
+
 -(void)splitThisFortranBlock:(id)sender  {
     nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
     NSUInteger ind_n = [ARRAYcontroller selectionIndex];
@@ -1612,7 +1639,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     
                     //si alguno anterior es fortran, hay que arreglar los numeros de linea
                     int j = 0;
-                    int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
+                    //int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
                     unsigned long suma_lineas = 0;
                   //  NSLog(@"index del elemento seleccionado = %i", K);
                     if ([(nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:ind_siguiente] Mi_modo_actual] == 0) {
@@ -1652,11 +1679,62 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 }
                 break;
             case 2:
-                [ARRAYcontroller removeObject:n];
+     
+                NSBeginAlertSheet(
+                                  @"Delete this block?",
+                                  @"Oh no! sorry", 
+                                  @"Delete it", 
+                                  NULL, 
+                                  [self windowForSheet], 
+                                  self, 
+                                  @selector(deleteBlock:returnCode:contextInfo:),  
+                                  NULL,
+                                  [NSDictionary dictionaryWithObject:@"Some context info" forKey:@"in a dictionary"],
+                                  [NSString stringWithString:@"Deleting a block can not be undone."]
+                                  );
+                
                 break;
             default:
                 break;
         }
+    }
+}
+
+- (IBAction)NotaiDisclosureClick:(id)sender {
+    //NSLog(@"state: %ld",[View2Drawer state]);
+    if ([View2Drawer state] == 2) {
+        [View2Drawer toggle:self];
+        [NotaiDisclosureButReminder setState:0];
+        if (NotaiDisclosureButReminder != sender) {
+            NotaiDisclosureButReminder = sender;
+            nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+            NSAttributedString *AtStr = [[NSAttributedString alloc] initWithAttributedString:[n txt]];
+            [NotaiDisclosureTitleBut setTitle:[n title]];
+            hoja_anterior = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
+            //NSLog(@"En el cajón quedó: %d",hoja_anterior);
+            [[NotaiDisclosureTxt textStorage] setAttributedString:AtStr];
+            [View2Drawer toggle:self];
+        }
+    }
+    else
+    {
+        if ([NotaiDisclosureBut state] == 0) {
+            NotaiDisclosureButReminder = sender;
+            nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+            NSAttributedString *AtStr = [[NSAttributedString alloc] initWithAttributedString:[n txt]];
+            [NotaiDisclosureTitleBut setTitle:[n title]];
+            hoja_anterior = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
+           // NSLog(@"En el cajón quedó: %d",hoja_anterior);
+            [[NotaiDisclosureTxt textStorage] setAttributedString:AtStr];
+        }
+        [View2Drawer toggle:self];
+    }
+}
+
+- (void)deleteBlock:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertAlternateReturn) {
+        nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+        [ARRAYcontroller removeObject:n];
     }
 }
 
@@ -2037,9 +2115,14 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     // more to get from the handle so we may as well shut down.
     if ([data length])
     {
+        //antes de tratar de procesarla, la mandamos al raw dump como texto
+        
         NSMutableArray* thisVarArray = [[NSMutableArray alloc] init];
         NSColor* color = [NSColor whiteColor];
         NSString * db = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        [VarsDumptxt setString:[[VarsDumptxt string] stringByAppendingString:db]];
+        [VarsDumptxt scrollToEndOfDocument:nil];
+        
         db = [db stringByReplacingOccurrencesOfString:@"(gdb)" withString:@""];
         NSLog(@"data:\n%@",db);
         // una variable por línea
@@ -2380,6 +2463,27 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 
 #pragma mark -
 #pragma mark syntax specific
+-(void) shouldUpdateArrayController : (NSNotification*)notification
+{
+    //hoja_anterior
+    if ([[ARRAYcontroller arrangedObjects] count] > hoja_anterior) {
+        nota*n = [[nota alloc] init];
+        n = (nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:hoja_anterior];
+        //NSLog(@"ini:\n%@",n.txt);
+        
+        n.txt = [[NSAttributedString alloc] initWithAttributedString:[NotaiDisclosureTxt attributedString]];
+        
+        //NSLog(@"fin:\n%@",n.txt);
+        
+        nota*nselected = [[ARRAYcontroller selectedObjects] objectAtIndex:0];
+        
+        if ([nselected isEqual:n]) {
+            // es la misma y vale actualizar
+            [txtx setNeedsDisplay:YES];
+        }
+    }
+}
+
 
 /* -----------------------------------------------------------------------------
  processEditing:
@@ -2490,6 +2594,16 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     } while (letra < stringLength);
     //    {
     nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+    int indiceN = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
+    if (hoja_anterior == indiceN) {
+        if ([View2Drawer state] == 2) {
+            NSAttributedString *AtStr = [[NSAttributedString alloc] initWithAttributedString:[n txt]];
+            [[NotaiDisclosureTxt textStorage] setAttributedString:AtStr]; 
+            [NotaiDisclosureTxt setNeedsDisplay:YES];
+        }
+    }
+    
+    
     //        int K = (int)[[ARRAYcontroller arrangedObjects] indexOfObject:n];
     //        hoja_anterior = K;
     [n setLastvisibleRange:[self getViewableRange:txtx]];
@@ -3656,5 +3770,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     
     return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:12.0],[NSColor whiteColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]];
 }
+
 
 @end
