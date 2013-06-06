@@ -1811,7 +1811,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     
     
     
-   // NSLog(@"terminal.txt = \n%@",terminal.txt); 
     //revisamos si hubo errores
     NSRange v = {0, 0};
     v = [terminal.txt rangeOfString:@"Error"];
@@ -1863,8 +1862,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     [self performSelectorOnMainThread:@selector(clean_and_close) withObject:nil waitUntilDone:YES];
     //    [self clean_and_close];
     
-    [terminal showTerm:[self windowForSheet]];
-    terminal.txt = @"running...\n";
     
     {
         NSAttributedString *nada_atrib = [[NSAttributedString alloc] initWithString:@""];
@@ -1879,6 +1876,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSDictionary *textos_dic = [self textos_de_salida_para_el_arreglo:[ARRAYcontroller arrangedObjects]];
     if (textos_dic == nil) {
         NSLog(@"\n\nError: Document contents could not be grouped.");
+        [terminal showTerm:[self windowForSheet]];
         terminal.txt = [terminal.txt stringByAppendingString:@"Error: Document contents could not be grouped.\n"];
         return;
     }
@@ -1888,6 +1886,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     
     if (![self guardadoTextoFortran:textoFortran TextoLatex:textoLatex]) {
         NSLog(@"sorry");
+        [terminal showTerm:[self windowForSheet]];
         terminal.txt = [terminal.txt stringByAppendingString:@"\nNot saved. quitting\n"];
         //[self saveDocument:nil];
         return;
@@ -1912,6 +1911,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSString *compiledProgram_name = [nombreOUTput_array lastObject];
     //NSTask *task = [[NSTask alloc] init];
     if ([ToggleBreakpoints state] == 0) {
+        [terminal showTerm:[self windowForSheet]];
+        terminal.txt = [terminal.txt stringByAppendingString:@"running...\n"];
+        
         NSLog(@"Compilador: \n%@",lineaCompilador);
         terminal.txt = [terminal.txt stringByAppendingString:[NSString stringWithFormat:@"Compiler: %@\n",lineaCompilador]];
         
@@ -1954,8 +1956,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     } 
     else if ([ToggleBreakpoints state] == 1) 
     {
-        NSLog(@"Pre Debug, compiler script: \n%@",lineaPreCompilador);
         
+        //NSLog(@"Pre Debug, compiler script: \n%@",lineaPreCompilador);
+        [[dbgTextOut textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Pre Debug, compiler script: \n%@",lineaPreCompilador]]];
         //limpiamos archivos de in y out del programa
         {
             if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@",directorioBase,inPut]]) {
@@ -1971,9 +1974,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         
         //ON entonces depurar
         NSLog(@"debugging compiled program");
-        
-        terminal.txt = [terminal.txt stringByAppendingString:@"debugging compiled program\n"];
-        
+        [[dbgTextOut textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:@"debugging compiled program\n"]];
         [gdbSplitView setPosition:300 ofDividerAtIndex:0];
         
         // juntar los breakpoints en un mutablearray
@@ -1999,12 +2000,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         for (h=0; h<[arr_PreDepurador count]; h++) {
             if (![[arr_PreDepurador objectAtIndex:h] isEqualToString:@""]) {
                 NSString *str_arr_PreDepurador = [[NSString alloc] initWithString: [arr_PreDepurador objectAtIndex:h]];
-                terminal.txt = [terminal.txt stringByAppendingString:[NSString stringWithFormat:@"Format line: %@\n",str_arr_PreDepurador]];
+                [[dbgTextOut textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Format line: %@\n",str_arr_PreDepurador]]];
                 str_arr_PreDepurador = [str_arr_PreDepurador stringByReplacingOccurrencesOfString:@"%F" withString:nombreArchivoFORTRAN];
                 str_arr_PreDepurador = [str_arr_PreDepurador stringByReplacingOccurrencesOfString:@"%A" withString:nombreOUTput];
                 str_arr_PreDepurador = [str_arr_PreDepurador stringByReplacingOccurrencesOfString:@"%O" withString:[nombreOUTput stringByReplacingOccurrencesOfString:@".out" withString:@".o"]];
-                terminal.txt = [terminal.txt stringByAppendingString:[NSString stringWithFormat:@"Actual line: %@\n",str_arr_PreDepurador]];
-                
+                [[dbgTextOut textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Actual line: %@\n",str_arr_PreDepurador]]];
                 do {
                     if ([str_arr_PreDepurador hasPrefix:@" "]) {
                         str_arr_PreDepurador = [str_arr_PreDepurador substringFromIndex:1];
@@ -2013,8 +2013,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 
                 
                 NSArray *arr_arr_PreDepurador = [str_arr_PreDepurador componentsSeparatedByString:@" "];
-                NSLog(@"launching: \n %@",[arr_arr_PreDepurador componentsJoinedByString:@" | "]);
-                
+                //NSLog(@"launching: \n %@",[arr_arr_PreDepurador componentsJoinedByString:@" | "]);
+                [[dbgTextOut textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"launching: \n %@",[arr_arr_PreDepurador componentsJoinedByString:@" | "]]]];
                 
                 if ([self Correr_programa:[arr_arr_PreDepurador objectAtIndex:0] withArgs:[arr_arr_PreDepurador subarrayWithRange:NSMakeRange(1, [arr_arr_PreDepurador count]-2)]]== 1) {
                     return;
@@ -2114,22 +2114,26 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     // If the length of the data is zero, then the task is basically over - there is nothing
     // more to get from the handle so we may as well shut down.
     if ([data length])
-    {
-        //antes de tratar de procesarla, la mandamos al raw dump como texto
-        
-        NSMutableArray* thisVarArray = [[NSMutableArray alloc] init];
-        NSColor* color = [NSColor whiteColor];
+    {        
         NSString * db = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        [VarsDumptxt setString:[[VarsDumptxt string] stringByAppendingString:db]];
-        [VarsDumptxt scrollToEndOfDocument:nil];
-        
+        {
+            //antes de tratar de procesarla, la mandamos al raw dump como texto
+            NSMutableArray* thisVarArray = [[NSMutableArray alloc] init];
+            NSColor* color = [NSColor whiteColor];
+            [VarsDumptxt setString:[[VarsDumptxt string] stringByAppendingString:db]];
+            [VarsDumptxt scrollToEndOfDocument:nil];
+        }
         db = [db stringByReplacingOccurrencesOfString:@"(gdb)" withString:@""];
-        NSLog(@"data:\n%@",db);
+        //NSLog(@"data:\n%@",db);
         // una variable por línea
         db = [db stringByReplacingOccurrencesOfString:@"{\n" withString:@"{"];
+        db = [db stringByReplacingOccurrencesOfString:@"{ " withString:@"{"];
         db = [db stringByReplacingOccurrencesOfString:@"\n}" withString:@"}"];
-        db = [db stringByReplacingOccurrencesOfString:@", \n" withString:@", "];
-        NSLog(@"data again:\n%@",db);
+        db = [db stringByReplacingOccurrencesOfString:@" }" withString:@"}"];
+        db = [db stringByReplacingOccurrencesOfString:@", \n" withString:@","];
+        db = [db stringByReplacingOccurrencesOfString:@",\n" withString:@","];
+        db = [db stringByReplacingOccurrencesOfString:@" " withString:@"|"];
+        //NSLog(@"data again:\n%@",db);
         
         NSArray * db_arr = [db componentsSeparatedByString:@"\n"]; //por renglones
         int i;
@@ -2360,35 +2364,39 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 
 - (IBAction)Stop_button_click:(id)sender {
     
-    
     [VarsPanel orderOut:self];
-    [self clean_and_close];
+    
+    [self performSelectorOnMainThread:@selector(clean_and_close) withObject:nil waitUntilDone:NO];
+     //    [self clean_and_close];
     
     [terminal hideTerm:[self windowForSheet]];
     
     //las animaciones se ven bonitas.
-    NSView *upS = [[gdbSplitView subviews]objectAtIndex:0];
-    NSView *doS = [[gdbSplitView subviews]objectAtIndex:1];
+    {
+        NSView *upS = [[gdbSplitView subviews]objectAtIndex:0];
+        NSView *doS = [[gdbSplitView subviews]objectAtIndex:1];
+        
+        NSMutableDictionary *collapseMainAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
+        [collapseMainAnimationDict setObject:upS forKey:NSViewAnimationTargetKey];
+        NSRect newRightSubViewFrame = upS.frame;
+        newRightSubViewFrame.size.width =  gdbSplitView.frame.size.height;
+        [collapseMainAnimationDict setObject:[NSValue valueWithRect:newRightSubViewFrame] forKey:NSViewAnimationEndFrameKey];
+        
+        NSMutableDictionary *collapseInspectorAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
+        [collapseInspectorAnimationDict setObject:doS forKey:NSViewAnimationTargetKey];
+        NSRect newLeftSubViewFrame = doS.frame;
+        newLeftSubViewFrame.size.height = 0.0f;
+        newLeftSubViewFrame.origin.y = gdbSplitView.frame.size.width;
+        [collapseInspectorAnimationDict setObject:[NSValue valueWithRect:newLeftSubViewFrame] forKey:NSViewAnimationEndFrameKey];
+        
+        NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:collapseMainAnimationDict, collapseInspectorAnimationDict, nil]];
+        [collapseAnimation setDuration:0.40f];
+        [collapseAnimation startAnimation];
+        [gdbSplitView adjustSubviews];
+        [gdbSplitView setNeedsDisplay:YES];
+    }
     
-    NSMutableDictionary *collapseMainAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [collapseMainAnimationDict setObject:upS forKey:NSViewAnimationTargetKey];
-    NSRect newRightSubViewFrame = upS.frame;
-    newRightSubViewFrame.size.width =  gdbSplitView.frame.size.height;
-    [collapseMainAnimationDict setObject:[NSValue valueWithRect:newRightSubViewFrame] forKey:NSViewAnimationEndFrameKey];
-    
-    NSMutableDictionary *collapseInspectorAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [collapseInspectorAnimationDict setObject:doS forKey:NSViewAnimationTargetKey];
-    NSRect newLeftSubViewFrame = doS.frame;
-    newLeftSubViewFrame.size.height = 0.0f;
-    newLeftSubViewFrame.origin.y = gdbSplitView.frame.size.width;
-    [collapseInspectorAnimationDict setObject:[NSValue valueWithRect:newLeftSubViewFrame] forKey:NSViewAnimationEndFrameKey];
-    
-    NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:collapseMainAnimationDict, collapseInspectorAnimationDict, nil]];
-    [collapseAnimation setDuration:0.40f];
-    [collapseAnimation startAnimation];
-    [gdbSplitView adjustSubviews];
-    [gdbSplitView setNeedsDisplay:YES];
-    
+    // decir STOP
     NSAttributedString * t = [[NSAttributedString alloc] initWithString:@" stopping " attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],[NSColor greenColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
     [[dbgTextOut textStorage] appendAttributedString:t];
     [dbgTextOut scrollToEndOfDocument:nil];
@@ -2426,12 +2434,17 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                                                    [(NSNumber*)[[notification userInfo] objectForKey:@"len"] unsignedLongValue]);
                         
                         NSLog(@"palabra: %@",palabra);
+       
+    //   OPCION 1
+//    checamos si dicha palabra arroja algún resultado en el gdb
+
+//NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
+//[stdinHandle writeData:new_input];
+               
+    //   OPCION 2                    
                         
-// ahora checamos si dicha palabra arroja algún resultado en el gdb
-// NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
-// [stdinHandle writeData:new_input];
-                                              
-                        //ahora tomamos esa palabra de la lista de variables,
+    //ahora tomamos esa palabra de la lista de variables, El problema con esto es que cuando se usan arrays allocatable, gdb no muestra todas las variables
+    
                         if ([self.VarsArray count] > 0) {
                             int i;
                             VarModel* vm = [[VarModel alloc]init];
@@ -2453,7 +2466,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"mostrarValor" object:nil userInfo:dada];
                                 }
                             }
-                        }
+                        }// if varsArray.count
+                        
+                        
                     }
                 }
             }
