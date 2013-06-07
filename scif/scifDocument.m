@@ -2074,14 +2074,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         // mostrar las variables
         if ([todos_los_breakpoints count] > 0) {
             //enviarmos mensajes sobre las variables
-            {
-                NSNumber *ok = [[NSNumber alloc] initWithInt:0];
-                NSDictionary* dadada = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                        ok,@"enviar",
-                                        nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"definirEnviarMensajes" object:nil userInfo:dadada];
-                
-            }
+            [txtx setEnviar:true];
             
             [VarsPanel orderFront:self];
         }
@@ -2114,12 +2107,19 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     // If the length of the data is zero, then the task is basically over - there is nothing
     // more to get from the handle so we may as well shut down.
     if ([data length])
-    {        
+    {     
+        NSMutableArray* thisVarArray = [[NSMutableArray alloc] init];
+        NSColor* color = [NSColor whiteColor];
         NSString * db = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         {
+            if ([db hasPrefix:@"(gdb) No symbol"]) {
+                // no tiene nada util
+                [[notification object] readInBackgroundAndNotify];
+                return;
+            }
+        }
+        {
             //antes de tratar de procesarla, la mandamos al raw dump como texto
-            NSMutableArray* thisVarArray = [[NSMutableArray alloc] init];
-            NSColor* color = [NSColor whiteColor];
             [VarsDumptxt setString:[[VarsDumptxt string] stringByAppendingString:db]];
             [VarsDumptxt scrollToEndOfDocument:nil];
         }
@@ -2132,8 +2132,33 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         db = [db stringByReplacingOccurrencesOfString:@" }" withString:@"}"];
         db = [db stringByReplacingOccurrencesOfString:@", \n" withString:@","];
         db = [db stringByReplacingOccurrencesOfString:@",\n" withString:@","];
-        db = [db stringByReplacingOccurrencesOfString:@" " withString:@"|"];
+        db = [db stringByReplacingOccurrencesOfString:@"  " withString:@" "];
         //NSLog(@"data again:\n%@",db);
+        {
+            // revisamos si comienza con $ eso quiere decir que es la salida de un print
+            if ([db hasPrefix:@"$"]) {
+                NSNumber* loc = [[NSNumber alloc] initWithUnsignedLong:palabraRange.location];
+                NSNumber* len = [[NSNumber alloc] initWithUnsignedLong:palabraRange.length];
+                db = [db stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+                //NSLog(@"original:\n%@",db);
+                db = [db substringFromIndex:NSMaxRange([db rangeOfString:@"="])];
+                //NSLog(@"trimmed:\n%@",db);
+                if ([db length] == 0) {
+                    [[notification object] readInBackgroundAndNotify];
+                    return;
+                }
+                db = [@"" stringByAppendingFormat:@"%@ = %@",palabra,db];
+                //NSLog(@"final:\n%@",db);
+                NSDictionary* dada = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                      db,@"varVal",
+                                      loc,@"loc",
+                                      len,@"len",
+                                      nil];
+                [txtx mostrarValor:dada];
+                [[notification object] readInBackgroundAndNotify];
+                return; //no hacemos más para no fregar la lista si es que se pobló
+            }
+        }
         
         NSArray * db_arr = [db componentsSeparatedByString:@"\n"]; //por renglones
         int i;
@@ -2317,14 +2342,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 
 -(void)clean_and_close{
     if ([gdbtask isRunning]) {
-        {
-            NSNumber *ok = [[NSNumber alloc] initWithInt:1];
-            NSDictionary* dadada = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                    ok,@"enviar",
-                                    nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"definirEnviarMensajes" object:nil userInfo:dadada];
-            
-        }
+        [txtx setEnviar:false];
         
         NSData *data = [[[NSString alloc] initWithString:@"kill\n"] dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:data];
@@ -2418,6 +2436,10 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     
 }
 
+-(void)returnPrintVarValue:(NSString*)value{
+    
+}
+
 -(void)printVariable:(NSNotification*)notification{
     //NSLog(@"%@",[notification description]);
     
@@ -2438,13 +2460,14 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     //   OPCION 1
 //    checamos si dicha palabra arroja algún resultado en el gdb
 
-//NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
-//[stdinHandle writeData:new_input];
+NSData *new_input = [[NSString stringWithFormat:@"print %@\n",palabra] dataUsingEncoding:NSUTF8StringEncoding];
+[stdinHandle writeData:new_input];
                
     //   OPCION 2                    
                         
     //ahora tomamos esa palabra de la lista de variables, El problema con esto es que cuando se usan arrays allocatable, gdb no muestra todas las variables
     
+                        /*
                         if ([self.VarsArray count] > 0) {
                             int i;
                             VarModel* vm = [[VarModel alloc]init];
@@ -2467,7 +2490,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                                 }
                             }
                         }// if varsArray.count
-                        
+                        */
                         
                     }
                 }
@@ -3040,6 +3063,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 	}
 	
 	[txtx setSelectedRange: nuSelRange];
+}
+
+// esto no es del la sintaxis
+-(IBAction) findSomething: (id)sender{
+    [[txtx window] makeFirstResponder:searchField];
 }
 
 

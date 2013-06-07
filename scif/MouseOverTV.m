@@ -10,34 +10,24 @@
 
 @implementation MouseOverTV
 
+@synthesize enviar;
+
 - (void)awakeFromNib {
     tf = [[NSTextField alloc] init];
     [[self window] setAcceptsMouseMovedEvents:YES];
     oldPalabra = [[NSString alloc]initWithString:@""];
-    enviarMensajes = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(definirEnviarMensajes:) name:@"definirEnviarMensajes" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mostrarValor:) name:@"mostrarValor" object:nil];
+    [self setEnviar:false];    
 }
 
--(void)definirEnviarMensajes:(NSNotification*)noti{    
-    NSNumber* ok = [[NSNumber alloc] init];
-    ok = (NSNumber*)[[noti userInfo] objectForKey:@"enviar"];
-    if ([ok intValue] == 0) {
-        enviarMensajes = YES;
-    } else {
-        enviarMensajes = NO;
-    }
-}
 
--(void)mostrarValor:(NSNotification*)noti{
+-(void)mostrarValor:(NSDictionary*)noti{
     
-    NSString * varVal = (NSString*)[[noti userInfo] objectForKey:@"varVal"];
-    unsigned long loc = [(NSNumber*)[[noti userInfo] objectForKey:@"loc"] unsignedLongValue];
+    NSString * varVal = (NSString*)[noti objectForKey:@"varVal"];
+    unsigned long loc = [(NSNumber*)[noti objectForKey:@"loc"] unsignedLongValue];
     //unsigned long len = [(NSNumber*)[[noti userInfo] objectForKey:@"len"] unsignedLongValue];
     NSRange  wordRange = NSMakeRange(loc, 2+varVal.length);
     
-    NSLog(@"varVal:\n%@",varVal);
+    //NSLog(@"varVal:\n%@",varVal);
     
     [tf removeFromSuperview];
     NSRect rect = [self overlayRectForRange:wordRange];
@@ -74,7 +64,7 @@
 //}
 
 - (void)mouseMoved:(NSEvent *)theEvent {
-    if (enviarMensajes) 
+    if (enviar) 
     {
     
     NSLayoutManager *layoutManager = [self layoutManager];
@@ -146,6 +136,8 @@
                         //   NSLog(@"palabra: %@",palabra);
                         NSNumber *loc = [[NSNumber alloc] initWithUnsignedLong:wordCharRange.location];
                         NSNumber *len = [[NSNumber alloc] initWithUnsignedLong:wordCharRange.length];
+//                        Palabraloc = [[NSNumber alloc] initWithUnsignedLong:wordCharRange.location];
+//                        Palabralen = [[NSNumber alloc] initWithUnsignedLong:wordCharRange.length];
                         NSDictionary *oo = [[NSDictionary alloc] initWithObjectsAndKeys:
                                             palabra,@"palabra",
                                             loc,@"loc",

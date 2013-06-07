@@ -510,8 +510,7 @@
 											<object class="NSMenuItem" id="605118523">
 												<reference key="NSMenu" ref="698887838"/>
 												<string key="NSTitle">Smart Copy/Paste</string>
-												<string key="NSKeyEquiv">f</string>
-												<int key="NSKeyEquivModMask">1048576</int>
+												<string key="NSKeyEquiv"/>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="1033313550"/>
 												<reference key="NSMixedImage" ref="310636482"/>
@@ -560,6 +559,25 @@
 									<reference key="NSMenu" ref="789758025"/>
 									<string key="NSTitle">Un-indent</string>
 									<string key="NSKeyEquiv"></string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="5183029">
+									<reference key="NSMenu" ref="789758025"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="518552670">
+									<reference key="NSMenu" ref="789758025"/>
+									<string key="NSTitle">Find in this block</string>
+									<string key="NSKeyEquiv">f</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -2106,6 +2124,14 @@
 					<int key="connectionID">735</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">findSomething:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="518552670"/>
+					</object>
+					<int key="connectionID">745</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="224633056"/>
@@ -2565,6 +2591,8 @@
 							<reference ref="608226541"/>
 							<reference ref="61634184"/>
 							<reference ref="237303643"/>
+							<reference ref="5183029"/>
+							<reference ref="518552670"/>
 						</array>
 						<reference key="parent" ref="952259628"/>
 					</object>
@@ -3481,6 +3509,16 @@
 						<reference key="object" ref="874663554"/>
 						<reference key="parent" ref="892078337"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">742</int>
+						<reference key="object" ref="5183029"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">743</int>
+						<reference key="object" ref="518552670"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3640,6 +3678,8 @@
 				<string key="730.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="733.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="742.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="743.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="77.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="78.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3654,7 +3694,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">741</int>
+			<int key="maxID">745</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4039,6 +4079,8 @@
 					<string key="superclassName">NSDocument</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="NotaOpcionesSectionClick:">id</string>
+						<string key="NotaiDisclosureClick:">id</string>
+						<string key="RunStopPrint_click:">id</string>
 						<string key="Run_button_click:">id</string>
 						<string key="Run_last_click:">id</string>
 						<string key="Section_buttons_click:">id</string>
@@ -4047,6 +4089,8 @@
 						<string key="clearSlate:">id</string>
 						<string key="click_Debug_panels:">id</string>
 						<string key="click_debug_actions:">id</string>
+						<string key="click_printable:">id</string>
+						<string key="findSomething:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="make_pdf:">id</string>
 						<string key="recolorCompleteFile:">id</string>
@@ -4061,6 +4105,14 @@
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="NotaOpcionesSectionClick:">
 							<string key="name">NotaOpcionesSectionClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="NotaiDisclosureClick:">
+							<string key="name">NotaiDisclosureClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="RunStopPrint_click:">
+							<string key="name">RunStopPrint_click:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="Run_button_click:">
@@ -4093,6 +4145,14 @@
 						</object>
 						<object class="IBActionInfo" key="click_debug_actions:">
 							<string key="name">click_debug_actions:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="click_printable:">
+							<string key="name">click_printable:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="findSomething:">
+							<string key="name">findSomething:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="indentSelection:">
@@ -4144,11 +4204,18 @@
 						<string key="L_vertical_final">NSBox</string>
 						<string key="LayoutVerticalScroller">NSScroller</string>
 						<string key="MainTAB">NSTabView</string>
+						<string key="NotaiDisclosureBut">NSButton</string>
+						<string key="NotaiDisclosureTitleBut">NSButton</string>
+						<string key="NotaiDisclosureTxt">NSTextView</string>
 						<string key="OpcionesNota">NSSegmentedControl</string>
+						<string key="OpcionesNotaImprimir">NSButton</string>
+						<string key="RunStopPrint">NSSegmentedControl</string>
 						<string key="SectionMode">NSSegmentedCell</string>
 						<string key="TheSplitView">NSSplitView</string>
 						<string key="ToggleBreakpoints">NSButton</string>
+						<string key="VarsDumptxt">NSTextView</string>
 						<string key="VarsPanel">NSPanel</string>
+						<string key="View2Drawer">NSDrawer</string>
 						<string key="dbgTextOut">NSTextView</string>
 						<string key="gdbSplitView">NSSplitView</string>
 						<string key="gdbinput">NSTextField</string>
@@ -4192,8 +4259,28 @@
 							<string key="name">MainTAB</string>
 							<string key="candidateClassName">NSTabView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="NotaiDisclosureBut">
+							<string key="name">NotaiDisclosureBut</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="NotaiDisclosureTitleBut">
+							<string key="name">NotaiDisclosureTitleBut</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="NotaiDisclosureTxt">
+							<string key="name">NotaiDisclosureTxt</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="OpcionesNota">
 							<string key="name">OpcionesNota</string>
+							<string key="candidateClassName">NSSegmentedControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="OpcionesNotaImprimir">
+							<string key="name">OpcionesNotaImprimir</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="RunStopPrint">
+							<string key="name">RunStopPrint</string>
 							<string key="candidateClassName">NSSegmentedControl</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="SectionMode">
@@ -4208,9 +4295,17 @@
 							<string key="name">ToggleBreakpoints</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="VarsDumptxt">
+							<string key="name">VarsDumptxt</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="VarsPanel">
 							<string key="name">VarsPanel</string>
 							<string key="candidateClassName">NSPanel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="View2Drawer">
+							<string key="name">View2Drawer</string>
+							<string key="candidateClassName">NSDrawer</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="dbgTextOut">
 							<string key="name">dbgTextOut</string>

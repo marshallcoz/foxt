@@ -11,10 +11,10 @@
 @interface MouseOverTV : NSTextView{
     @private
     NSString *oldPalabra;
-    bool      enviarMensajes;
     NSTextField *tf;
 }
--(void)definirEnviarMensajes:(NSNotification*)noti;
--(void)mostrarValor:(NSNotification*)noti;
+@property bool enviar;
+
+-(void)mostrarValor:(NSDictionary*)noti;
 - (NSRect)overlayRectForRange:(NSRange)aRange;
 @end

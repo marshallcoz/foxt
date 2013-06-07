@@ -10,6 +10,7 @@
 #import "UKTextDocGotoBox.h"
 #import "termOut.h"
 #import "UKKQueue.h"
+#import "MouseOverTV.h"
 
 // Define the constant below to 0 if you don't need support for old-style
 //  (pre-0.2.0) syntax definition files. Old-style syntax definitions are being
@@ -48,6 +49,7 @@
     NSFileHandle            *stdinHandle;
     NSFileHandle            *stdOutHandle;
     
+    //el set de preferencias elegido
     int                     my_presets;
     
     //NSFileHandle            *execinHandle;
@@ -71,6 +73,7 @@
     unsigned long           punto_ant;
     NSString                *busqueda_ant;
     
+    //entrada y salida del programa que ejecuta el gdb
     UKKQueue                *observadorINPUT;
     UKKQueue                *observadorOUTPUT;
     
@@ -104,7 +107,7 @@
 @property (assign) IBOutlet NSTabView *MainTAB; //ya no se usa
 @property (assign) IBOutlet NSTextView *terminal_out;
 @property (assign) IBOutlet NSArrayController *ARRAYcontroller;
-@property (assign) IBOutlet NSTextView *txtx; //La caja de texto que usamos para editar código.
+@property (assign) IBOutlet MouseOverTV *txtx; //La caja de texto que usamos para editar código.
 @property (assign) IBOutlet NSScroller *LayoutVerticalScroller;
 @property (assign) IBOutlet NSSplitView *TheSplitView;
 @property (assign) IBOutlet NSSplitView *gdbSplitView;
@@ -171,6 +174,7 @@
 -(IBAction) showGoToPanel: (id)sender;
 -(IBAction) indentSelection: (id)sender;
 -(IBAction) unindentSelection: (id)sender;
+-(IBAction) findSomething: (id)sender;
 
 -(void)		setAutoSyntaxColoring: (BOOL)state;
 -(BOOL)		autoSyntaxColoring;
