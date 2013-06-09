@@ -17,7 +17,7 @@
 -(id)init {
     self = [super init];
     if (self) {
-        _txt = @"";
+//        _txt = @"";
         _visible = NO;
        // _windowed = [[NSWindow alloc] init];
     }

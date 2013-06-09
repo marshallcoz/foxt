@@ -11,6 +11,7 @@
 #import "termOut.h"
 #import "UKKQueue.h"
 #import "MouseOverTV.h"
+#import "makeScrPrefs.h"
 
 // Define the constant below to 0 if you don't need support for old-style
 //  (pre-0.2.0) syntax definition files. Old-style syntax definitions are being
@@ -42,6 +43,13 @@
 @interface scifDocument : NSDocument <NSTextViewDelegate,NSSplitViewDelegate,NSTextStorageDelegate,NSTabViewDelegate> {
     
 @private
+    //scripts
+    NSString *lineaCompilador; 
+    NSString *lineaDepurador;
+    NSString *lineaArgumentos;
+    NSString *lineaPreCompilador;
+    NSString *lineaExtension;
+    
     //debugging
     IBOutlet termOut        *terminal;
     NSTask                  *gdbtask;
@@ -51,6 +59,7 @@
     
     //el set de preferencias elegido
     int                     my_presets;
+    IBOutlet makeScrPrefs   *makeScrPrefsPanel;
     
     //NSFileHandle            *execinHandle;
     IBOutlet NSTextView     *dbgTextOut;
@@ -97,6 +106,7 @@
 //objetos view
 @property (assign) IBOutlet NSCollectionView *tablaOutline;
 @property (assign) IBOutlet NSButton *ToggleBreakpoints;
+@property (assign) IBOutlet NSButton *ToggleMakeScriptPrefs;
 @property (assign) IBOutlet NSSegmentedCell *SectionMode;
 @property (assign) IBOutlet NSSegmentedControl *RunStopPrint;
 @property (assign) IBOutlet NSSegmentedControl *Debug_panel;
@@ -136,9 +146,16 @@
 - (IBAction)Run_last_click:(id)sender;
 - (IBAction)Stop_button_click:(id)sender;
 - (IBAction)make_pdf:(id)sender;
+- (IBAction)click_makeScript:(id)sender;
 - (IBAction)Section_buttons_click:(id)sender;
+- (IBAction)click_split:(id)sender;
 - (IBAction)Toggle_breakpoints:(id)sender;
 - (IBAction)click_debug_actions:(id)sender;
+- (IBAction)continue_menuclick:(id)sender;
+- (IBAction)StepInto_menuclick:(id)sender;
+- (IBAction)StepOut_menuclick:(id)sender;
+- (IBAction)OpenTerminal_menuclick:(id)sender;
+- (IBAction)RunScript_menuclick:(id)sender;
 - (IBAction)click_Debug_panels:(id)sender;
 - (IBAction)NotaOpcionesSectionClick:(id)sender;
 - (IBAction)NotaiDisclosureClick:(id)sender;
@@ -147,6 +164,7 @@
 //- (NSRect)overlayRectForRange:(NSRange)aRange;
 - (IBAction)terminal_enter:(id)sender;
 - (IBAction)toggle_comment:(id)sender;
+-(IBAction)toggle_comment_with_spacebar:(id)sender;
 -(void)splitThisFortranBlock:(id)sender;
 -(void)splitThisLatexBlock:(id)sender;
 -(void)grabar:(NSString*)linea to:(NSString*)key;

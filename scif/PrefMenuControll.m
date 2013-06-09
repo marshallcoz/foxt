@@ -110,6 +110,7 @@
 - (IBAction)selectedApreset:(id)sender{
     if (sender == _presetControll) {
         NSLog(@"seleccionado el preset = %ld",[_presetControll selectedSegment]+1);
+        
         [self setPreset:(int)[_presetControll selectedSegment]+1];
         
         NSString *ruta = NSHomeDirectory();

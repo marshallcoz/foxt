@@ -40,6 +40,7 @@
 		ABCB09A7165193A00016EE54 /* Fortran.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB09A6165193A00016EE54 /* Fortran.plist */; };
 		ABCB09AB1652BB7A0016EE54 /* PrefMenuControll.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */; };
 		ABCB09AD1652C0710016EE54 /* RunPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB09AC1652C0710016EE54 /* RunPrefs.plist */; };
+		ABDB20441761BF58001E0812 /* makeScrPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDB20431761BF58001E0812 /* makeScrPrefs.m */; };
 		ABE5860F1641D57500DEDF09 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE5860E1641D57500DEDF09 /* Cocoa.framework */; };
 		ABE586191641D57500DEDF09 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABE586171641D57500DEDF09 /* InfoPlist.strings */; };
 		ABE5861B1641D57500DEDF09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE5861A1641D57500DEDF09 /* main.m */; };
@@ -102,6 +103,8 @@
 		ABCB09A91652BB790016EE54 /* PrefMenuControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefMenuControll.h; sourceTree = "<group>"; };
 		ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefMenuControll.m; sourceTree = "<group>"; };
 		ABCB09AC1652C0710016EE54 /* RunPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RunPrefs.plist; sourceTree = "<group>"; };
+		ABDB20421761BF58001E0812 /* makeScrPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = makeScrPrefs.h; sourceTree = "<group>"; };
+		ABDB20431761BF58001E0812 /* makeScrPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = makeScrPrefs.m; sourceTree = "<group>"; };
 		ABE5860A1641D57500DEDF09 /* scif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE5860E1641D57500DEDF09 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		ABE586111641D57500DEDF09 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -257,6 +260,8 @@
 				AB23CB0716436B95009F4FCC /* nota.m */,
 				ABCB09A91652BB790016EE54 /* PrefMenuControll.h */,
 				ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */,
+				ABDB20421761BF58001E0812 /* makeScrPrefs.h */,
+				ABDB20431761BF58001E0812 /* makeScrPrefs.m */,
 				ABFDA954165306570004BF13 /* termOut.h */,
 				ABFDA955165306570004BF13 /* termOut.m */,
 				AB19748716819F1600FCA0F8 /* VarModel.h */,
@@ -378,6 +383,7 @@
 				AB07B5AC16B75E9300413E2F /* UKKQueue.m in Sources */,
 				AB07B5AD16B75E9300413E2F /* UKMainThreadProxy.m in Sources */,
 				AB17D86A17235C0500CB2013 /* MouseOverTV.m in Sources */,
+				ABDB20441761BF58001E0812 /* makeScrPrefs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
