@@ -3,41 +3,41 @@
 <plist version="1.0">
 <dict>
 	<key>Compilador - 1</key>
-	<string>/usr/bin/g95</string>
+	<string>/usr/bin/gfortran</string>
 	<key>Compilador - 2</key>
 	<string>/usr/bin/gfortran</string>
 	<key>Compilador - 3</key>
 	<string>/usr/bin/g95</string>
 	<key>Compilador - 4</key>
-	<string>/usr/bin/g95</string>
+	<string>/usr/bin/gfortran</string>
 	<key>Compilador - 5</key>
-	<string>/usr/bin/g95</string>
+	<string>/usr/local/dislin/bin/gf95link</string>
 	<key>Compilador - 6</key>
-	<string>/usr/bin/g95</string>
+	<string>/usr/local/dislin/bin/gf95link</string>
 	<key>PreDepurador - 1</key>
-	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<string>/usr/bin/gfortran -g3 -c %F  %return /usr/bin/gfortran -g3 -o %A %O %return</string>
 	<key>PreDepurador - 2</key>
-	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<string>/usr/bin/gfortran -g3 -c %F  %return /usr/bin/gfortran -g3 -o %A %O %return</string>
 	<key>PreDepurador - 3</key>
 	<string>/usr/bin/g95 -g1 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
 	<key>PreDepurador - 4</key>
-	<string>/usr/bin/g95 -g1 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<string>/usr/bin/gfortran -g3 -Wall -c %F   /usr/local/lib/librefblas.a /usr/local/lib/liblapack.a ; /usr/bin/gfortran -g3 -o %A %O  /usr/local/lib/librefblas.a /usr/local/lib/liblapack.a ;</string>
 	<key>PreDepurador - 5</key>
-	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<string>/usr/local/dislin/bin/gf95link -c %G -g3 -c %return cp %G %O ; /usr/local/dislin/bin/gf95link %G %O %return cp %G %A ;</string>
 	<key>PreDepurador - 6</key>
-	<string>/usr/bin/g95 -g3 -c %F  %return /usr/bin/g95 -g3 -o %A %O %return</string>
+	<string>/usr/local/dislin/bin/gf95link -c %G -g3 -c /usr/local/lib/librefblas.a /usr/local/lib/liblapack.a ; cp %G %O ; /usr/local/dislin/bin/gf95link %G /usr/local/lib/librefblas.a /usr/local/lib/liblapack.a %return  cp %G %A ;</string>
 	<key>Depurador - 1</key>
-	<string>/usr/bin/gdb</string>
+	<string>/usr/bin/gdb7</string>
 	<key>Depurador - 2</key>
-	<string>/usr/bin/gdb</string>
+	<string>/usr/bin/gdb7</string>
 	<key>Depurador - 3</key>
-	<string>/usr/bin/gdb</string>
+	<string>/usr/bin/gdb7</string>
 	<key>Depurador - 4</key>
-	<string>/usr/bin/gdb</string>
+	<string>/usr/bin/gdb7</string>
 	<key>Depurador - 5</key>
-	<string>/usr/bin/gdb</string>
+	<string>/usr/bin/gdb7</string>
 	<key>Depurador - 6</key>
-	<string>/usr/bin/gdb</string>
+	<string>/usr/bin/gdb7</string>
 	<key>rutaBase</key>
 	<string>/.scifex/RunPrefs.plist</string>
 	<key>set</key>
@@ -49,11 +49,11 @@
 	<key>Argumentos - 3</key>
 	<string>-g3 %F -o %A</string>
 	<key>Argumentos - 4</key>
-	<string>-g3 %F -o %A</string>
+	<string>%F -o %A /usr/local/lib/librefblas.a /usr/local/lib/liblapack.a</string>
 	<key>Argumentos - 5</key>
-	<string>-g3 %F -o %A</string>
+	<string>-a %G</string>
 	<key>Argumentos - 6</key>
-	<string>-g3 %F -o %A</string>
+	<string>-a %G /usr/local/lib/librefblas.a /usr/local/lib/liblapack.a</string>
 	<key>RunArgs - 1</key>
 	<string></string>
 	<key>RunArgs - 2</key>
@@ -63,9 +63,9 @@
 	<key>RunArgs - 4</key>
 	<string></string>
 	<key>RunArgs - 5</key>
-	<string></string>
+	<string>cp %G %A</string>
 	<key>RunArgs - 6</key>
-	<string></string>
+	<string>cp %G %A</string>
 	<key>extension - 1</key>
 	<string>.for</string>
 	<key>extension - 2</key>
@@ -75,8 +75,8 @@
 	<key>extension - 4</key>
 	<string>.f90</string>
 	<key>extension - 5</key>
-	<string>.for</string>
+	<string>.f90</string>
 	<key>extension - 6</key>
-	<string>.f95</string>
+	<string>.f90</string>
 </dict>
 </plist>

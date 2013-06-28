@@ -17,6 +17,7 @@
 @synthesize lineaDepurador = _lineaDepurador;
 @synthesize lineaPreCompilador = _lineaPreCompilador;
 @synthesize lineaExtension = _lineaExtension;
+@synthesize lineaRunArgs = _lineaRunArgs;
 
 
 -(id)init {
@@ -28,12 +29,14 @@
         _lineaArgumentos = [[NSTextField alloc]init];
         _lineaPreCompilador = [[NSTextField alloc]init];
         _lineaExtension = [[NSTextField alloc]init];
+        _lineaRunArgs = [[NSTextField alloc]init];
         _selectedSet = [[NSSegmentedControl alloc] init];
         actlineaCompilador = [[NSString alloc] init];
         actlineaArgumentos = [[NSString alloc] init];
         actlineaDepurador = [[NSString alloc] init];
         actlineaPreCompilador = [[NSString alloc] init];
         actlineaExtension = [[NSString alloc] init];
+        actlineaRunArgs = [[NSString alloc] init];
     }
     return self;
 }
@@ -63,6 +66,8 @@
         [_lineaArgumentos setStringValue:[[NSString alloc] initWithString:[info objectForKey:[NSString stringWithFormat:@"Argumentos - %i",preset]]]];
         [_lineaPreCompilador setStringValue:[[NSString alloc] initWithString:[info objectForKey:[NSString stringWithFormat:@"PreDepurador - %i",preset]]]];
         [_lineaExtension setStringValue:[[NSString alloc] initWithString:[info objectForKey:[NSString stringWithFormat:@"extension - %i", preset]]]];
+        [_lineaRunArgs setStringValue:[[NSString alloc] initWithString:[info objectForKey:[NSString stringWithFormat:@"RunArgs - %i", preset]]]];
+        
         
 //        [_lineaArgumentos setEditable:false];
 //        [_lineaCompilador setEditable:false];
@@ -77,13 +82,14 @@
         [_lineaDepurador resignFirstResponder];
         [_lineaExtension resignFirstResponder];
         [_lineaPreCompilador resignFirstResponder];
+        [_lineaRunArgs resignFirstResponder];
         // es el actual.
         [_lineaCompilador setStringValue:actlineaCompilador];
         [_lineaDepurador setStringValue:actlineaDepurador];
         [_lineaArgumentos setStringValue:actlineaArgumentos];
         [_lineaPreCompilador setStringValue:actlineaPreCompilador];
         [_lineaExtension setStringValue:actlineaExtension];
-        
+        [_lineaRunArgs setStringValue:actlineaRunArgs];
 //        [_lineaArgumentos setEditable:true];
 //        [_lineaCompilador setEditable:true];
 //        [_lineaDepurador setEditable:true];
@@ -100,6 +106,7 @@
     actlineaDepurador = [_lineaDepurador stringValue];
     actlineaExtension = [_lineaExtension stringValue];
     actlineaPreCompilador = [_lineaPreCompilador stringValue];
+    actlineaRunArgs = [_lineaRunArgs stringValue];
     
     // mostrar la hoja
     [[NSApplication sharedApplication] beginSheet:makeScrPrefsPanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(termDidEnd:returnCode:contextInfo:) contextInfo:nil];

@@ -10,14 +10,12 @@
 
 @implementation termOut
 
-@synthesize txt = _txt;
 @synthesize visible = _visible;
 //@synthesize windowed = _windowed;
 
 -(id)init {
     self = [super init];
     if (self) {
-//        _txt = @"";
         _visible = NO;
        // _windowed = [[NSWindow alloc] init];
     }

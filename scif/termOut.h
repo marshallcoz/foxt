@@ -13,7 +13,6 @@
 }
 //@property (strong) NSWindow* windowed;
 @property (assign) Boolean *visible;
-@property (strong) NSString *txt;
 
 -(IBAction) showTerm: (NSWindow*)owner;
 -(IBAction) hideTerm:(id)sender;

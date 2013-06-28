@@ -49,6 +49,7 @@
     NSString *lineaArgumentos;
     NSString *lineaPreCompilador;
     NSString *lineaExtension;
+    NSString *lineaRunArgs;
     
     //debugging
     IBOutlet termOut        *terminal;
@@ -56,6 +57,7 @@
     NSTask                  *execTask;
     NSFileHandle            *stdinHandle;
     NSFileHandle            *stdOutHandle;
+    bool                    predebugscriptdone;
     
     //el set de preferencias elegido
     int                     my_presets;
@@ -81,6 +83,7 @@
     NSMutableArray          *recentSearches;
     unsigned long           punto_ant;
     NSString                *busqueda_ant;
+    bool                    todoEldocumento;
     
     //entrada y salida del programa que ejecuta el gdb
     UKKQueue                *observadorINPUT;
@@ -92,6 +95,7 @@
     NSNumber                *num_de_lineas;
     int                     hoja_anterior;
     NSButton                *NotaiDisclosureButReminder;
+    IBOutlet NSPopUpButton  *botonListaDelDrawer;
     
     //sintaxis de código
     IBOutlet UKTextDocGoToBox*		gotoPanel;				// Controller for our "go to line" panel.
@@ -169,6 +173,8 @@
 -(void)splitThisLatexBlock:(id)sender;
 -(void)grabar:(NSString*)linea to:(NSString*)key;
 -(IBAction)clearSlate:(id)sender;
+- (IBAction)changedDrawerSelection:(id)sender;
+- (IBAction)closeTheDrawer:(id)sender;
 
 //otros métodos
 -(bool) guardarTexto:(NSString*)t en:(NSString*)ruta;
@@ -199,7 +205,7 @@
 
 -(void)		setMaintainIndentation: (BOOL)state;
 -(BOOL)		maintainIndentation;
-
+-(void) toToLineinThisTxt: (int)lineNum;
 -(void)		goToLine: (int)lineNum;
 -(void)		goToCharacter: (int)charNum;
 -(void)		goToRangeFrom: (int)startCh toChar: (int)endCh;

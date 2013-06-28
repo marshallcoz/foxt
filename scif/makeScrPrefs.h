@@ -15,6 +15,7 @@
     NSString*actlineaDepurador;
     NSString*actlineaPreCompilador;
     NSString*actlineaExtension;
+    NSString*actlineaRunArgs;
 }
 @property (assign) Boolean *visible;
 @property (assign) IBOutlet NSSegmentedControl *selectedSet;
@@ -24,6 +25,8 @@
 @property (assign) IBOutlet NSTextField *lineaDepurador;
 @property (assign) IBOutlet NSTextField *lineaPreCompilador;
 @property (assign) IBOutlet NSTextField *lineaExtension;
+@property (assign) IBOutlet NSTextField *lineaRunArgs;
+
 
 - (IBAction)selectedPreset:(id)sender;
 -(IBAction) showTerm: (NSWindow*)owner;
