@@ -700,7 +700,7 @@ static NSString* outPut = @".programOutput.txt";
     [num_de_lineas retain];
     //[txtx setFont:[NSFont userFixedPitchFontOfSize:[NSFont smallSystemFontSize]]];
     
-    [TheSplitView setPosition:183 ofDividerAtIndex:0];
+    [TheSplitView setPosition:250 ofDividerAtIndex:0];
     [gdbSplitView setPosition:gdbSplitView.frame.size.height ofDividerAtIndex:0];
     
     id searchCell = [searchField cell];

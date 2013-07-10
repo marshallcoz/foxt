@@ -48,6 +48,7 @@
 		ABE586221641D57600DEDF09 /* scifDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE586211641D57600DEDF09 /* scifDocument.m */; };
 		ABE586251641D57600DEDF09 /* scifDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE586231641D57600DEDF09 /* scifDocument.xib */; };
 		ABE586281641D57600DEDF09 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE586261641D57600DEDF09 /* MainMenu.xib */; };
+		ABF3AF82177E272C00D2E5A0 /* CodeTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF3AF81177E272C00D2E5A0 /* CodeTextView.m */; };
 		ABFDA956165306570004BF13 /* termOut.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFDA955165306570004BF13 /* termOut.m */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,8 @@
 		ABE586211641D57600DEDF09 /* scifDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scifDocument.m; sourceTree = "<group>"; };
 		ABE586241641D57600DEDF09 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/scifDocument.xib; sourceTree = "<group>"; };
 		ABE586271641D57600DEDF09 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		ABF3AF80177E272C00D2E5A0 /* CodeTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeTextView.h; sourceTree = "<group>"; };
+		ABF3AF81177E272C00D2E5A0 /* CodeTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeTextView.m; sourceTree = "<group>"; };
 		ABFDA954165306570004BF13 /* termOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = termOut.h; sourceTree = "<group>"; };
 		ABFDA955165306570004BF13 /* termOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = termOut.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,6 +252,8 @@
 				AB8EEBE2166FC52900F6B0F5 /* LineNumberAndMarkers */,
 				ABE586201641D57600DEDF09 /* scifDocument.h */,
 				ABE586211641D57600DEDF09 /* scifDocument.m */,
+				ABF3AF80177E272C00D2E5A0 /* CodeTextView.h */,
+				ABF3AF81177E272C00D2E5A0 /* CodeTextView.m */,
 				AB17D86817235C0500CB2013 /* MouseOverTV.h */,
 				AB17D86917235C0500CB2013 /* MouseOverTV.m */,
 				ABE586231641D57600DEDF09 /* scifDocument.xib */,
@@ -384,6 +389,7 @@
 				AB07B5AD16B75E9300413E2F /* UKMainThreadProxy.m in Sources */,
 				AB17D86A17235C0500CB2013 /* MouseOverTV.m in Sources */,
 				ABDB20441761BF58001E0812 /* makeScrPrefs.m in Sources */,
+				ABF3AF82177E272C00D2E5A0 /* CodeTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
