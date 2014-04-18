@@ -8,27 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "scif/MouseOverTV.m"
-         timestampString = "388301611.082547"
+         filePath = "scif/scifDocument.m"
+         timestampString = "419476169.306193"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "-mostrarValor:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "scif/MouseOverTV.m"
-         timestampString = "388345338.831669"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "-overlayRectForRange:"
+         startingLineNumber = "2380"
+         endingLineNumber = "2380"
+         landmarkName = "-Correr_programa:withArgs:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -37,12 +23,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "scif/scifDocument.m"
-         timestampString = "388345418.908357"
+         timestampString = "401462383.588986"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2167"
-         endingLineNumber = "2167"
-         landmarkName = "-getData:"
+         startingLineNumber = "287"
+         endingLineNumber = "287"
+         landmarkName = "-windowControllerDidLoadNib:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -51,12 +37,96 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "scif/scifDocument.m"
-         timestampString = "388346187.824174"
+         timestampString = "419476169.306193"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2292"
-         endingLineNumber = "2292"
-         landmarkName = "-getData:"
+         startingLineNumber = "2449"
+         endingLineNumber = "2449"
+         landmarkName = "-Run_button_click:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "scif/MouseOverTV.m"
+         timestampString = "404436229.285917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-keyUp:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "scif/scifDocument.m"
+         timestampString = "406092582.479446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1443"
+         endingLineNumber = "1443"
+         landmarkName = "-guardarTexto:en:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "scif/scifDocument.m"
+         timestampString = "419476169.306193"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2312"
+         endingLineNumber = "2312"
+         landmarkName = "-Correr_programa:withArgs:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "scif/scifDocument.m"
+         timestampString = "419476169.306193"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2303"
+         endingLineNumber = "2303"
+         landmarkName = "-Correr_programa:withArgs:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "scif/scifDocument.m"
+         timestampString = "419476169.306193"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2293"
+         endingLineNumber = "2293"
+         landmarkName = "-Correr_programa:withArgs:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "scif/scifDocument.m"
+         timestampString = "419476169.306193"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2261"
+         endingLineNumber = "2261"
+         landmarkName = "-Correr_programa:withArgs:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

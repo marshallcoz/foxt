@@ -66,10 +66,11 @@
     //NSFileHandle            *execinHandle;
     IBOutlet NSTextView     *dbgTextOut;
     IBOutlet NSTextField    *gdbinput;
-    IBOutlet NSTextView     *programOUTtxt;
-    IBOutlet NSTextField    *programINPUTtxt;
+    //IBOutlet NSTextView     *programOUTtxt;
+    //IBOutlet NSTextField    *programINPUTtxt;
     IBOutlet NSPanel        *VarsPanel;
     NSMutableArray          *VarsArray;
+    NSMutableArray          *WarnsArray;
     IBOutlet NSTextView     *VarsDumptxt;
     
     
@@ -106,6 +107,7 @@
     BOOL							syntaxColoringBusy;		// Set while recolorRange is busy, so we don't recursively call recolorRange.
     NSRange							affectedCharRange;
 	NSString*						replacementString;
+    IBOutlet NSWindow *popwindow;
 }
 //objetos view
 @property (assign) IBOutlet NSCollectionView *tablaOutline;
@@ -125,7 +127,9 @@
 @property (assign) IBOutlet NSScroller *LayoutVerticalScroller;
 @property (assign) IBOutlet NSSplitView *TheSplitView;
 @property (assign) IBOutlet NSSplitView *gdbSplitView;
+@property (assign) IBOutlet NSSplitView *gdbWarnSplitView;
 @property (copy) NSMutableArray *VarsArray;
+@property (copy) NSMutableArray *WarnsArray;
 @property (assign) IBOutlet NSButton *NotaiDisclosureBut;
 @property (assign) IBOutlet NSDrawer *View2Drawer;
 @property (assign) IBOutlet NSTextView *NotaiDisclosureTxt;
@@ -164,9 +168,11 @@
 - (IBAction)NotaOpcionesSectionClick:(id)sender;
 - (IBAction)NotaiDisclosureClick:(id)sender;
 - (IBAction)click_printable:(id)sender;
+- (IBAction)ShowOuts:(id)sender;
+- (IBAction)Popout:(id)sender;
 //-(void) showOff:(NSString*)tt here:(NSRange)ran;
 //- (NSRect)overlayRectForRange:(NSRange)aRange;
-- (IBAction)terminal_enter:(id)sender;
+//- (IBAction)terminal_enter:(id)sender;
 - (IBAction)toggle_comment:(id)sender;
 -(IBAction)toggle_comment_with_spacebar:(id)sender;
 -(void)splitThisFortranBlock:(id)sender;
@@ -183,11 +189,13 @@
 -(NSDictionary*)textos_de_salida_para_el_arreglo:(NSArray*)ARR;
 - (IBAction)sheetDoneButtonAction:(id)sender;
 -(void)clean_and_close;
+-(void)postthis:(NSString*)st withcoolor:(NSColor*)color;
+- (NSString*)currentHour;
 
 // objetos para manejar la sintaxis
 
 -(void) processEditing: (NSNotification*)notification;
-
+-(NSAttributedString*) preProssText:(NSString*)txt oftype:(NSString*)type;
 +(void) asegurarQuePfrefsYaIniciaron;
 
 +(void) makeSurePrefsAreInited;		// No need to call this.
@@ -217,8 +225,8 @@
 -(NSDictionary*)	defaultTextAttributes;		// Style attributes dictionary for an NSAttributedString.
 -(NSDictionary*) defaultTextAttributeBLANK;
 // Private:
--(void) turnOffWrapping;
--(void) turnOnWrapping;
+-(void) turnOffWrapping: (NSTextView*) tv;
+-(void) turnOnWrapping: (NSTextView*) tv;
 
 -(void) recolorRange: (NSRange) range;
 #if TD_BACKWARDS_COMPATIBLE

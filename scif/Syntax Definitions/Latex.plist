@@ -31,12 +31,15 @@
 				<string>\varoint</string>
 				<string>\varint</string>
 				<string>\begin</string>
+				<string>\begin{</string>
 				<string>\end</string>
+				<string>\end{</string>
 				<string>\documentclass</string>
 				<string>\title</string>
 				<string>\maketitle</string>
 				<string>\author</string>
 				<string>\renewcommand</string>
+				<string>\infty</string>
 			</array>
 			<key>Name</key>
 			<string>Functions</string>

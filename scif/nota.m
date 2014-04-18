@@ -25,12 +25,14 @@
 @synthesize lastvisibleRange = _lastvisibleRange;
 //@synthesize update_me = _update_me;
 @synthesize title = _title;
+@synthesize ATtitle = _ATtitle;
 //@synthesize imprimible = _imprimible;
 
 -(id)init {
     self = [super init];
     if (self) {
         _txt = [[NSAttributedString alloc] initWithString:@""];
+        _ATtitle = [[NSAttributedString alloc] initWithString:@""];
         _title = [[NSString alloc] initWithString:@""];
         _Typefort = false;
         _TypeTEX = true;

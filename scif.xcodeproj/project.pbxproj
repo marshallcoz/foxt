@@ -34,9 +34,12 @@
 		AB3E915E164C685C00D4784F /* UKSCTDUserIdentifiersPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3E9152164C685C00D4784F /* UKSCTDUserIdentifiersPrefsController.m */; };
 		AB3E9162164D897B00D4784F /* UKTextDocGoToBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3E9161164D897B00D4784F /* UKTextDocGoToBox.m */; };
 		AB3E9165164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3E9164164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m */; };
+		AB4CF72517E90C8500AC7BA0 /* WarnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF72417E90C8500AC7BA0 /* WarnModel.m */; };
+		AB4CF72917E9468B00AC7BA0 /* WarnTableViewStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF72817E9468B00AC7BA0 /* WarnTableViewStuff.m */; };
 		AB8EEBDB166FAB2600F6B0F5 /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDA166FAB2600F6B0F5 /* MarkerLineNumberView.m */; };
 		AB8EEBE0166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDD166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m */; };
 		AB8EEBE1166FAB8E00F6B0F5 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDF166FAB8E00F6B0F5 /* NoodleLineNumberView.m */; };
+		AB912B9317E80D4500F215CC /* rightPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AB912B9217E80D4500F215CC /* rightPane.m */; };
 		ABCB09A7165193A00016EE54 /* Fortran.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB09A6165193A00016EE54 /* Fortran.plist */; };
 		ABCB09AB1652BB7A0016EE54 /* PrefMenuControll.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */; };
 		ABCB09AD1652C0710016EE54 /* RunPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB09AC1652C0710016EE54 /* RunPrefs.plist */; };
@@ -94,12 +97,18 @@
 		AB3E9161164D897B00D4784F /* UKTextDocGoToBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKTextDocGoToBox.m; sourceTree = "<group>"; };
 		AB3E9163164D8A1E00D4784F /* UKSyntaxColoredTextDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKSyntaxColoredTextDocument.h; sourceTree = "<group>"; };
 		AB3E9164164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKSyntaxColoredTextDocument.m; sourceTree = "<group>"; };
+		AB4CF72317E90C8500AC7BA0 /* WarnModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarnModel.h; sourceTree = "<group>"; };
+		AB4CF72417E90C8500AC7BA0 /* WarnModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnModel.m; sourceTree = "<group>"; };
+		AB4CF72717E9468B00AC7BA0 /* WarnTableViewStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarnTableViewStuff.h; sourceTree = "<group>"; };
+		AB4CF72817E9468B00AC7BA0 /* WarnTableViewStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnTableViewStuff.m; sourceTree = "<group>"; };
 		AB8EEBD9166FAB2600F6B0F5 /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerLineNumberView.h; sourceTree = "<group>"; };
 		AB8EEBDA166FAB2600F6B0F5 /* MarkerLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkerLineNumberView.m; sourceTree = "<group>"; };
 		AB8EEBDC166FAB8E00F6B0F5 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		AB8EEBDD166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberMarker.m; sourceTree = "<group>"; };
 		AB8EEBDE166FAB8E00F6B0F5 /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		AB8EEBDF166FAB8E00F6B0F5 /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
+		AB912B9117E80D4500F215CC /* rightPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rightPane.h; sourceTree = "<group>"; };
+		AB912B9217E80D4500F215CC /* rightPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rightPane.m; sourceTree = "<group>"; };
 		ABCB09A6165193A00016EE54 /* Fortran.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Fortran.plist; sourceTree = "<group>"; };
 		ABCB09A91652BB790016EE54 /* PrefMenuControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefMenuControll.h; sourceTree = "<group>"; };
 		ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefMenuControll.m; sourceTree = "<group>"; };
@@ -256,6 +265,8 @@
 				ABF3AF81177E272C00D2E5A0 /* CodeTextView.m */,
 				AB17D86817235C0500CB2013 /* MouseOverTV.h */,
 				AB17D86917235C0500CB2013 /* MouseOverTV.m */,
+				AB912B9117E80D4500F215CC /* rightPane.h */,
+				AB912B9217E80D4500F215CC /* rightPane.m */,
 				ABE586231641D57600DEDF09 /* scifDocument.xib */,
 				ABE586261641D57600DEDF09 /* MainMenu.xib */,
 				ABE586151641D57500DEDF09 /* Supporting Files */,
@@ -271,6 +282,10 @@
 				ABFDA955165306570004BF13 /* termOut.m */,
 				AB19748716819F1600FCA0F8 /* VarModel.h */,
 				AB19748816819F1600FCA0F8 /* VarModel.m */,
+				AB4CF72317E90C8500AC7BA0 /* WarnModel.h */,
+				AB4CF72417E90C8500AC7BA0 /* WarnModel.m */,
+				AB4CF72717E9468B00AC7BA0 /* WarnTableViewStuff.h */,
+				AB4CF72817E9468B00AC7BA0 /* WarnTableViewStuff.m */,
 			);
 			path = scif;
 			sourceTree = "<group>";
@@ -390,6 +405,9 @@
 				AB17D86A17235C0500CB2013 /* MouseOverTV.m in Sources */,
 				ABDB20441761BF58001E0812 /* makeScrPrefs.m in Sources */,
 				ABF3AF82177E272C00D2E5A0 /* CodeTextView.m in Sources */,
+				AB912B9317E80D4500F215CC /* rightPane.m in Sources */,
+				AB4CF72517E90C8500AC7BA0 /* WarnModel.m in Sources */,
+				AB4CF72917E9468B00AC7BA0 /* WarnTableViewStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

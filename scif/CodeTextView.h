@@ -36,7 +36,7 @@
 	NSString*						replacementString;
 }
 
--(void) processEditing: (NSNotification*)notification;
+-(void) processEditingHere: (NSNotification*)notification;
 
 +(void) asegurarQuePfrefsYaIniciaron;
 

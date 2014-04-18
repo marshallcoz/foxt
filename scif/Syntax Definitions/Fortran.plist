@@ -375,23 +375,9 @@
 		<dict>
 			<key>Color</key>
 			<array>
-				<real>0.0470588</real>
-				<real>0.7647058799999999</real>
-				<real>0.2745098039</real>
-			</array>
-			<key>Name</key>
-			<string>Commentarios</string>
-			<key>Start</key>
-			<string>C </string>
-			<key>Type</key>
-			<string>OneLineComment</string>
-		</dict>
-		<dict>
-			<key>Color</key>
-			<array>
-				<real>0.0470588</real>
-				<real>0.7647058799999999</real>
-				<real>0.2745098039</real>
+				<real>0.145098039215686</real>
+				<real>0.470588235294118</real>
+				<real>0.086274509803922</real>
 			</array>
 			<key>Name</key>
 			<string>Commentarios</string>

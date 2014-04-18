@@ -63,6 +63,133 @@
 //    [tf removeFromSuperview];
 //}
 
+-(void)swipeWithEvent:(NSEvent *)event{
+//    NSLog(@"%@,%@,%f",[event description],@"\n",[[event window]frame].size.width);
+    
+//    NSLog(@"%f",[event locationInWindow].x);
+    if ([event deltaY] > 0) {
+        //NSLog(@"mostrar anterior");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selecAnt" object:nil];
+    }
+    if ([event deltaY] < 0) {
+        //NSLog(@"mostrar siguiente");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selecSig" object:nil];
+    }
+    if ([event locationInWindow].x < [[event window]frame].size.width/3 ) {
+        if ([event deltaX] < 0) {
+//            NSLog(@"mostrar lateral");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"mostLateral" object:nil];
+            return;
+        }
+        if ([event deltaX] > 0) {
+//            NSLog(@"ocultar lateral");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ocultLateral" object:nil];
+            return;
+        }
+    }    
+    if ([event locationInWindow].x > [[event window]frame].size.width *2/3 ) {
+        if ([event deltaX] > 0) {
+//            NSLog(@"mostrar lateral2");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"mostLateral2" object:nil];
+            return;
+            }
+        if ([event deltaX] < 0) {
+//            NSLog(@"ocultar lateral2");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ocultLateral2" object:nil];
+            return;
+        } 
+    }
+    
+}
+
+-(void)keyUp:(NSEvent *)event{
+    
+    NSLayoutManager *layoutManager = [self layoutManager];
+//    NSTextContainer *textContainer = [self textContainer];
+//    NSUInteger glyphIndex, textLength = [[self textStorage] length];
+    NSUInteger textLength = [[self textStorage] length];
+//    
+//    NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
+//    NSRange lineGlyphRange, lineCharRange, textCharRange = NSMakeRange(0, textLength);
+    NSRange lineCharRange, textCharRange = NSMakeRange(0, textLength);
+//    NSRect glyphRect;
+    
+    // Remove any existing coloring.
+    [layoutManager removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:textCharRange];
+    
+//    // Convert view coordinates to container coordinates
+//    point.x -= [self textContainerOrigin].x;
+//    point.y -= [self textContainerOrigin].y;
+//    
+//    // Convert those coordinates to the nearest glyph index
+//    glyphIndex = [layoutManager glyphIndexForPoint:point inTextContainer:textContainer];
+//    
+//    // Check to see whether the mouse actually lies over the glyph it is nearest to
+//    glyphRect = [layoutManager boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1) inTextContainer:textContainer];
+//    
+//    if (NSPointInRect(point, glyphRect)) {
+//    // Determine the range of glyphs, and of characters, in the corresponding line
+//    (void)[layoutManager lineFragmentRectForGlyphAtIndex:glyphIndex effectiveRange:&lineGlyphRange];        
+//    lineCharRange = [layoutManager characterRangeForGlyphRange:lineGlyphRange actualGlyphRange:NULL];
+    
+    lineCharRange = [self rangeForUserCompletion];
+    //NSLog(@"%lu",lineCharRange.location);
+    NSUInteger loc = lineCharRange.location; //the current cursor
+    unsigned int		x = (int)loc;
+    // Scan up to prev line break:
+    while( x > 0 )
+    {
+        unichar theCh = [[[self textStorage] string] characterAtIndex: x];
+        if( theCh == '\n' || theCh == '\r' )
+            break;
+        --x;
+    }
+    
+    loc = x+1;
+    
+    NSUInteger len;
+    // Scan up to next line break:
+    x = (int)lineCharRange.location + (int)lineCharRange.length;
+    
+    while( x < [[self textStorage] length] )
+    {
+        unichar theCh = [[[self textStorage] string] characterAtIndex: x];
+        if( theCh == '\n' || theCh == '\r' )
+            break;
+        ++x;
+    }
+    
+    len = x - loc + 1 ;
+    
+    //...
+    //NSUInteger len = lineCharRange.length;
+//    NSRange ra;
+//    bool ok = true;
+//    do {
+//        ra = NSMakeRange(loc, 2);
+//        if ([[[[self textStorage] string] substringWithRange:ra] rangeOfString:@"\n"].length == 0) {
+//            loc -= 1;
+//        } else {
+//            loc += 1;
+//            ok = false;
+//        }
+//    } while (ok);
+//    ok = true;
+//    do {
+//        ra = NSMakeRange(loc, len);
+//        if ([[[[self textStorage] string] substringWithRange:ra] rangeOfString:@"\n"].length == 0) {
+//            len += 1;
+//        } else {
+//            len += 2;
+//            ok = false;
+//        }
+//    } while (ok);
+    lineCharRange = NSMakeRange(loc,len);
+    
+    [layoutManager addTemporaryAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor blackColor], NSBackgroundColorAttributeName, nil] forCharacterRange:lineCharRange];
+//    }
+}
+
 - (void)mouseMoved:(NSEvent *)theEvent {
     if (enviar) 
     {

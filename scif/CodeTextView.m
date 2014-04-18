@@ -24,6 +24,7 @@ static BOOL sPrefInits = NO;
 		maintainIndentation = YES;
 		recolorTimer = nil;
 		syntaxColoringBusy = NO;
+        modo = 0; // creemos que es un fortran
     }
     return self;
 }
@@ -91,14 +92,14 @@ static BOOL sPrefInits = NO;
     [[self class] asegurarQuePfrefsYaIniciaron];
     
     // Register for "text changed" notifications of our text storage:
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEditing:)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEditingHere:)
                                                  name: NSTextStorageDidProcessEditingNotification
                                                object: [self textStorage]];
     // Put selection at top like Project Builder has it, so user sees it:
-    [self setSelectedRange: NSMakeRange(0,0)];
+//    [self setSelectedRange: NSMakeRange(0,0)];
     
-    [self setPostsBoundsChangedNotifications:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrolled:) name:NSViewBoundsDidChangeNotification object:self];
+//    [self setPostsBoundsChangedNotifications:YES];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrolled:) name:NSViewBoundsDidChangeNotification object:self];
 }
 -(void)scrolled:(NSNotification*)notification{
     //NSLog(@"Scrolled:\n%@",[notification description]);
@@ -144,7 +145,7 @@ static BOOL sPrefInits = NO;
  Part of the text was changed. Recolor it.
  -------------------------------------------------------------------------- */
 
--(void) processEditing: (NSNotification*)notification
+-(void) processEditingHere: (NSNotification*)notification
 {    
     [NSGraphicsContext saveGraphicsState];
     //Este método parece ejecutarse dos veces al iniciar el programa, pero en realidad, 

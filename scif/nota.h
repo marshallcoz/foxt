@@ -14,6 +14,7 @@
 }
 
 @property (strong) NSAttributedString *txt;
+@property (strong) NSAttributedString *ATtitle;
 @property (strong) NSString *title;
 @property bool Typefort;
 @property bool TypeTEX;
