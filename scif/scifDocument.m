@@ -352,7 +352,7 @@ static NSString* outPut = @".programOutput.txt";
     NSDictionary *textos_dic = [self textos_de_salida_para_el_arreglo:[ARRAYcontroller arrangedObjects]];
     if (textos_dic == nil) {
         NSLog(@"\n\nError: Document contents could not be grouped.");
-        [terminal_out setString:[[terminal_out string] stringByAppendingString:@"Error: Document contents could not be grouped.\n"]];
+        [self postthis:@"Error: Document contents could not be grouped.\n" withcoolor:[NSColor redColor]];
         @throw exception;
         return nil;
     }
@@ -361,8 +361,8 @@ static NSString* outPut = @".programOutput.txt";
     //NSString *textoLatex = [textos_dic objectForKey:@"t_todo"];
     
     if (![self guardadoTextoFortran:textoFortran TextoLatex:textoLatex]) {
-        NSLog(@"sorry");
-        [terminal_out setString:[[terminal_out string] stringByAppendingString:@"\nSave again to save fortran and latex individual files\n"]];
+        NSLog(@"\nSave again to save fortran and latex individual files\n");
+        [self postthis:@"\nSave again to save fortran and latex individual files\n" withcoolor:[NSColor redColor]];
     }
     
     NSMutableArray *datos_mutARR = [[NSMutableArray alloc] init] ;
@@ -738,10 +738,6 @@ static NSString* outPut = @".programOutput.txt";
     id searchCell = [searchField cell];
     [searchCell setMaximumRecents:10];
     todoEldocumento = false;
-    
-    NSAttributedString * t = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n......................\n%@\n",[self currentHour]] attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:10.0],[NSColor orangeColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
-    
-    [[terminal_out textStorage]setAttributedString:t];
 }
 
 -(void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem{
@@ -2329,9 +2325,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSRange rW = {0, 0};
     NSRange rN = {0, 0};
     NSString *lineTxt = [[NSString alloc] initWithFormat:@"%@:",lineaExtension];
-    //rN = [[terminal_out string] rangeOfString:lineTxt];
-    rE = [[terminal_out string] rangeOfString:@"Error"]; //el primero que encuentra
-    rW = [[terminal_out string] rangeOfString:@"Warning"]; //el primero que encuentra
+    
+    rE = [[dbgTextOut string] rangeOfString:@"Error"]; //el primero que encuentra
+    rW = [[dbgTextOut string] rangeOfString:@"Warning"]; //el primero que encuentra
     unsigned long Enter = 0;
     unsigned long Start = 0;
     int ReturnValue = 0;
@@ -2387,8 +2383,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 }
 -(void)postthis:(NSString*)st withcoolor:(NSColor*)color {
     NSAttributedString *Satrib = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:st] attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
-    [gdbSplitView setPosition:500 ofDividerAtIndex:0];
-    [gdbWarnSplitView setPosition:gdbWarnSplitView.frame.size.width ofDividerAtIndex:0];
+    //[gdbSplitView setPosition:500 ofDividerAtIndex:0];
+    //[gdbWarnSplitView setPosition:gdbWarnSplitView.frame.size.width ofDividerAtIndex:0];
     [[dbgTextOut textStorage] appendAttributedString:Satrib];
     [dbgTextOut scrollToEndOfDocument:nil];
 }
@@ -2418,6 +2414,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     //    [self clean_and_close];
     
     {
+        [gdbSplitView setPosition:500 ofDividerAtIndex:0];
         [[dbgTextOut textStorage] setAttributedString:[[NSAttributedString alloc] initWithString:@""]];
         NSString* ts = [[NSString alloc]initWithString: [NSString stringWithFormat:@"\n......................\n%@\n",[self currentHour]]];
         [self postthis:ts withcoolor:[NSColor orangeColor]];
@@ -2429,11 +2426,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSDictionary *textos_dic = [self textos_de_salida_para_el_arreglo:[ARRAYcontroller arrangedObjects]];
     if (textos_dic == nil) {
         NSLog(@"\n\nError: Document contents could not be grouped.");
-        //        [terminal showTerm:[self windowForSheet]];
-//        if ([View2Drawer state] == 0) {
-//            [View2Drawer toggle:self];
-//        }
-        [terminal_out setString:[[terminal_out string] stringByAppendingString:@"Error: Document contents could not be grouped.\n"]];
+        [self postthis:@"Error: Document contents could not be grouped.\n" withcoolor:[NSColor redColor]];
         return;
     }
     NSString *textoFortran = [textos_dic objectForKey:@"t_fort"];
@@ -2441,9 +2434,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     
     if (![self guardadoTextoFortran:textoFortran TextoLatex:textoLatex]) {
         NSLog(@"sorry");
-        {
-            [self postthis:@"\nNot saved... quitting\n" withcoolor:[NSColor redColor]];
-        }
+        [self postthis:@"\nNot saved... quitting\n" withcoolor:[NSColor redColor]];
         return;
     }
     
@@ -2584,7 +2575,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             // send a NSFileHandleReadCompletionNotification when it has data that is available.
             [[[gdbtask standardOutput] fileHandleForReading] readInBackgroundAndNotify];
             [gdbtask launch];
-            //[terminal_out setEditable:NO];
             
             NSData *data;
             //data = [[NSString stringWithFormat:@"tty %@ \n",thisTTY] dataUsingEncoding:NSUTF8StringEncoding];
@@ -2642,7 +2632,6 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 // We just pass the data along to the controller as an NSString.
 -(void)getData:(NSNotification*)notification{
     //NSLog(@"get data:\n%@",[notification description]);
-    //[terminal_out setEditable:NO];
     NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
     
     // If the length of the data is zero, then the task is basically over - there is nothing
