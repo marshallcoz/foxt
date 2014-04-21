@@ -4544,7 +4544,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 -(NSDictionary*)	defaultTextAttributes
 {
     //Aqua font
-    return [NSDictionary dictionaryWithObject:[NSFont fontWithName:@"Menlo Regular" size:13] forKey:NSFontAttributeName];
+    return [NSDictionary dictionaryWithObject:[NSFont fontWithName:@"Menlo Regular" size:15] forKey:NSFontAttributeName];
 	//return [NSDictionary dictionaryWithObject: [NSFont userFixedPitchFontOfSize:12.0] forKey: NSFontAttributeName];
 }
 
@@ -4555,7 +4555,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     //    
     //    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:12.0],[NSColor whiteColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]];
     
-    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont fontWithName:@"Menlo Regular" size:13],[NSColor whiteColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]];
+    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont fontWithName:@"Menlo Regular" size:15],[NSColor whiteColor], nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]];
 }
 
 
