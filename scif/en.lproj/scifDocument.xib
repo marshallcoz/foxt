@@ -52,7 +52,6 @@
             <rect key="contentRect" x="61" y="320" width="1164" height="455"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="887" height="300"/>
-            <value key="maxSize" type="size" width="1280" height="680"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="1164" height="455"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -329,7 +328,7 @@
                                                                                                         <tableColumns>
                                                                                                             <tableColumn editable="NO" width="338" minWidth="40" maxWidth="1000" id="100992">
                                                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Warnings">
-                                                                                                                    <font key="font" size="11" name=".LucidaGrandeUI"/>
+                                                                                                                    <font key="font" metaFont="smallSystem"/>
                                                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                                     <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                                 </tableHeaderCell>
@@ -463,7 +462,7 @@
                         <button key="view" focusRingType="none" verticalHuggingPriority="750" id="100092">
                             <rect key="frame" x="0.0" y="14" width="82" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="push" title="▶" bezelStyle="rounded" image="73E7786D-FFA2-4CEB-A65A-5890BE18F967" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="100093">
+                            <buttonCell key="cell" type="push" title="▶" bezelStyle="rounded" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="100093">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -479,7 +478,7 @@
                         <button key="view" verticalHuggingPriority="750" id="100095">
                             <rect key="frame" x="0.0" y="14" width="63" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="push" title="◼" bezelStyle="rounded" image="73E7786D-FFA2-4CEB-A65A-5890BE18F967" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100096">
+                            <buttonCell key="cell" type="push" title="◼" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100096">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -495,7 +494,7 @@
                         <button key="view" verticalHuggingPriority="750" id="100570">
                             <rect key="frame" x="8" y="14" width="63" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="push" title="pdf" bezelStyle="rounded" image="7B4C2302-442A-4FB9-BF9B-FD21E8E8AAA2" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100571">
+                            <buttonCell key="cell" type="push" title="pdf" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100571">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -972,14 +971,14 @@ Gw
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView editable="NO" selectable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" id="100479">
-                                    <rect key="frame" x="0.0" y="18" width="553" height="262"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="553" height="262"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" red="0.77254909279999995" green="0.77254909279999995" blue="0.77254909279999995" alpha="1" colorSpace="deviceRGB"/>
                                     <size key="minSize" width="553" height="262"/>
-                                    <size key="maxSize" width="553" height="10000000"/>
+                                    <size key="maxSize" width="570" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="553" height="262"/>
-                                    <size key="maxSize" width="553" height="10000000"/>
+                                    <size key="maxSize" width="570" height="10000000"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" red="0.191674397" green="0.19387755100000001" blue="0.19387755100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1166,10 +1165,10 @@ Gw
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.25098040700000002" green="0.25490197539999998" blue="0.25490197539999998" alpha="1" colorSpace="deviceRGB"/>
                                 <size key="minSize" width="550" height="214"/>
-                                <size key="maxSize" width="550" height="10000000"/>
+                                <size key="maxSize" width="567" height="10000000"/>
                                 <color key="insertionPointColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="minSize" width="550" height="214"/>
-                                <size key="maxSize" width="550" height="10000000"/>
+                                <size key="maxSize" width="567" height="10000000"/>
                                 <connections>
                                     <outlet property="delegate" destination="-2" id="100841"/>
                                 </connections>
@@ -1477,84 +1476,6 @@ Gw
         </window>
     </objects>
     <resources>
-        <image name="73E7786D-FFA2-4CEB-A65A-5890BE18F967" width="1" height="1">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
-GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
-c1dOU0NvbG9ygAKADRIgwwAAgAOAC1Z7MSwgMX3SFQoWGFpOUy5vYmplY3RzoReABIAK0hUKGh2iGxyA
-BYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxEFyE1NACoAAAAKAAAADgEAAAMA
-AAABAAEAAAEBAAMAAAABAAEAAAECAAMAAAACAAgACAEDAAMAAAABAAEAAAEGAAMAAAABAAEAAAERAAQA
-AAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAIAAAEWAAMAAAABAAEAAAEXAAQAAAABAAAAAgEcAAMA
-AAABAAEAAAFSAAMAAAABAAEAAAFTAAMAAAACAAEAAYdzAAcAAAUQAAAAuAAAAAAAAAUQYXBwbAIgAABt
-bnRyR1JBWVhZWiAH0AACAA4ADAAAAABhY3NwQVBQTAAAAABub25lAAAAAAAAAAAAAAAAAAAAAAAA9tYA
-AQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVk
-ZXNjAAAAwAAAAG93dHB0AAABMAAAABRrVFJDAAABRAAAAA5jcHJ0AAABVAAAADhkc2NtAAABjAAAA4Rk
-ZXNjAAAAAAAAABVHZW5lcmljIEdyYXkgUHJvZmlsZQAAAAAAAAAAAAAAFUdlbmVyaWMgR3JheSBQcm9m
-aWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWFlaIAAAAAAA
-APNRAAEAAAABFsxjdXJ2AAAAAAAAAAEBzQAAdGV4dAAAAABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMu
-LCBhbGwgcmlnaHRzIHJlc2VydmVkLgBtbHVjAAAAAAAAABEAAAAMZW5VUwAAACgAAALUZXNFUwAAACgA
-AAFaZGFESwAAADQAAAIAZGVERQAAADoAAAGuZmlGSQAAACwAAAL8ZnJGVQAAACoAAAEKaXRJVAAAAC4A
-AAKmbmxOTAAAACoAAAI0bmJOTwAAACwAAAGCcHRCUgAAADAAAAJ2c3ZTRQAAAC4AAADcamFKUAAAABYA
-AAE0a29LUgAAABgAAAJeemhUVwAAABAAAAFKemhDTgAAABgAAAHocnVSVQAAACYAAAMocGxQTAAAADYA
-AANOAEcAZQBuAGUAcgBpAHMAawAgAEcAcgDlAHMAawBhAGwAZQBwAHIAbwBmAGkAbABQAHIAbwBmAGkA
-bAAgAEcA6QBuAOkAcgBpAHEAdQBlACAARwByAGkAc04AgiwwsDDsMKQw1zDtMNUwoTCkMOuQGnUocHCW
-joJyX2ljz4/wAFAAZQByAGYAaQBsACAARwByAGkAcwAgAEcAZQBuAOkAcgBpAGMAbwBHAGUAbgBlAHIA
-aQBzAGsAIABHAHIA5QB0AG8AbgBlAHAAcgBvAGYAaQBsAEEAbABsAGcAZQBtAGUAaQBuAGUAcwAgAEcA
-cgBhAHUAcwB0AHUAZgBlAG4ALQBQAHIAbwBmAGkAbGZukBoAIABHAHIAYQB5ACBjz4/wZYdO9gBHAGUA
-bgBlAHIAZQBsACAARwByAOUAdABvAG4AZQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAQQBsAGcAZQBtAGUA
-ZQBuACAARwByAGkAagBzAHAAcgBvAGYAaQBlAGzHfLwYACAARwByAGEAeQAg1QS4XNMMx3wAUABlAHIA
-ZgBpAGwAIABkAGUAIABDAGkAbgB6AGEAIABHAGUAbgDpAHIAaQBjAG8AUAByAG8AZgBpAGwAbwAgAEcA
-cgBpAGcAaQBvACAARwBlAG4AZQByAGkAYwBvAEcAZQBuAGUAcgBpAGMAIABHAHIAYQB5ACAAUAByAG8A
-ZgBpAGwAZQBZAGwAZQBpAG4AZQBuACAAaABhAHIAbQBhAGEAcAByAG8AZgBpAGkAbABpBB4EMQRJBDgE
-OQAgBEEENQRABEsEOQAgBD8EQAQ+BEQEOAQ7BEwAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8A
-ZgBpAGwAIABzAHoAYQByAG8BWwBjAGnSJSYnKFokY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJ
-bWFnZVJlcKMpKitfEBBOU0JpdG1hcEltYWdlUmVwWk5TSW1hZ2VSZXBYTlNPYmplY3TSJSYtLldOU0Fy
-cmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJyYXmjMC0r0zM0CjU2N1dOU1doaXRlXE5TQ29sb3JTcGFjZUQw
-IDAAEAOADNIlJjk6V05TQ29sb3KiOSvSJSY8PVdOU0ltYWdlojwrXxAPTlNLZXllZEFyY2hpdmVy0UBB
-VHJvb3SAAQAIABEAGgAjAC0AMgA3AEYATABXAF4AZQByAHkAgQCDAIUAigCMAI4AlQCaAKUApwCpAKsA
-sACzALUAtwC5ALsAwADXANkA2wanBqwGtwbABtMG1wbqBvUG/gcDBwsHDgcTByIHJgctBzUHQgdHB0kH
-SwdQB1gHWwdgB2gHawd9B4AHhQAAAAAAAAIBAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAeHA
-</mutableData>
-        </image>
-        <image name="7B4C2302-442A-4FB9-BF9B-FD21E8E8AAA2" width="1" height="1">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
-GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
-c1dOU0NvbG9ygAKADRIgwwAAgAOAC1Z7MSwgMX3SFQoWGFpOUy5vYmplY3RzoReABIAK0hUKGh2iGxyA
-BYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxEFyE1NACoAAAAKAAAADgEAAAMA
-AAABAAEAAAEBAAMAAAABAAEAAAECAAMAAAACAAgACAEDAAMAAAABAAEAAAEGAAMAAAABAAEAAAERAAQA
-AAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAIAAAEWAAMAAAABAAEAAAEXAAQAAAABAAAAAgEcAAMA
-AAABAAEAAAFSAAMAAAABAAEAAAFTAAMAAAACAAEAAYdzAAcAAAUQAAAAuAAAAAAAAAUQYXBwbAIgAABt
-bnRyR1JBWVhZWiAH0AACAA4ADAAAAABhY3NwQVBQTAAAAABub25lAAAAAAAAAAAAAAAAAAAAAAAA9tYA
-AQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVk
-ZXNjAAAAwAAAAG93dHB0AAABMAAAABRrVFJDAAABRAAAAA5jcHJ0AAABVAAAADhkc2NtAAABjAAAA4Rk
-ZXNjAAAAAAAAABVHZW5lcmljIEdyYXkgUHJvZmlsZQAAAAAAAAAAAAAAFUdlbmVyaWMgR3JheSBQcm9m
-aWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWFlaIAAAAAAA
-APNRAAEAAAABFsxjdXJ2AAAAAAAAAAEBzQAAdGV4dAAAAABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMu
-LCBhbGwgcmlnaHRzIHJlc2VydmVkLgBtbHVjAAAAAAAAABEAAAAMZW5VUwAAACgAAALUZXNFUwAAACgA
-AAFaZGFESwAAADQAAAIAZGVERQAAADoAAAGuZmlGSQAAACwAAAL8ZnJGVQAAACoAAAEKaXRJVAAAAC4A
-AAKmbmxOTAAAACoAAAI0bmJOTwAAACwAAAGCcHRCUgAAADAAAAJ2c3ZTRQAAAC4AAADcamFKUAAAABYA
-AAE0a29LUgAAABgAAAJeemhUVwAAABAAAAFKemhDTgAAABgAAAHocnVSVQAAACYAAAMocGxQTAAAADYA
-AANOAEcAZQBuAGUAcgBpAHMAawAgAEcAcgDlAHMAawBhAGwAZQBwAHIAbwBmAGkAbABQAHIAbwBmAGkA
-bAAgAEcA6QBuAOkAcgBpAHEAdQBlACAARwByAGkAc04AgiwwsDDsMKQw1zDtMNUwoTCkMOuQGnUocHCW
-joJyX2ljz4/wAFAAZQByAGYAaQBsACAARwByAGkAcwAgAEcAZQBuAOkAcgBpAGMAbwBHAGUAbgBlAHIA
-aQBzAGsAIABHAHIA5QB0AG8AbgBlAHAAcgBvAGYAaQBsAEEAbABsAGcAZQBtAGUAaQBuAGUAcwAgAEcA
-cgBhAHUAcwB0AHUAZgBlAG4ALQBQAHIAbwBmAGkAbGZukBoAIABHAHIAYQB5ACBjz4/wZYdO9gBHAGUA
-bgBlAHIAZQBsACAARwByAOUAdABvAG4AZQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAQQBsAGcAZQBtAGUA
-ZQBuACAARwByAGkAagBzAHAAcgBvAGYAaQBlAGzHfLwYACAARwByAGEAeQAg1QS4XNMMx3wAUABlAHIA
-ZgBpAGwAIABkAGUAIABDAGkAbgB6AGEAIABHAGUAbgDpAHIAaQBjAG8AUAByAG8AZgBpAGwAbwAgAEcA
-cgBpAGcAaQBvACAARwBlAG4AZQByAGkAYwBvAEcAZQBuAGUAcgBpAGMAIABHAHIAYQB5ACAAUAByAG8A
-ZgBpAGwAZQBZAGwAZQBpAG4AZQBuACAAaABhAHIAbQBhAGEAcAByAG8AZgBpAGkAbABpBB4EMQRJBDgE
-OQAgBEEENQRABEsEOQAgBD8EQAQ+BEQEOAQ7BEwAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8A
-ZgBpAGwAIABzAHoAYQByAG8BWwBjAGnSJSYnKFokY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJ
-bWFnZVJlcKMpKitfEBBOU0JpdG1hcEltYWdlUmVwWk5TSW1hZ2VSZXBYTlNPYmplY3TSJSYtLldOU0Fy
-cmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJyYXmjMC0r0zM0CjU2N1dOU1doaXRlXE5TQ29sb3JTcGFjZUQw
-IDAAEAOADNIlJjk6V05TQ29sb3KiOSvSJSY8PVdOU0ltYWdlojwrXxAPTlNLZXllZEFyY2hpdmVy0UBB
-VHJvb3SAAQAIABEAGgAjAC0AMgA3AEYATABXAF4AZQByAHkAgQCDAIUAigCMAI4AlQCaAKUApwCpAKsA
-sACzALUAtwC5ALsAwADXANkA2wanBqwGtwbABtMG1wbqBvUG/gcDBwsHDgcTByIHJgctBzUHQgdHB0kH
-SwdQB1gHWwdgB2gHawd9B4AHhQAAAAAAAAIBAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAeHA
-</mutableData>
-        </image>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
     </resources>
 </document>
