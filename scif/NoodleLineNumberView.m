@@ -311,16 +311,16 @@
 	}
 }
 
-- (unsigned long)lineNumberForCharacterIndex:(unsigned)index inText:(NSString *)text
+- (unsigned int)lineNumberForCharacterIndex:(unsigned)index inText:(NSString *)text
 {
-    unsigned long			left, right, mid, lineStart;
+    unsigned int			left, right, mid, lineStart;
 	NSMutableArray		*lines;
 
 	lines = [self lineIndices];
 	
     // Binary search
     left = 0;
-    right = [lines count];
+    right = (int)[lines count];
 
     while ((right - left) > 1)
     {
@@ -480,7 +480,7 @@
 					}
                     
                     // Line numbers are internally stored starting at 0
-                    labelText = [NSString stringWithFormat:@"%d", line + 1 + [indice_inicial intValue]];
+                    labelText = [NSString stringWithFormat:@"%lu", line + 1 + [indice_inicial intValue]];
                     
                     stringSize = [labelText sizeWithAttributes:textAttributes];
 

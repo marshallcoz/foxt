@@ -957,7 +957,7 @@ static NSString* outPut = @".programOutput.txt";
     
     if ([gdbtask isRunning]) {
         NSData* data = [[NSData alloc] init];
-        data = [[NSString stringWithString:@"delete\n"] dataUsingEncoding:NSUTF8StringEncoding];
+        data = [@"delete\n" dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:data];
         
         //ahora agregamos los breakpoints
@@ -1050,7 +1050,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             if ([n Mi_modo_actual] != 0) {
                 tipo = [self syntaxDefinitionFilename];
             }
-            if (tit != nil || tipo != nil || tit != @"") {
+            if (tit != nil || tipo != nil || ![tit  isEqual: @""]) {
                 NSAttributedString *at = [[NSAttributedString alloc] initWithString:tit];
                 at = [self preProssText:tit oftype:tipo];
                 if (at != nil) {
@@ -1617,9 +1617,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSHourCalendarUnit fromDate:now];
-    NSString *hora = [[NSString alloc] initWithFormat:@"%i:",[components hour]];
+    NSString *hora = [[NSString alloc] initWithFormat:@"%li:",(long)[components hour]];
     components = [calendar components:NSMinuteCalendarUnit fromDate:now];
-    hora = [hora stringByAppendingFormat:@"%i",[components minute]];
+    hora = [hora stringByAppendingFormat:@"%li",(long)[components minute]];
     
     return hora;
 }
@@ -1885,19 +1885,19 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     if ([gdbtask isRunning] && (stdinHandle != nil)) {
         NSString * ttt = [NSString alloc];
         if ([Debug_actions selectedSegment] == 0) {
-            ttt = [NSString stringWithString:@"continue\n"];
+            ttt = @"continue\n";
         } else if ([Debug_actions selectedSegment] == 1) {
             //s-o
-            ttt = [NSString stringWithString:@"next\n"];
+            ttt = @"next\n";
         } else {
             //s-i
-            ttt = [NSString stringWithString:@"step\n"];
+            ttt = @"step\n";
         }
         [self postthis:[NSString stringWithFormat:@"%@\n",ttt] withcoolor:[NSColor orangeColor]];
         NSData *data = [ttt dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:data];
         
-        NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *new_input = [@"info locals\n" dataUsingEncoding:NSUTF8StringEncoding];
         [stdinHandle writeData:new_input];
     }
 }
@@ -1905,33 +1905,33 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 - (IBAction)continue_menuclick:(id)sender{
     [self postthis:@"continue\n" withcoolor:[NSColor orangeColor]];
     NSString * ttt = [NSString alloc];
-    ttt = [NSString stringWithString:@"continue\n"];
+    ttt = @"continue\n";
     NSData *data = [ttt dataUsingEncoding:NSUTF8StringEncoding];
     [stdinHandle writeData:data];
     
-    NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *new_input = [@"info locals\n" dataUsingEncoding:NSUTF8StringEncoding];
     [stdinHandle writeData:new_input];
 }
 - (IBAction)StepInto_menuclick:(id)sender{
     [self postthis:@"next\n" withcoolor:[NSColor orangeColor]];
     
     NSString * ttt = [NSString alloc];
-    ttt = [NSString stringWithString:@"next\n"];
+    ttt = @"next\n";
     NSData *data = [ttt dataUsingEncoding:NSUTF8StringEncoding];
     [stdinHandle writeData:data];
     
-    NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *new_input = [@"info locals\n" dataUsingEncoding:NSUTF8StringEncoding];
     [stdinHandle writeData:new_input];
 }
 - (IBAction)StepOut_menuclick:(id)sender{
     [self postthis:@"step\n" withcoolor:[NSColor orangeColor]];
     
     NSString * ttt = [NSString alloc];
-    ttt = [NSString stringWithString:@"step\n"];
+    ttt = @"step\n";
     NSData *data = [ttt dataUsingEncoding:NSUTF8StringEncoding];
     [stdinHandle writeData:data];
     
-    NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *new_input = [@"info locals\n" dataUsingEncoding:NSUTF8StringEncoding];
     [stdinHandle writeData:new_input];
 }
 - (IBAction)OpenTerminal_menuclick:(id)sender{
@@ -1942,7 +1942,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                        @"tell application \"Terminal\" to do script \"cd / \n cd %@ \n clear \"",directorioBase];
         NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
         [as executeAndReturnError:nil];
-        s = [NSString stringWithString:@"tell application \"Terminal\" to activate"];
+        s = @"tell application \"Terminal\" to activate";
         as = [[NSAppleScript alloc] initWithSource: s];
         [as executeAndReturnError:nil];
     }
@@ -2025,9 +2025,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             ra = [texto lineRangeForRange:NSMakeRange(ind_letra, 0)];
             
             if ([[texto substringWithRange:NSMakeRange(ra.location, 1)] isEqualToString:@" "]) {
-                tx = [NSString stringWithString:@"!"];
+                tx = @"!";
             } else {
-                tx = [NSString stringWithString:@" "];
+                tx = @" ";
             }
             
             [txtx insertText:tx replacementRange:NSMakeRange(ra.location, 1)];
@@ -2048,7 +2048,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         
         NSString *tx = [[NSString alloc] initWithString:@"!"];
         if ([togglecomment selectedSegment] == 1) {
-            tx = [NSString stringWithString:@" "];
+            tx = @" ";
         }
         
         //par cada line_break al principio
@@ -2187,7 +2187,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                                   @selector(deleteBlock:returnCode:contextInfo:),  
                                   NULL,
                                   [NSDictionary dictionaryWithObject:@"Some context info" forKey:@"in a dictionary"],
-                                  [NSString stringWithString:@"Deleting a block can not be undone."]
+                                  @"Deleting a block can not be undone."
                                   );
                 
                 break;
@@ -2382,7 +2382,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     return ReturnValue;
 }
 -(void)postthis:(NSString*)st withcoolor:(NSColor*)color {
-    NSAttributedString *Satrib = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:st] attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
+    NSAttributedString *Satrib = [[NSAttributedString alloc] initWithString:st attributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSFont userFixedPitchFontOfSize:11.0],color, nil] forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName, nil]]] ;
     //[gdbSplitView setPosition:500 ofDividerAtIndex:0];
     //[gdbWarnSplitView setPosition:gdbWarnSplitView.frame.size.width ofDividerAtIndex:0];
     [[dbgTextOut textStorage] appendAttributedString:Satrib];
@@ -2475,7 +2475,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                        ,directorioBase,[self currentHour],_lineaRunArgs,compiledProgram_name];
         NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
         [as executeAndReturnError:nil];
-        s = [NSString stringWithString:@"tell application \"Terminal\" to activate"];
+        s = @"tell application \"Terminal\" to activate";
         as = [[NSAppleScript alloc] initWithSource: s];
         [as executeAndReturnError:nil];
     } 
@@ -2499,7 +2499,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                            @"tell application \"Terminal\" to do script \"cd / \n cd %@ \n echo %@ \n %@ \n\""
                            ,directorioBase,[self currentHour],processedlineaPreCompilador];
             NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
-            NSDictionary **errorInfo;
+            NSDictionary **errorInfo = NULL;
             [as executeAndReturnError:errorInfo];
             {
                 [self postthis:@"Precompile script executed. Run again to debug.\n" withcoolor:[NSColor redColor]];
@@ -2592,7 +2592,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 [stdinHandle writeData:data];
             }
             // y un break para cuando la regamos en los vectores
-            data = [[NSString stringWithString:@"break malloc_error_break\n"] dataUsingEncoding:NSUTF8StringEncoding];
+            data = [@"break malloc_error_break\n" dataUsingEncoding:NSUTF8StringEncoding];
             [stdinHandle writeData:data];
             
             data = [[NSString stringWithFormat:@"run < %@ > %@ \n",inPut,outPut] dataUsingEncoding:NSUTF8StringEncoding];
@@ -2621,7 +2621,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                        @"tell application \"Terminal\" to do script \"cd / \n cd %@ \n clear \n ./%@\"",directorioBase,script_txt];
         NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
         [as executeAndReturnError:nil];
-        s = [NSString stringWithString:@"tell application \"Terminal\" to activate"];
+        s = @"tell application \"Terminal\" to activate";
         as = [[NSAppleScript alloc] initWithSource: s];
         [as executeAndReturnError:nil];
     }
@@ -2757,7 +2757,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                             
                             color = [NSColor whiteColor];
                             
-                            NSData *new_input = [[NSString stringWithString:@"info locals\n"] dataUsingEncoding:NSUTF8StringEncoding];
+                            NSData *new_input = [@"info locals\n" dataUsingEncoding:NSUTF8StringEncoding];
                             [stdinHandle writeData:new_input];
                             NSError *ReadErr = nil;
                             NSString *readText = [[NSString alloc] initWithContentsOfFile:[[NSString alloc] initWithFormat:@"%@/%@",directorioBase,outPut] encoding:NSUTF8StringEncoding error:&ReadErr];
