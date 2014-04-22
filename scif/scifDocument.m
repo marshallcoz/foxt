@@ -1756,10 +1756,12 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSString *pdfRuta = [[NSString alloc] init];
     pdfRuta = [nombreArchivoTeX stringByReplacingOccurrencesOfString:@".tex" withString:@".pdf"];
     NSString *s = [NSString stringWithFormat:
-                   @"tell application \"Terminal\" to do script \"cd / \n cd %@ \n clear \n pdflatex -output-directory %@ %@  \n open %@ \n exit \n\" ",directorioBase,directorioBase,nombreArchivoTeX,pdfRuta];
+                   @"tell application \"Terminal\" to do script \"cd / \n cd %@ \n clear \n pdflatex -output-directory %@ %@  \n exit \n\" ",directorioBase,directorioBase,nombreArchivoTeX];
     NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
     [as executeAndReturnError:nil];
-    
+    s = [NSString stringWithFormat:@"tell application \"Terminal\" to do script \" open %@ \n exit \n\" ",pdfRuta];
+    as = [[NSAppleScript alloc] initWithSource: s];
+    [as executeAndReturnError:nil];
 }
 
 - (IBAction)click_makeScript:(id)sender {
