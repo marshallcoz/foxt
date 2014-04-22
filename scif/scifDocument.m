@@ -1425,7 +1425,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         
         nombreArchivo = [[[url_file_name absoluteString] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""] stringByReplacingOccurrencesOfString:@".scif" withString:@""];
         directorioBase = [[[url_file_name URLByDeletingLastPathComponent] absoluteString] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
-        //NSLog(@"\n\nNom arch: %@\nDir base: %@",nombreArchivo,directorioBase);
+        NSLog(@"\n\nNom arch: %@\nDir base: %@",nombreArchivo,directorioBase);
+        
         return YES;
     }
     return NO;
@@ -1436,7 +1437,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     //NSLog(@"\n\n\t\tEscribiendo archivo en:\n\t\t%@",ruta);
     //NSLog(@"\n\t\tWe will save this:\n\n%@",t);    
     
-    FILE* f_log = fopen([ruta cStringUsingEncoding:NSUTF8StringEncoding],"w");
+    FILE* f_log = fopen([[ruta stringByReplacingOccurrencesOfString:@"file://" withString:@""] cStringUsingEncoding:NSUTF8StringEncoding],"w");
     fprintf(f_log, "%s\n", [t cStringUsingEncoding:NSUTF8StringEncoding]);
     fflush(f_log);
     fclose(f_log);
@@ -1458,7 +1459,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         nombreArchivo = [[[url_file_name absoluteString] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""] stringByReplacingOccurrencesOfString:@".scif" withString:@""];
         directorioBase = [[[url_file_name URLByDeletingLastPathComponent] absoluteString] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
         //NSLog(@"\n\nNom arch: %@\nDir base: %@",nombreArchivo,directorioBase);
-        
+        nombreArchivo = [nombreArchivo stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+        directorioBase = [directorioBase stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     } else {
         return false;
     }
@@ -2445,7 +2447,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         [self clearSlate:nil];
         
         NSString *argum_txt = lineaArgumentos;
-        //NSLog(@"Arguemnt line form:\n%@\n",argum_txt);
+        NSLog(@"Arguemnt line form:\n%@\n",argum_txt);
         
         argum_txt = [argum_txt stringByReplacingOccurrencesOfString:@"%F" withString:nombreArchivoFORTRAN];
         argum_txt = [argum_txt stringByReplacingOccurrencesOfString:@"%G" withString:
