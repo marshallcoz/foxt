@@ -38,7 +38,7 @@
 - (NSMutableArray *)lineIndices;
 - (void)invalidateLineIndices;
 - (void)calculateLines;
-- (unsigned)lineNumberForCharacterIndex:(unsigned)index inText:(NSString *)text;
+- (unsigned long)lineNumberForCharacterIndex:(unsigned)index inText:(NSString *)text;
 - (NSDictionary *)textAttributes;
 - (NSDictionary *)markerTextAttributes;
 
@@ -480,7 +480,7 @@
 					}
                     
                     // Line numbers are internally stored starting at 0
-                    labelText = [NSString stringWithFormat:@"%d", line + 1 + [indice_inicial intValue]];
+                    labelText = [NSString stringWithFormat:@"%lu", line + 1 + [indice_inicial intValue]];
                     
                     stringSize = [labelText sizeWithAttributes:textAttributes];
 

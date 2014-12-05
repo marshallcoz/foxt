@@ -191,6 +191,14 @@
 -(void)clean_and_close;
 -(void)postthis:(NSString*)st withcoolor:(NSColor*)color;
 - (NSString*)currentHour;
+void keepReadingOutfile(
+                        ConstFSEventStreamRef streamRef,
+                        void *clientCallBackInfo,
+                        size_t numEvents,
+                        void *eventPaths,
+                        const FSEventStreamEventFlags eventFlags[],
+                        const FSEventStreamEventId eventIds[]);
+
 
 // objetos para manejar la sintaxis
 

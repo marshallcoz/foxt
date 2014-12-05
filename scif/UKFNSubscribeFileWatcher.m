@@ -73,8 +73,9 @@ void    UKFileSubscriptionProc(FNMessage message, OptionBits flags, void *refcon
     
     while( (subValue = [enny nextObject]) )
     {
-        FNSubscriptionRef   subscription = [subValue pointerValue];
-        FNUnsubscribe( subscription );
+        [subValue release];
+//        FNSubscriptionRef   subscription = [subValue pointerValue];
+//        FNUnsubscribe( subscription );
     }
     
     [subscriptions release];
@@ -126,9 +127,9 @@ void    UKFileSubscriptionProc(FNMessage message, OptionBits flags, void *refcon
     
 	if( subValue )
 	{
-		FNSubscriptionRef   subscription = [subValue pointerValue];
-		
-		FNUnsubscribe( subscription );
+        [subValue release];
+//		FNSubscriptionRef   subscription = [subValue pointerValue];
+//		FNUnsubscribe( subscription );
 	}
 }
 
