@@ -97,17 +97,20 @@
 {
 	NSPoint					location;
 	unsigned long			line;
-	
+    NSDictionary* dicout;
+    NSString* txtline;
 	location = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	line = [self lineNumberForLocation:location.y];
-	
+	//line = [self lineNumberForLocation:location.y];
+	dicout = [self lineNumberForLocation:location.y];
+    line = [[dicout objectForKey:@"linea"] unsignedLongValue];
+    txtline = [dicout objectForKey:@"txtlinea"];
+    
 	if (line != NSNotFound)
 	{
 		NoodleLineNumberMarker		*marker;
 		
 		marker = [self markerAtLine:line];
-		
-		if (marker != nil)
+        if (marker != nil)
 		{
 			[self removeMarker:marker];
 		}
@@ -123,6 +126,7 @@
                                                             lineNumber:line
                                                                  image:[self markerImageWithSize:NSMakeSize(38.0, MARKER_HEIGHT)]
 														   imageOrigin:NSMakePoint(0, MARKER_HEIGHT / 2)];
+            [marker seTextoLinea:txtline];
             [self addMarker:marker];
 			[marker release];
 		}

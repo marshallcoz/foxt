@@ -51,6 +51,16 @@
 	return lineNumber;
 }
 
+- (void)seTextoLinea:(NSString*)tx
+{
+    textolinea = tx;
+}
+
+- (NSString*)textolinea
+{
+    return textolinea;
+}
+
 #pragma mark NSCoding methods
 
 #define NOODLE_LINE_CODING_KEY		@"line"
@@ -94,7 +104,7 @@
 	
 	copy = [super copyWithZone:zone];
 	[copy setLineNumber:lineNumber];
-	
+    [copy seTextoLinea:textolinea];
 	return copy;
 }
 

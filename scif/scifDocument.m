@@ -338,6 +338,8 @@ static NSString* outPut = @".programOutput.txt";
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
+    [self updateFunctionList];
+    [self updateBreaklist];
     /*
      Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
      You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
@@ -672,6 +674,8 @@ static NSString* outPut = @".programOutput.txt";
         }
     }
     
+    [self updateFunctionList];
+    [self updateBreaklist];
     
     //NSLog(@"se cargaron %lu elementos",[arrr count]);
     [self setAWAKE:arrr];
@@ -1427,11 +1431,13 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSString *texto = [[NSString alloc] init];
     texto = [[textoORIG copy] uppercaseString];
     NSRange ran = {0, 0};
-    NSArray *palabrasBuscadas = [[NSArray alloc] initWithObjects:@"PROGRAM",@"SUBROUTINE",@"FUNCTION", nil];
-    NSColor* verde = [NSColor greenColor];
+    NSArray *palabrasBuscadas = [[NSArray alloc] initWithObjects:
+                                 @"      FUNCTION",@"      SUBROUTINE",@"      PROGRAM",@"      MODULE", nil];
+    NSColor* gris = [NSColor darkGrayColor];
     NSColor* morado = [NSColor purpleColor];
-    NSColor*rosita = [NSColor magentaColor];
-    NSArray *coloresTipo = [[NSArray alloc] initWithObjects:verde,morado,rosita, nil];
+    NSColor* rosita = [NSColor magentaColor];
+    NSColor* naranja = [NSColor orangeColor];
+    NSArray *coloresTipo = [[NSArray alloc] initWithObjects:gris,morado,rosita,naranja, nil];
     int i;
     unsigned long Enter = 0;
     unsigned long Start = 0;
@@ -1439,8 +1445,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSString *trimedText = [[NSString alloc] init];
     for (i = 0; i < [palabrasBuscadas count]; i++) {
         trimedText = [texto copy];
-        ran = [trimedText rangeOfString:[palabrasBuscadas objectAtIndex:i]];
+        ran = [texto rangeOfString:[palabrasBuscadas objectAtIndex:i]];
+        BOOL estaEnBloqueInterface = FALSE;
         if (ran.length > 0) {
+            unsigned long ind_letra = 0;
+            unsigned long numberOfLines = 0;
             do {
                 //limite inicial
                 Start = [trimedText lineRangeForRange:ran].location;
@@ -1448,14 +1457,28 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 Enter = ran.location;
                 Enter = NSMaxRange([trimedText lineRangeForRange:NSMakeRange(Enter, 5)]);
                 Extracted = [trimedText substringWithRange:NSMakeRange(Start, Enter-Start)];
-                Extracted = [Extracted stringByReplacingOccurrencesOfString:@"  " withString:@""];
-                NSRange ra;
+                NSRange ra; NSRange rb;
+                // No queremos lo que esté dentro de los bloques de interface
+                ra = [trimedText rangeOfString:@"      INTERFACE"];
+                rb = [trimedText rangeOfString:@"END INTERFACE"];
+                if (rb.length == 0) {
+                    estaEnBloqueInterface = FALSE;
+                } else {
+                    if(ra.length ==0) {
+                        estaEnBloqueInterface = TRUE;
+                    } else {
+                        if(ra.location < ran.location && ran.location < rb.location) {
+                            estaEnBloqueInterface = TRUE;
+                        } else {
+                            estaEnBloqueInterface = FALSE;
+                        }
+                    }
+                }
+                if (estaEnBloqueInterface == FALSE) {
                 // pero no queremos los "END MODULE","END PROGRAM",...
                 ra = [Extracted rangeOfString:@"END"];
                 if (ra.length == 0) {
                     //numero de linea en el texto original
-                    unsigned long numberOfLines = 0;
-                    unsigned long ind_letra = 0;
                     do {
                         ra = [texto lineRangeForRange:NSMakeRange(ind_letra, 0)];
                         ind_letra = NSMaxRange(ra);
@@ -1466,16 +1489,21 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                     SubModel* sm = [[SubModel alloc]init];
                     [sm setTitulo:[[NSString alloc] initWithString:[Extracted stringByReplacingOccurrencesOfString:[palabrasBuscadas objectAtIndex:i] withString:@""]]];
                     ra.length=1;
-                    ra.location=0;
+                    ra.location=6;
                     [sm setTipo:[[NSString alloc] initWithString:[[palabrasBuscadas objectAtIndex:i] substringWithRange:ra]]];
                     [sm setColorTipo:[coloresTipo objectAtIndex:i]];
-                    [sm setLinea:[[NSNumber alloc] initWithInt:(int)numberOfLines]];
+                    [sm setLinea:[[NSNumber alloc] initWithInt:(int)numberOfLines+1]];
                     [sm setTxlinea:[[NSString alloc] initWithFormat:@"%i",(int)numberOfLines]];
                     // mandamos todo a la variable compartida
                     [thisFuncArray addObject:sm];
+                //trimedText = [trimedText substringFromIndex:Enter];
+                //ran = [trimedText rangeOfString:[palabrasBuscadas objectAtIndex:i]];
+                ind_letra = Enter;
+                numberOfLines=numberOfLines+1;
                 }
-                trimedText = [trimedText substringFromIndex:Enter];
-                ran = [trimedText rangeOfString:[palabrasBuscadas objectAtIndex:i]];
+                }
+                ra = [trimedText rangeOfString:[trimedText substringFromIndex:Enter]];
+                ran = [trimedText rangeOfString:[palabrasBuscadas objectAtIndex:i] options:NSForcedOrderingSearch range:ra];
             } while (ran.length > 0);
         }
     }
@@ -1498,14 +1526,14 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     for (i = 0; i < [[ARRAYcontroller arrangedObjects] count]; i++) {
         nota* n = (nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:i];
         if ([n Mi_modo_actual] == 0) {
-            NSEnumerator *UnMarcador = [[n Nota_linesToMarkers] keyEnumerator];
-            NSNumber *Key_en_nota = nil;
+            NoodleLineNumberMarker *nlnm = nil;
+            NSEnumerator *UnMarcador = [[n Nota_linesToMarkers] objectEnumerator];
             unsigned long num_lin_inicial = [n indice_inicial];
-            while (Key_en_nota = [UnMarcador nextObject]) {
+            while (nlnm = [UnMarcador nextObject]) {
+                // NSLog(@"%i| %@",[nlnm lineNumber],[nlnm textolinea]);
                 BreakModel *sm = [[BreakModel alloc]init];
-                [sm setLinea:[NSNumber numberWithUnsignedLong:num_lin_inicial + [Key_en_nota unsignedLongValue] + 1]];
-                [sm setTitulo:[[NSString alloc] initWithFormat:@"%i %@",[[sm linea] intValue],[self TxtinThisLine:[[sm linea]intValue]]]];
-                //NSLog(@"\nBreakpoint en: %lu",num_lin_inicial + [Key_en_nota unsignedLongValue] + 1);
+                [sm setLinea:[NSNumber numberWithUnsignedLong:num_lin_inicial+[nlnm lineNumber]]];
+                [sm setTitulo:[NSString stringWithFormat:@"%lu| %@",num_lin_inicial+[nlnm lineNumber],[nlnm textolinea]]];
                 [thisBreaks addObject:sm];
             }
         }
@@ -3342,8 +3370,7 @@ void keepReadingOutfile(
                 num_de_lineas = [NSNumber numberWithLong:numberOfLines];
                 [num_de_lineas retain];
                 [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setNoDeLineas_reciente:[[NSNumber alloc] initWithUnsignedLong:numberOfLines]];
-                [self updateFunctionList];
-                [self updateBreaklist];
+                
                 //            [(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] setUpdate_me:YES];
                 //n.NoDeLineas_reciente = [[NSNumber alloc] initWithUnsignedLong:numberOfLines];
             }
@@ -3648,7 +3675,7 @@ void keepReadingOutfile(
             acumulado = acumulado + [[n NoDeLineas_reciente] intValue];
             if (acumulado >= lineNum) {
                 //aquí está el break
-                [ARRAYcontroller setSelectionIndex:kk];
+                //[ARRAYcontroller setSelectionIndex:kk];
                 lineNum = lineNum - (int)[n indice_inicial];
                 
                 break;

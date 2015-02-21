@@ -33,12 +33,14 @@
 @interface NoodleLineNumberMarker : NSRulerMarker
 {
 	unsigned		lineNumber;
+    NSString*  textolinea;
 }
 
 - (id)initWithRulerView:(NSRulerView *)aRulerView lineNumber:(float)line image:(NSImage *)anImage imageOrigin:(NSPoint)imageOrigin;
 
 - (void)setLineNumber:(unsigned)line;
 - (unsigned)lineNumber;
-
+- (void)seTextoLinea:(NSString*)tx;
+- (NSString*)textolinea;
 
 @end

@@ -199,7 +199,7 @@
     [self setNeedsDisplay:YES];
 }
 
-- (unsigned long)lineNumberForLocation:(float)location
+- (NSDictionary*)lineNumberForLocation:(float)location
 {
     [NSGraphicsContext saveGraphicsState];
 	unsigned long	line, count, index, rectCount, i;
@@ -239,13 +239,22 @@
 				if ((location >= NSMinY(rects[i])) && (location < NSMaxY(rects[i])))
 				{
                     [NSGraphicsContext restoreGraphicsState];
-					return line + 1;
+                    //NSLog(@"%@",[[view string] substringWithRange:NSMakeRange(index, 10)]);
+                    NSString* txtlinea = [[NSString alloc]initWithString:[[view string] substringWithRange:NSMakeRange(index, MIN(20,[[view string] length]))]];
+					//return line + 1;
+                    NSNumber* linea = [[NSNumber alloc]initWithUnsignedLong:line+1];
+                    NSDictionary *dicOut = [[NSDictionary alloc]initWithObjectsAndKeys:linea,@"linea",txtlinea,@"txtlinea", nil];
+                    return dicOut;
 				}
 			}
 		}	
 	}
     [NSGraphicsContext restoreGraphicsState];
-	return NSNotFound;
+    NSDictionary *dicOut = [[NSDictionary alloc]initWithObjectsAndKeys:
+                            [[NSNumber alloc]initWithUnsignedLong:NSNotFound],@"linea",
+                            [[NSString alloc]initWithString:@""],@"txtlinea", nil];
+    return dicOut;
+	//return NSNotFound;
 }
 
 - (NoodleLineNumberMarker *)markerAtLine:(unsigned long)line
@@ -442,7 +451,7 @@
         count = [lines count];
         index = 0;
         
-        
+        //NSLog(@"%@",[text substringWithRange:range]);
         for (line = [self lineNumberForCharacterIndex:(unsigned int)range.location inText:text]; line < count; line++)
         {
                 
@@ -465,6 +474,8 @@
 					
 					if (marker != nil)
 					{
+                        //NSLog(@"%@",[text substringWithRange:range]);
+                        //[marker seTextoLinea:[[NSString alloc] initWithString:[NSString stringWithFormat:@"%lu", line + 1 + [indice_inicial intValue]]]];
 						markerImage = [marker image];
                         //NSLog(@"imagen = %@", markerImage);
 						markerSize = [markerImage size];
@@ -531,10 +542,10 @@
 {
 	if ([aMarker isKindOfClass:[NoodleLineNumberMarker class]])
 	{
-		[linesToMarkers setObject:aMarker
+        [linesToMarkers setObject:aMarker
 							forKey:[NSNumber numberWithUnsignedInt:[(NoodleLineNumberMarker *)aMarker lineNumber] - 1]];
         //post a notification to update NOTA dictionary of markers.
-
+        
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[linesToMarkers copy],@"marcadores", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateNota_marker" object:nil userInfo:dic];
     }

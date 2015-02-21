@@ -135,6 +135,7 @@
     lineCharRange = [self rangeForUserCompletion];
     //NSLog(@"%lu",lineCharRange.location);
     NSUInteger loc = lineCharRange.location; //the current cursor
+    if (loc == textLength) return;
     unsigned int		x = (int)loc;
     // Scan up to prev line break:
     while( x > 0 )
