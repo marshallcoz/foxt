@@ -36,6 +36,10 @@
 		AB3E9165164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3E9164164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m */; };
 		AB4CF72517E90C8500AC7BA0 /* WarnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF72417E90C8500AC7BA0 /* WarnModel.m */; };
 		AB4CF72917E9468B00AC7BA0 /* WarnTableViewStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF72817E9468B00AC7BA0 /* WarnTableViewStuff.m */; };
+		AB7A6C8E1A95D99E00024428 /* SubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7A6C8D1A95D99E00024428 /* SubModel.m */; };
+		AB7A6C911A96BC0100024428 /* FuncsTableViewStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7A6C901A96BC0100024428 /* FuncsTableViewStuff.m */; };
+		AB7A6CA11A97FCE400024428 /* BreakModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7A6CA01A97FCE400024428 /* BreakModel.m */; };
+		AB7A6CA41A97FD9B00024428 /* BreaksTableViewStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7A6CA31A97FD9B00024428 /* BreaksTableViewStuff.m */; };
 		AB8EEBDB166FAB2600F6B0F5 /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDA166FAB2600F6B0F5 /* MarkerLineNumberView.m */; };
 		AB8EEBE0166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDD166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m */; };
 		AB8EEBE1166FAB8E00F6B0F5 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDF166FAB8E00F6B0F5 /* NoodleLineNumberView.m */; };
@@ -101,6 +105,14 @@
 		AB4CF72417E90C8500AC7BA0 /* WarnModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnModel.m; sourceTree = "<group>"; };
 		AB4CF72717E9468B00AC7BA0 /* WarnTableViewStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarnTableViewStuff.h; sourceTree = "<group>"; };
 		AB4CF72817E9468B00AC7BA0 /* WarnTableViewStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnTableViewStuff.m; sourceTree = "<group>"; };
+		AB7A6C8C1A95D99E00024428 /* SubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubModel.h; sourceTree = "<group>"; };
+		AB7A6C8D1A95D99E00024428 /* SubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubModel.m; sourceTree = "<group>"; };
+		AB7A6C8F1A96BC0100024428 /* FuncsTableViewStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuncsTableViewStuff.h; sourceTree = "<group>"; };
+		AB7A6C901A96BC0100024428 /* FuncsTableViewStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuncsTableViewStuff.m; sourceTree = "<group>"; };
+		AB7A6C9F1A97FCE400024428 /* BreakModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakModel.h; sourceTree = "<group>"; };
+		AB7A6CA01A97FCE400024428 /* BreakModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakModel.m; sourceTree = "<group>"; };
+		AB7A6CA21A97FD9B00024428 /* BreaksTableViewStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreaksTableViewStuff.h; sourceTree = "<group>"; };
+		AB7A6CA31A97FD9B00024428 /* BreaksTableViewStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreaksTableViewStuff.m; sourceTree = "<group>"; };
 		AB8EEBD9166FAB2600F6B0F5 /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerLineNumberView.h; sourceTree = "<group>"; };
 		AB8EEBDA166FAB2600F6B0F5 /* MarkerLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkerLineNumberView.m; sourceTree = "<group>"; };
 		AB8EEBDC166FAB8E00F6B0F5 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
@@ -286,6 +298,14 @@
 				AB4CF72417E90C8500AC7BA0 /* WarnModel.m */,
 				AB4CF72717E9468B00AC7BA0 /* WarnTableViewStuff.h */,
 				AB4CF72817E9468B00AC7BA0 /* WarnTableViewStuff.m */,
+				AB7A6C8C1A95D99E00024428 /* SubModel.h */,
+				AB7A6C8D1A95D99E00024428 /* SubModel.m */,
+				AB7A6C8F1A96BC0100024428 /* FuncsTableViewStuff.h */,
+				AB7A6C901A96BC0100024428 /* FuncsTableViewStuff.m */,
+				AB7A6C9F1A97FCE400024428 /* BreakModel.h */,
+				AB7A6CA01A97FCE400024428 /* BreakModel.m */,
+				AB7A6CA21A97FD9B00024428 /* BreaksTableViewStuff.h */,
+				AB7A6CA31A97FD9B00024428 /* BreaksTableViewStuff.m */,
 			);
 			path = scif;
 			sourceTree = "<group>";
@@ -390,6 +410,8 @@
 				AB3E9155164C685C00D4784F /* NSScanner+SkipUpToCharset.m in Sources */,
 				AB3E915D164C685C00D4784F /* UKSCTDColorWellPrefsController.m in Sources */,
 				AB3E915E164C685C00D4784F /* UKSCTDUserIdentifiersPrefsController.m in Sources */,
+				AB7A6CA41A97FD9B00024428 /* BreaksTableViewStuff.m in Sources */,
+				AB7A6C8E1A95D99E00024428 /* SubModel.m in Sources */,
 				AB3E9162164D897B00D4784F /* UKTextDocGoToBox.m in Sources */,
 				AB3E9165164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m in Sources */,
 				ABCB09AB1652BB7A0016EE54 /* PrefMenuControll.m in Sources */,
@@ -403,10 +425,12 @@
 				AB07B5AC16B75E9300413E2F /* UKKQueue.m in Sources */,
 				AB07B5AD16B75E9300413E2F /* UKMainThreadProxy.m in Sources */,
 				AB17D86A17235C0500CB2013 /* MouseOverTV.m in Sources */,
+				AB7A6CA11A97FCE400024428 /* BreakModel.m in Sources */,
 				ABDB20441761BF58001E0812 /* makeScrPrefs.m in Sources */,
 				ABF3AF82177E272C00D2E5A0 /* CodeTextView.m in Sources */,
 				AB912B9317E80D4500F215CC /* rightPane.m in Sources */,
 				AB4CF72517E90C8500AC7BA0 /* WarnModel.m in Sources */,
+				AB7A6C911A96BC0100024428 /* FuncsTableViewStuff.m in Sources */,
 				AB4CF72917E9468B00AC7BA0 /* WarnTableViewStuff.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -59,6 +59,9 @@
     NSFileHandle            *stdOutHandle;
     bool                    predebugscriptdone;
     
+    IBOutlet NSOutlineView *listaFunciones;
+    
+    
     //el set de preferencias elegido
     int                     my_presets;
     IBOutlet makeScrPrefs   *makeScrPrefsPanel;
@@ -71,6 +74,8 @@
     IBOutlet NSPanel        *VarsPanel;
     NSMutableArray          *VarsArray;
     NSMutableArray          *WarnsArray;
+    NSMutableArray          *FuncsArray;
+    NSMutableArray          *BreakArray;
     IBOutlet NSTextView     *VarsDumptxt;
     
     
@@ -108,6 +113,7 @@
     NSRange							affectedCharRange;
 	NSString*						replacementString;
     IBOutlet NSWindow *popwindow;
+    
 }
 //objetos view
 @property (assign) IBOutlet NSCollectionView *tablaOutline;
@@ -130,6 +136,8 @@
 @property (assign) IBOutlet NSSplitView *gdbWarnSplitView;
 @property (copy) NSMutableArray *VarsArray;
 @property (copy) NSMutableArray *WarnsArray;
+@property (copy) NSMutableArray *FuncsArray;
+@property (copy) NSMutableArray *BreakArray;
 @property (assign) IBOutlet NSButton *NotaiDisclosureBut;
 @property (assign) IBOutlet NSDrawer *View2Drawer;
 @property (assign) IBOutlet NSTextView *NotaiDisclosureTxt;
@@ -183,6 +191,7 @@
 - (IBAction)closeTheDrawer:(id)sender;
 
 //otros métodos
+-(void) updateFunctionList;
 -(bool) guardarTexto:(NSString*)t en:(NSString*)ruta;
 -(BOOL) pedirArchivo:(NSString*)mensaje;
 -(BOOL) guardadoTextoFortran:(NSString*)textoFortran TextoLatex:(NSString*)textoLatex;
@@ -223,6 +232,7 @@ void keepReadingOutfile(
 -(BOOL)		maintainIndentation;
 -(void) toToLineinThisTxt: (int)lineNum;
 -(void)		goToLine: (int)lineNum;
+-(NSString*)TxtinThisLine: (int)lineNum;
 -(void)		goToCharacter: (int)charNum;
 -(void)		goToRangeFrom: (int)startCh toChar: (int)endCh;
 
