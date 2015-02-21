@@ -1045,7 +1045,7 @@ AGEAbABuAHkAIABwAHIAbwBmAGkAbAAgAHMAegBhAHIAbwFbAGMAaQ</bytes>
 																									<reference key="NSSuperview" ref="408282715"/>
 																									<reference key="NSNextKeyView" ref="815078829"/>
 																									<string key="NSReuseIdentifierKey">_NS:13</string>
-																									<object class="NSAppearance" key="NSAppearance" id="574140633">
+																									<object class="NSAppearance" key="NSAppearance" id="676747841">
 																										<string key="NSAppearanceName">NSAppearanceNameVibrantLight</string>
 																										<string key="NSAppearanceBundleIdentifier">com.apple.systemappearance</string>
 																									</object>
@@ -1277,7 +1277,7 @@ AGEAbABuAHkAIABwAHIAbwBmAGkAbAAgAHMAegBhAHIAbwFbAGMAaQ</bytes>
 																									<string key="NSFrameSize">{170, 378}</string>
 																									<reference key="NSSuperview" ref="844972433"/>
 																									<string key="NSReuseIdentifierKey">_NS:13</string>
-																									<reference key="NSAppearance" ref="574140633"/>
+																									<reference key="NSAppearance" ref="676747841"/>
 																									<bool key="NSEnabled">YES</bool>
 																									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																									<bool key="NSControlAllowsExpansionToolTips">YES</bool>
