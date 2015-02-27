@@ -91,6 +91,10 @@
     NSString                *busqueda_ant;
     bool                    todoEldocumento;
     
+    IBOutlet NSSearchField  *FuncsSearch;
+    NSMutableArray          *recentFuncSearches;    
+    IBOutlet NSSearchField *funcsSearchField;
+    
     //entrada y salida del programa que ejecuta el gdb
     UKKQueue                *observadorINPUT;
     UKKQueue                *observadorOUTPUT;
@@ -102,6 +106,7 @@
     int                     hoja_anterior;
     NSButton                *NotaiDisclosureButReminder;
     IBOutlet NSPopUpButton  *botonListaDelDrawer;
+    NSInteger               notaidiscloruebutLastSelection;
     
     //sintaxis de código
     IBOutlet UKTextDocGoToBox*		gotoPanel;				// Controller for our "go to line" panel.
@@ -142,7 +147,7 @@
 @property (assign) IBOutlet NSDrawer *View2Drawer;
 @property (assign) IBOutlet NSTextView *NotaiDisclosureTxt;
 @property (assign) IBOutlet NSButton *NotaiDisclosureTitleBut;
-
+@property (assign) NSInteger notaidiscloruebutLastSelection;
 
 //variables globales
 @property (assign) NSString *nombreArchivo;
@@ -189,6 +194,7 @@
 -(IBAction)clearSlate:(id)sender;
 - (IBAction)changedDrawerSelection:(id)sender;
 - (IBAction)closeTheDrawer:(id)sender;
+- (IBAction)BuscarEntreFunciones:(id)sender;
 
 //otros métodos
 -(void) updateFunctionList;

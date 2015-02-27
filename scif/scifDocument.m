@@ -69,7 +69,7 @@ static NSString* outPut = @".programOutput.txt";
 @synthesize BPs;
 @synthesize palabra;
 @synthesize palabraRange;
-
+@synthesize notaidiscloruebutLastSelection;
 #pragma mark -
 #pragma mark Life cycle
 
@@ -85,6 +85,7 @@ static NSString* outPut = @".programOutput.txt";
 		maintainIndentation = YES;
 		recolorTimer = nil;
 		syntaxColoringBusy = NO;
+        notaidiscloruebutLastSelection = 0;
         VarsArray = [[NSMutableArray alloc] init];
         WarnsArray = [[NSMutableArray alloc] init];
         FuncsArray = [[NSMutableArray alloc] init];
@@ -733,6 +734,8 @@ static NSString* outPut = @".programOutput.txt";
                                                  name:@"mostLateral2" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ocultLateral2:) 
                                                  name:@"ocultLateral2" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changedDrawerSelection:)
+                                                 name:@"changedDrawerSelection" object:nil];
     
     LineNumberVW = [[MarkerLineNumberView alloc] initWithScrollView:scrollView];
     [scrollView setVerticalRulerView:LineNumberVW];
@@ -1419,6 +1422,10 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     [[txtx layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:NSMakeRange(0, [[txtx string]length])];
     [[txtx layoutManager] removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:NSMakeRange(0, [[txtx string]length])];
     punto_ant = 0;
+}
+
+- (IBAction)BuscarEntreFunciones:(id)sender {
+    
 }
 
 #pragma mark -
@@ -2397,6 +2404,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 }
 
 - (IBAction)NotaiDisclosureClick:(id)sender {
+    NSLog(@"click NotaiDisclosureClick");
     
 }
 
@@ -2623,7 +2631,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSNumber *n = [[notification userInfo]objectForKey:@"renglon"];
     if ([self.FuncsArray count] > 0) {
         if ([self.FuncsArray count] >= n.intValue) {
-            n = [[self.FuncsArray objectAtIndex:[n integerValue]] linea];
+            //NSLog(@"%@",[funcsSearchField stringValue]);
+            NSPredicate *pre = [NSPredicate predicateWithFormat:@"titulo contains %@",[funcsSearchField stringValue]];
+            NSArray *ar = [self.FuncsArray filteredArrayUsingPredicate:pre];
+            
+            n = [[ar objectAtIndex:[n integerValue]] linea];
             [self goToLine:[n intValue]];
         }
     }
@@ -3117,19 +3129,24 @@ void keepReadingOutfile(
 }
 
 - (IBAction)changedDrawerSelection:(id)sender {
-    //    NSLog(@"%ld",[botonListaDelDrawer indexOfSelectedItem]);
+    //  NSLog(@"%ld",[botonListaDelDrawer indexOfSelectedItem]);
+    //[botonListaDelDrawer selectItemAtIndex:notaidiscloruebutLastSelection];
     hoja_anterior = (int)[botonListaDelDrawer indexOfSelectedItem];
     nota *n = (nota*)[[ARRAYcontroller arrangedObjects] objectAtIndex:[botonListaDelDrawer indexOfSelectedItem]];
+    if (n != nil){
     NSAttributedString *AtStr = [[NSAttributedString alloc] initWithAttributedString:[n txt]];
     [[NotaiDisclosureTxt textStorage] setAttributedString:AtStr]; 
     [NotaiDisclosureTitleBut setTitle:[n title]];
     [NotaiDisclosureTxt setNeedsDisplay:YES];
+    }
 }
 
 - (IBAction)closeTheDrawer:(id)sender {
     [NotaiDisclosureButReminder setState:0];
     [View2Drawer toggle:self];
 }
+
+
 
 -(void)returnPrintVarValue:(NSString*)value{
     

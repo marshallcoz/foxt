@@ -160,6 +160,12 @@
 				<string>))</string>
 				<string>(((</string>
 				<string>)))</string>
+				<string>((((</string>
+				<string>))))</string>
+				<string>(((((</string>
+				<string>)))))</string>
+				<string>((((((</string>
+				<string>))))))</string>
 			</array>
 			<key>Color</key>
 			<array>
@@ -385,6 +391,24 @@
 			<string>!</string>
 			<key>Type</key>
 			<string>OneLineComment</string>
+		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<real>0.3</real>
+				<real>0.2</real>
+				<real>0.01</real>
+			</array>
+			<key>End</key>
+			<string>!#endif</string>
+			<key>EscapeChar</key>
+			<string></string>
+			<key>Name</key>
+			<string>Strings</string>
+			<key>Start</key>
+			<string>!#if</string>
+			<key>Type</key>
+			<string>String</string>
 		</dict>
 	</array>
 	<key>FileNameSuffixes</key>

@@ -116,6 +116,8 @@ static BOOL sPrefInits = NO;
     
 }
 
+
+
 #pragma mark -
 #pragma mark syntax specific
 -(void) shouldUpdateArrayController : (NSNotification*)notification

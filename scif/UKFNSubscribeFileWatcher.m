@@ -98,7 +98,6 @@ void    UKFileSubscriptionProc(FNMessage message, OptionBits flags, void *refcon
     
     if( !subscriptionUPP )
         subscriptionUPP = NewFNSubscriptionUPP( UKFileSubscriptionProc );
-    
     err = FNSubscribeByPath( (UInt8*) [path fileSystemRepresentation], subscriptionUPP, (void*)self,
                                 kNilOptions, &subscription );
     if( err != noErr )

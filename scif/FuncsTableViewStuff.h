@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FuncsTableViewStuff : NSObject <NSTableViewDelegate>
+@interface FuncsTableViewStuff : NSObject <NSTableViewDelegate>{
+    //@private
+    //int cant;
+}
+@property (assign) IBOutlet NSTableView *tbview;
 
 @end
