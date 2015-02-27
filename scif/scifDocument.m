@@ -2632,9 +2632,11 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     if ([self.FuncsArray count] > 0) {
         if ([self.FuncsArray count] >= n.intValue) {
             //NSLog(@"%@",[funcsSearchField stringValue]);
-            NSPredicate *pre = [NSPredicate predicateWithFormat:@"titulo contains %@",[funcsSearchField stringValue]];
-            NSArray *ar = [self.FuncsArray filteredArrayUsingPredicate:pre];
-            
+            NSArray *ar = [[NSArray alloc]initWithArray:self.FuncsArray];
+            if ([[funcsSearchField stringValue] length]){
+                NSPredicate *pre = [NSPredicate predicateWithFormat:@"titulo contains %@",[funcsSearchField stringValue]];
+                ar = [self.FuncsArray filteredArrayUsingPredicate:pre];
+            }
             n = [[ar objectAtIndex:[n integerValue]] linea];
             [self goToLine:[n intValue]];
         }
