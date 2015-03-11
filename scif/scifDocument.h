@@ -76,6 +76,7 @@
     NSMutableArray          *WarnsArray;
     NSMutableArray          *FuncsArray;
     NSMutableArray          *BreakArray;
+    NSMutableArray          *EncontradoArray;
     IBOutlet NSTextView     *VarsDumptxt;
     
     
@@ -143,6 +144,7 @@
 @property (copy) NSMutableArray *WarnsArray;
 @property (copy) NSMutableArray *FuncsArray;
 @property (copy) NSMutableArray *BreakArray;
+@property (copy) NSMutableArray *EncontradoArray;
 @property (assign) IBOutlet NSButton *NotaiDisclosureBut;
 @property (assign) IBOutlet NSDrawer *View2Drawer;
 @property (assign) IBOutlet NSTextView *NotaiDisclosureTxt;

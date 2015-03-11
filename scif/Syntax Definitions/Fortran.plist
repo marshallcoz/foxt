@@ -400,15 +400,69 @@
 				<real>0.01</real>
 			</array>
 			<key>End</key>
-			<string>!#endif</string>
+			<string>#endif</string>
 			<key>EscapeChar</key>
 			<string></string>
 			<key>Name</key>
 			<string>Strings</string>
 			<key>Start</key>
-			<string>!#if</string>
+			<string>#ifdef</string>
 			<key>Type</key>
 			<string>String</string>
+		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<real>0.164</real>
+				<real>0.492</real>
+				<real>0.394</real>
+			</array>
+			<key>End</key>
+			<string>!#&gt;</string>
+			<key>EscapeChar</key>
+			<string> </string>
+			<key>Name</key>
+			<string>BlockComment</string>
+			<key>Start</key>
+			<string>!#&lt; g</string>
+			<key>Type</key>
+			<string>BlockComment</string>
+		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<real>0.2617</real>
+				<real>0.4648</real>
+				<real>0.6328</real>
+			</array>
+			<key>End</key>
+			<string>!#&gt;</string>
+			<key>EscapeChar</key>
+			<string> </string>
+			<key>Name</key>
+			<string>BlockComment</string>
+			<key>Start</key>
+			<string>!#&lt; b</string>
+			<key>Type</key>
+			<string>BlockComment</string>
+		</dict>
+		<dict>
+			<key>Color</key>
+			<array>
+				<real>0.6328</real>
+				<real>0.14</real>
+				<real>0.3125</real>
+			</array>
+			<key>End</key>
+			<string>!#&gt;</string>
+			<key>EscapeChar</key>
+			<string> </string>
+			<key>Name</key>
+			<string>BlockComment</string>
+			<key>Start</key>
+			<string>!#&lt; r</string>
+			<key>Type</key>
+			<string>BlockComment</string>
 		</dict>
 	</array>
 	<key>FileNameSuffixes</key>

@@ -22,6 +22,7 @@
 #import "WarnModel.h"
 #import "SubModel.h"
 #import "BreakModel.h"
+#import "EncontradoModel.h"
 
 static BOOL	sSyntaxColoredTextDocPrefsInited = NO;
 static BOOL sPrefInits = NO;
@@ -61,6 +62,7 @@ static NSString* outPut = @".programOutput.txt";
 @synthesize WarnsArray;
 @synthesize FuncsArray;
 @synthesize BreakArray;
+@synthesize EncontradoArray;
 @synthesize NotaiDisclosureBut;
 @synthesize View2Drawer;
 @synthesize NotaiDisclosureTxt;
@@ -90,6 +92,7 @@ static NSString* outPut = @".programOutput.txt";
         WarnsArray = [[NSMutableArray alloc] init];
         FuncsArray = [[NSMutableArray alloc] init];
         BreakArray = [[NSMutableArray alloc] init];
+        EncontradoArray = [[NSMutableArray alloc] init];
         palabra = @"";
         palabraRange = NSMakeRange(0, 0);
         
@@ -127,6 +130,7 @@ static NSString* outPut = @".programOutput.txt";
     [WarnsArray release];
     [FuncsArray release];
     [BreakArray release];
+    [EncontradoArray release];
 	[super dealloc];
 }
 
@@ -714,6 +718,9 @@ static NSString* outPut = @".programOutput.txt";
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GotoBreakLine:)
                                                  name:@"GotoBreakLine"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GotoEncontradoLine:)
+                                                 name:@"GotoEncontradoLine"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNota_Marcador:)
                                                  name:@"updateNota_marker" object:nil];
@@ -1333,40 +1340,52 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 break;
             }
         }
+        
         if (estuvo == NO && ![string isEqualToString:@""]) {
             [recentSearches addObject:[textView string]];
             //NSLog(@"added %@ to recentSearches\n",string);
         }
         
-        
-        //resaltar en el texto los resultados, si los hay.
         NSMutableArray *coincidencias = [[NSMutableArray alloc] init];
         NSString *texto = [[NSString alloc] init];
-        if (todoEldocumento) {
-            NSDictionary *textos_dic = [self textos_de_salida_para_el_arreglo:[ARRAYcontroller arrangedObjects]];
-            if (textos_dic == nil) {
-                NSLog(@"\n\nsorry");
-                result = NO;
-                return result;
-            }
-            texto = [textos_dic objectForKey:@"t_fort"];
-        } else {
-            texto = [[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] txt] string];
+        //todoEldocumento
+        NSDictionary *textos_dic = [self textos_de_salida_para_el_arreglo:[ARRAYcontroller arrangedObjects]];
+        if (textos_dic == nil) {
+            NSLog(@"\n\nsorry");
+            result = NO;
+            return result;
         }
+        texto = [textos_dic objectForKey:@"t_fort"];
         
         //NSLog(@"buscando %@ dentro de : \n%@\n",string,texto);
-        
         int k;
         NSRange res;
         for (k=0; k<[texto length]; k = MIN((int)[texto length], k)+1 ) {
-            res = [texto rangeOfString:string 
-                               options:NSCaseInsensitiveSearch 
+            res = [texto rangeOfString:string
+                               options:NSCaseInsensitiveSearch
                                  range:NSMakeRange(k, [texto length]-k)];
             if (res.location != NSNotFound) {
                 //si hay, guradamos donde encontrarlo y buscamos de nuevo
-                NSValue *v = [NSValue valueWithRange:res];
+                //NSValue *v = [NSValue valueWithRange:res];
                 
-                [coincidencias addObject:v];
+                //[coincidencias addObject:v];
+                
+                
+                NSRange ra;
+                unsigned long numberOfLines = 0;
+                unsigned long ind_letra = 0;
+                do {
+                    ra = [texto lineRangeForRange:NSMakeRange(ind_letra, 0)];
+                    ind_letra = NSMaxRange(ra);
+                    numberOfLines++;
+                    
+                } while (ind_letra < res.location);
+                
+                EncontradoModel* em = [[EncontradoModel alloc] init];
+                [em setTitulo:[texto substringWithRange:NSMakeRange(res.location, res.length+10)]];
+                [em setLinea:[[NSNumber alloc] initWithUnsignedLong:numberOfLines]];
+                [em setTxlinea:[[NSString alloc]initWithFormat:@"%lu",numberOfLines]];
+                [coincidencias addObject:em];
                 //NSLog(@"Encontrado en: %lu \n",res.location);
                 k = (int)res.location;
             } else {
@@ -1374,45 +1393,96 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
             }
         }
         
-        for (NSValue *v in coincidencias) {
-            NSRange range = [v rangeValue];
-            if (range.length > 0) {
-                [[txtx layoutManager] addTemporaryAttributes:[NSDictionary dictionaryWithObject:[NSColor orangeColor] forKey:NSShadowAttributeName]
-                                           forCharacterRange:range];
-                [[txtx layoutManager] addTemporaryAttributes:[NSDictionary dictionaryWithObject:[NSColor yellowColor] forKey:NSForegroundColorAttributeName] forCharacterRange:range];
-            }
-            
-        }
+        NSSortDescriptor *sortDescriptor;
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"linea"
+                                                     ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        NSArray *sortedArray;
+        sortedArray = [coincidencias sortedArrayUsingDescriptors:sortDescriptors];
+        
+        self.EncontradoArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+        [self.EncontradoArray retain];
+        
+        return YES;
+        
+        
+        // ---------------
+        
+        
+        //resaltar en el texto los resultados, si los hay.
+        //NSMutableArray *coincidencias = [[NSMutableArray alloc] init];
+        //NSString *texto = [[NSString alloc] init];
+//        if (todoEldocumento) {
+//            NSDictionary *textos_dic = [self textos_de_salida_para_el_arreglo:[ARRAYcontroller arrangedObjects]];
+//            if (textos_dic == nil) {
+//                NSLog(@"\n\nsorry");
+//                result = NO;
+//                return result;
+//            }
+//            texto = [textos_dic objectForKey:@"t_fort"];
+//        } else {
+//            texto = [[(nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0] txt] string];
+//        }
+        
+        //NSLog(@"buscando %@ dentro de : \n%@\n",string,texto);
+        
+//        int k;
+//        NSRange res;
+//        for (k=0; k<[texto length]; k = MIN((int)[texto length], k)+1 ) {
+//            res = [texto rangeOfString:string 
+//                               options:NSCaseInsensitiveSearch 
+//                                 range:NSMakeRange(k, [texto length]-k)];
+//            if (res.location != NSNotFound) {
+//                //si hay, guradamos donde encontrarlo y buscamos de nuevo
+//                NSValue *v = [NSValue valueWithRange:res];
+//                
+//                [coincidencias addObject:v];
+//                //NSLog(@"Encontrado en: %lu \n",res.location);
+//                k = (int)res.location;
+//            } else {
+//                break;
+//            }
+//        }
+        
+//        for (NSValue *v in coincidencias) {
+//            NSRange range = [v rangeValue];
+//            if (range.length > 0) {
+//                [[txtx layoutManager] addTemporaryAttributes:[NSDictionary dictionaryWithObject:[NSColor orangeColor] forKey:NSShadowAttributeName]
+//                                           forCharacterRange:range];
+//                [[txtx layoutManager] addTemporaryAttributes:[NSDictionary dictionaryWithObject:[NSColor yellowColor] forKey:NSForegroundColorAttributeName] forCharacterRange:range];
+//            }
+//            
+//        }
         
         
         //nos movemos a la primera coincidencia
         //transformar el range a un line number
         //sacar un indice de la coincidencia y resetarlo cada que se modifique la busqueda
         //ciclar dentro de las coincidencias
-        NSRange range0;
-        if (punto_ant >= [coincidencias count]) {
-            punto_ant = 0; 
-        }
-        range0 = [[coincidencias objectAtIndex:punto_ant] rangeValue];
-        
-        NSRange ra;
-        unsigned long numberOfLines = 0;
-        unsigned long ind_letra = 0;
-        do {
-            ra = [texto lineRangeForRange:NSMakeRange(ind_letra, 0)];
-            ind_letra = NSMaxRange(ra);
-            numberOfLines++;
-            
-        } while (ind_letra < range0.location);
-        
-        if (todoEldocumento) {
-            [self goToLine:(int)numberOfLines];
-            //todoEldocumento = false;
-        } else {
-            [self toToLineinThisTxt:(int)numberOfLines];
-        }
-        [txtx setSelectedRange:range0];
-        punto_ant++;
+//        NSRange range0;
+//        if (punto_ant >= [coincidencias count]) {
+//            punto_ant = 0; 
+//        }
+//        range0 = [[coincidencias objectAtIndex:punto_ant] rangeValue];
+//        
+//        NSRange ra;
+//        unsigned long numberOfLines = 0;
+//        unsigned long ind_letra = 0;
+//        do {
+//            ra = [texto lineRangeForRange:NSMakeRange(ind_letra, 0)];
+//            ind_letra = NSMaxRange(ra);
+//            numberOfLines++;
+//            
+//        } while (ind_letra < range0.location);
+//        
+//        if (todoEldocumento) {
+//            [self goToLine:(int)numberOfLines];
+//            //todoEldocumento = false;
+//        } else {
+//            [self toToLineinThisTxt:(int)numberOfLines];
+//        }
+//        [txtx setSelectedRange:range0];
+//        punto_ant++;
     }
 	
     return result;
@@ -1466,7 +1536,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 Extracted = [trimedText substringWithRange:NSMakeRange(Start, Enter-Start)];
                 NSRange ra; NSRange rb;
                 // No queremos lo que esté dentro de los bloques de interface
-                ra = [trimedText rangeOfString:@"      INTERFACE"];
+                ra = [trimedText rangeOfString:@"INTERFACE"];
                 rb = [trimedText rangeOfString:@"END INTERFACE"];
                 if (rb.length == 0) {
                     estaEnBloqueInterface = FALSE;
@@ -2642,6 +2712,24 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
     }
 }
+
+-(void)GotoEncontradoLine:(NSNotification*)notification{
+    NSNumber *n = [[notification userInfo]objectForKey:@"renglon"];
+    if ([self.EncontradoArray count] > 0) {
+        if ([self.EncontradoArray count] >= n.intValue) {
+            //NSLog(@"%@",[funcsSearchField stringValue]);
+//            NSArray *ar = [[NSArray alloc]initWithArray:self.EncontradoArray];
+//            if ([[[self.EncontradoArray objectAtIndex:[n integerValue]] titulo] length]){
+//                NSPredicate *pre = [NSPredicate predicateWithFormat:@"titulo contains %@",
+//                                    [[self.EncontradoArray objectAtIndex:[n integerValue]] titulo]];
+//                ar = [self.EncontradoArray filteredArrayUsingPredicate:pre];
+//            }
+            n = [[self.EncontradoArray objectAtIndex:[n integerValue]] linea];
+            [self goToLine:[n intValue]];
+        }
+    }
+}
+
 -(void)GotoBreakLine:(NSNotification*)notification{
     NSNumber *n = [[notification userInfo]objectForKey:@"renglon"];
     if ([self.BreakArray count] > 0) {
@@ -2651,6 +2739,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
     }
 }
+
+
 
 void keepReadingOutfile(
                         ConstFSEventStreamRef streamRef,

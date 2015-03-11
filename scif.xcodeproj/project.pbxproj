@@ -44,6 +44,8 @@
 		AB8EEBE0166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDD166FAB8E00F6B0F5 /* NoodleLineNumberMarker.m */; };
 		AB8EEBE1166FAB8E00F6B0F5 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8EEBDF166FAB8E00F6B0F5 /* NoodleLineNumberView.m */; };
 		AB912B9317E80D4500F215CC /* rightPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AB912B9217E80D4500F215CC /* rightPane.m */; };
+		ABBDD3A01AB0F14C0061DBE6 /* EncontradoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBDD39F1AB0F14C0061DBE6 /* EncontradoModel.m */; };
+		ABBDD3A31AB0F8F60061DBE6 /* EncontradoTableViewStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBDD3A21AB0F8F60061DBE6 /* EncontradoTableViewStuff.m */; };
 		ABCB09A7165193A00016EE54 /* Fortran.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB09A6165193A00016EE54 /* Fortran.plist */; };
 		ABCB09AB1652BB7A0016EE54 /* PrefMenuControll.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */; };
 		ABCB09AD1652C0710016EE54 /* RunPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB09AC1652C0710016EE54 /* RunPrefs.plist */; };
@@ -122,6 +124,10 @@
 		AB8EEBDF166FAB8E00F6B0F5 /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
 		AB912B9117E80D4500F215CC /* rightPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rightPane.h; sourceTree = "<group>"; };
 		AB912B9217E80D4500F215CC /* rightPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rightPane.m; sourceTree = "<group>"; };
+		ABBDD39E1AB0F14C0061DBE6 /* EncontradoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncontradoModel.h; sourceTree = "<group>"; };
+		ABBDD39F1AB0F14C0061DBE6 /* EncontradoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncontradoModel.m; sourceTree = "<group>"; };
+		ABBDD3A11AB0F8F60061DBE6 /* EncontradoTableViewStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncontradoTableViewStuff.h; sourceTree = "<group>"; };
+		ABBDD3A21AB0F8F60061DBE6 /* EncontradoTableViewStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncontradoTableViewStuff.m; sourceTree = "<group>"; };
 		ABCB09A6165193A00016EE54 /* Fortran.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Fortran.plist; sourceTree = "<group>"; };
 		ABCB09A91652BB790016EE54 /* PrefMenuControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefMenuControll.h; sourceTree = "<group>"; };
 		ABCB09AA1652BB7A0016EE54 /* PrefMenuControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefMenuControll.m; sourceTree = "<group>"; };
@@ -309,6 +315,10 @@
 				AB7A6C901A96BC0100024428 /* FuncsTableViewStuff.m */,
 				AB7A6C9F1A97FCE400024428 /* BreakModel.h */,
 				AB7A6CA01A97FCE400024428 /* BreakModel.m */,
+				ABBDD39E1AB0F14C0061DBE6 /* EncontradoModel.h */,
+				ABBDD39F1AB0F14C0061DBE6 /* EncontradoModel.m */,
+				ABBDD3A11AB0F8F60061DBE6 /* EncontradoTableViewStuff.h */,
+				ABBDD3A21AB0F8F60061DBE6 /* EncontradoTableViewStuff.m */,
 				AB7A6CA21A97FD9B00024428 /* BreaksTableViewStuff.h */,
 				AB7A6CA31A97FD9B00024428 /* BreaksTableViewStuff.m */,
 			);
@@ -412,11 +422,13 @@
 				AB23CB0516436AFB009F4FCC /* arrController.m in Sources */,
 				ABF345F01A99779A00A44793 /* anothertextview.m in Sources */,
 				AB23CB0816436B95009F4FCC /* nota.m in Sources */,
+				ABBDD3A31AB0F8F60061DBE6 /* EncontradoTableViewStuff.m in Sources */,
 				AB3E9153164C685C00D4784F /* NSArray+Color.m in Sources */,
 				AB3E9155164C685C00D4784F /* NSScanner+SkipUpToCharset.m in Sources */,
 				AB3E915D164C685C00D4784F /* UKSCTDColorWellPrefsController.m in Sources */,
 				AB3E915E164C685C00D4784F /* UKSCTDUserIdentifiersPrefsController.m in Sources */,
 				AB7A6CA41A97FD9B00024428 /* BreaksTableViewStuff.m in Sources */,
+				ABBDD3A01AB0F14C0061DBE6 /* EncontradoModel.m in Sources */,
 				AB7A6C8E1A95D99E00024428 /* SubModel.m in Sources */,
 				AB3E9162164D897B00D4784F /* UKTextDocGoToBox.m in Sources */,
 				AB3E9165164D8A1E00D4784F /* UKSyntaxColoredTextDocument.m in Sources */,
