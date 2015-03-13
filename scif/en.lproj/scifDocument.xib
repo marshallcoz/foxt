@@ -3374,7 +3374,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<object class="NSCustomObject" id="941240537">
 				<string key="NSClassName">BreaksTableViewStuff</string>
 			</object>
-			<object class="NSCustomObject" id="175446054">
+			<object class="NSCustomObject" id="243946698">
 				<string key="NSClassName">EncontradoTableViewStuff</string>
 			</object>
 			<object class="NSCustomObject" id="438985107">
@@ -5842,7 +5842,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="959717965"/>
-						<reference key="destination" ref="175446054"/>
+						<reference key="destination" ref="243946698"/>
 					</object>
 					<int key="connectionID">101434</int>
 				</object>
@@ -7849,7 +7849,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">101433</int>
-						<reference key="object" ref="175446054"/>
+						<reference key="object" ref="243946698"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
