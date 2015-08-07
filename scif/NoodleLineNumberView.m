@@ -320,9 +320,9 @@
 	}
 }
 
-- (unsigned int)lineNumberForCharacterIndex:(unsigned)index inText:(NSString *)text
+- (unsigned long)lineNumberForCharacterIndex:(unsigned)index inText:(NSString *)text
 {
-    unsigned int			left, right, mid, lineStart;
+    unsigned long			left, right, mid, lineStart;
 	NSMutableArray		*lines;
 
 	lines = [self lineIndices];

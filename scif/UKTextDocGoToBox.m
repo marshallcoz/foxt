@@ -16,6 +16,7 @@
 -(IBAction) showGoToSheet: (NSWindow*)owner
 {
 	[[NSApplication sharedApplication] beginSheet:goToPanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    
 }
 
 

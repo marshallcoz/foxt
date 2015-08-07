@@ -1839,9 +1839,9 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
-    NSDateComponents *components = [calendar components: NSHourCalendarUnit fromDate:now];
+    NSDateComponents *components = [calendar components: NSCalendarUnitHour fromDate:now];
     NSString *hora = [[NSString alloc] initWithFormat:@"%li:",(long)[components hour]];
-    components = [calendar components:NSMinuteCalendarUnit fromDate:now];
+    components = [calendar components:NSCalendarUnitMinute fromDate:now];
     hora = [hora stringByAppendingFormat:@"%li",(long)[components minute]];
     
     return hora;
@@ -2453,23 +2453,56 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 break;
             case 2:
                 
-                NSBeginAlertSheet(
-                                  @"Delete this block?",
-                                  @"Oh no! sorry", 
-                                  @"Delete it", 
-                                  NULL, 
-                                  [self windowForSheet], 
-                                  self, 
-                                  @selector(deleteBlock:returnCode:contextInfo:),  
-                                  NULL,
-                                  [NSDictionary dictionaryWithObject:@"Some context info" forKey:@"in a dictionary"],
-                                  @"Deleting a block can not be undone."
-                                  );
+                NSLog(@"alerta de borrar");
+                NSAlert *alert = [[NSAlert alloc]init];
+                [alert addButtonWithTitle:@"Oh no! sorry"];
+                [alert addButtonWithTitle:@"Delete it"];
+                [alert setMessageText:@"Delete this block?"];
+                [alert setInformativeText:@"NSWarningAlertStyle \r Quieres borrar ese bloque"];
+                [alert setAlertStyle:NSWarningAlertStyle];
+                [alert beginSheetModalForWindow:[self windowForSheet] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+                
+//                NSBeginAlertSheet(
+//                                  @"Delete this block?",
+//                                  @"Oh no! sorry", 
+//                                  @"Delete it", 
+//                                  NULL, 
+//                                  [self windowForSheet], 
+//                                  self, 
+//                                  @selector(deleteBlock:returnCode:contextInfo:),  
+//                                  NULL,
+//                                  [NSDictionary dictionaryWithObject:@"Some context info" forKey:@"in a dictionary"],
+//                                  @"Deleting a block can not be undone."
+//                                  );
                 
                 break;
             default:
                 break;
         }
+    }
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    /*
+     The following options are deprecated in 10.9. Use NSAlertFirstButtonReturn instead
+     NSAlertDefaultReturn = 1,
+     NSAlertAlternateReturn = 0,
+     NSAlertOtherReturn = -1,
+     NSAlertErrorReturn = -2
+     NSOKButton = 1, // NSModalResponseOK should be used
+     NSCancelButton = 0 // NSModalResponseCancel should be used
+     */
+    if (returnCode == NSAlertFirstButtonReturn)
+    {
+        NSLog(@"(returnCode == NSAlertFirstButtonReturn)");
+        
+    }
+    else if (returnCode == NSAlertSecondButtonReturn)
+    {
+        NSLog(@"(returnCode == NSAlertSecondButtonReturn)");
+        nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
+        [ARRAYcontroller removeObject:n];
     }
 }
 
@@ -2965,8 +2998,8 @@ void keepReadingOutfile(
             
             //ahora agregamos los breakpoints
             for (i=0; i < [todos_los_breakpoints count]; i++) {
-                data = [[NSString stringWithFormat:@"br s -f %@ -l %i\n",nombreArchivoFORTRAN,[(NSNumber*)[todos_los_breakpoints objectAtIndex:i] intValue]] dataUsingEncoding:NSUTF8StringEncoding];
-                [self postthis:[NSString stringWithFormat:@"br s -f %@ -l %i\n",nombreArchivoFORTRAN,[(NSNumber*)[todos_los_breakpoints objectAtIndex:i] intValue]] withcoolor:[NSColor blueColor]];
+                data = [[NSString stringWithFormat:@"br s -l %i\n",[(NSNumber*)[todos_los_breakpoints objectAtIndex:i] intValue]] dataUsingEncoding:NSUTF8StringEncoding];
+                [self postthis:[NSString stringWithFormat:@"br s -l %i\n",[(NSNumber*)[todos_los_breakpoints objectAtIndex:i] intValue]] withcoolor:[NSColor blueColor]];
                 [stdinHandle writeData:data];
             }
             // y un break para cuando la regamos en los vectores
