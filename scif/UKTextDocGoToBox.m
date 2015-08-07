@@ -15,8 +15,12 @@
 
 -(IBAction) showGoToSheet: (NSWindow*)owner
 {
-	[[NSApplication sharedApplication] beginSheet:goToPanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	//[[NSApplication sharedApplication] beginSheet:goToPanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
     
+     [owner beginSheet:goToPanel completionHandler:^(NSModalResponse returnCode) {
+         NSLog(@"En UKTextDocGoToBox : showGoToSheet ");
+     }];
+
 }
 
 
@@ -31,7 +35,8 @@
 
 -(IBAction) hideGoToSheet: (id)sender
 {
-	[[NSApplication sharedApplication] endSheet: goToPanel];
+	//[[NSApplication sharedApplication] endSheet: goToPanel];
+    [[[NSApplication sharedApplication] mainWindow] endSheet:goToPanel];
 }
 
 

@@ -23,11 +23,15 @@
 }
 
 -(IBAction) showTerm: (NSWindow*)owner{
-    [[NSApplication sharedApplication] beginSheet:termOUTpanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(termDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    //[[NSApplication sharedApplication] beginSheet:termOUTpanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(termDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [[[NSApplication sharedApplication] mainWindow] beginSheet:termOUTpanel completionHandler:^(NSModalResponse returnCode) {
+        NSLog(@"en termOut : showTerm");
+    }];
 }
 
 -(IBAction) hideTerm:(id)sender{
-    [[NSApplication sharedApplication] endSheet: termOUTpanel];
+ //   [[NSApplication sharedApplication] endSheet: termOUTpanel];
+    [[[NSApplication sharedApplication] mainWindow] endSheet:termOUTpanel];
 }
 
 //-(IBAction) popOut:(id)sender{

@@ -109,11 +109,14 @@
     actlineaRunArgs = [_lineaRunArgs stringValue];
     
     // mostrar la hoja
-    [[NSApplication sharedApplication] beginSheet:makeScrPrefsPanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(termDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    //[[NSApplication sharedApplication] beginSheet:makeScrPrefsPanel modalForWindow:owner modalDelegate:self didEndSelector:@selector(termDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [[[NSApplication sharedApplication] mainWindow] beginSheet:makeScrPrefsPanel completionHandler:^(NSModalResponse returnCode) {
+        NSLog(@"en makeScrPrefs : showTerm");
+    }];
 }
 
 -(IBAction) hideTerm:(id)sender{
-    [[NSApplication sharedApplication] endSheet: makeScrPrefsPanel];
+    [[[NSApplication sharedApplication] mainWindow] endSheet: makeScrPrefsPanel];
 }
 
 -(void)termDidEnd: (NSWindow*)sheet returnCode: (int)returnCode contextInfo: (void*)contextInfo{

@@ -2468,7 +2468,10 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                 [alert setMessageText:@"Delete this block?"];
                 [alert setInformativeText:@"NSWarningAlertStyle \r Quieres borrar ese bloque"];
                 [alert setAlertStyle:NSWarningAlertStyle];
-                [alert beginSheetModalForWindow:[self windowForSheet] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+                //[alert beginSheetModalForWindow:[self windowForSheet] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+                [alert beginSheetModalForWindow:[self windowForSheet] completionHandler:^(NSInteger result) {
+                    NSLog(@"Success");
+                }];
                 
 //                NSBeginAlertSheet(
 //                                  @"Delete this block?",
@@ -2520,7 +2523,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
 }
 
 - (void)deleteBlock:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
-    if (returnCode == NSAlertAlternateReturn) {
+    if (returnCode == NSAlertFirstButtonReturn) {
         nota *n = (nota*)[[ARRAYcontroller selectedObjects] objectAtIndex:0];
         [ARRAYcontroller removeObject:n];
     }
