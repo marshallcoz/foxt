@@ -743,7 +743,9 @@ static NSString* outPut = @".programOutput.txt";
                                                  name:@"ocultLateral2" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changedDrawerSelection:)
                                                  name:@"changedDrawerSelection" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:)
+                                                 name:NSWindowDidResizeNotification object:self];
+
     LineNumberVW = [[MarkerLineNumberView alloc] initWithScrollView:scrollView];
     [scrollView setVerticalRulerView:LineNumberVW];
     [scrollView setHasHorizontalRuler:NO];
@@ -1066,6 +1068,10 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
     NSLog(@"algo pasó");
 }
 
+-(void) windowDidResize: (NSNotification*) noit {
+   [TheSplitView setPosition:183 ofDividerAtIndex:0];
+}
+
 
 -(void) fdf: (NSNotification*)noti {
     if([[ARRAYcontroller selectedObjects] count] > 0) {
@@ -1151,6 +1157,8 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         }
     }
 }
+
+
 
 -(void) mostLateral: (NSNotification*)noti {
     //las animaciones se ven bonitas.
