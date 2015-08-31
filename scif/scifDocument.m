@@ -1025,9 +1025,9 @@ static NSString* outPut = @".programOutput.txt";
     lineaPreCompilador = [[makeScrPrefsPanel lineaPreCompilador] stringValue];
     lineaRunArgs = [[makeScrPrefsPanel lineaRunArgs] stringValue];
     
-    //NSLog(@"updated:\n%@\n%@\n%@\n%@\n%@\n",lineaCompilador,
-    //     lineaDepurador,lineaArgumentos,
-    //     lineaPreCompilador,lineaExtension);
+    NSLog(@"updated:\n%@\n%@\n%@\n%@\n%@\n",lineaCompilador,
+         lineaDepurador,lineaArgumentos,
+         lineaPreCompilador,lineaExtension);
     
     //NSLog(@"updated scripts");
 }
@@ -2023,6 +2023,7 @@ constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
         [[makeScrPrefsPanel lineaRunArgs] setStringValue:lineaRunArgs];
         [makeScrPrefsPanel showTerm:[self windowForSheet]];
     } else {
+        [self updateSpripts:nil];
         [makeScrPrefsPanel hideTerm:[self windowForSheet]];
     }
     

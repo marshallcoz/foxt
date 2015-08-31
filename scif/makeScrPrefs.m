@@ -116,6 +116,7 @@
 }
 
 -(IBAction) hideTerm:(id)sender{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateSpripts" object:nil];
     [[[NSApplication sharedApplication] mainWindow] endSheet: makeScrPrefsPanel];
 }
 

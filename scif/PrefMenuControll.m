@@ -138,6 +138,8 @@
     
     [self clickBuscaPreCompilador:nil]; 
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateSpripts" object:nil userInfo:nil];
+    
     [[self window]close];
 }
 
